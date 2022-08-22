@@ -1,0 +1,22 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+:root {
+  --color-bg: #e5e5e5;
+  --color-green: #21bf48;
+  --color-deep-gray: #767676;
+  --color-light-gray: #c4c4c4;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+
+.ir {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+}
+
+input:focus {
+  outline: 0;
+}
