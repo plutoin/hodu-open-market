@@ -11,7 +11,7 @@ import {
 export default function Header() {
   return (
     <Container>
-      <LogoBtn href="/"></LogoBtn>
+      <LogoBtn to="/"></LogoBtn>
       <Label htmlFor="search">
         <input
           id="search"

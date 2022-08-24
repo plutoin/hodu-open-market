@@ -8,21 +8,24 @@ import SearchIcon from "../../assets/icon-search.svg";
 
 export const Container = styled.header`
   display: flex;
-  height: 90px;
   justify-content: center;
-  padding: 22px 0;
+  align-items: center;
+  height: 90px;
+  padding: 22px 320px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 `;
 
-export const LogoBtn = styled.button`
+export const LogoBtn = styled(Link)`
   width: 124px;
   height: 38px;
-  margin-right: 30px;
+  padding-right: 30px;
   border: none;
   background-color: transparent;
   background-image: url(${Logo});
   background-size: 124px 38px;
+  background-repeat: no-repeat;
+  cursor: pointer;
 `;
 
 export const Label = styled.label`
@@ -56,11 +59,11 @@ export const Label = styled.label`
 `;
 
 export const BtnContainer = styled.div`
-  width: 46px;
   display: flex;
+  width: 46px;
   text-align: center;
   flex-direction: column;
-  margin-left: 598px;
+  margin-left: auto;
   a {
     width: 32px;
     height: 32px;
