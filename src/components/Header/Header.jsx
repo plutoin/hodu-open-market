@@ -1,8 +1,8 @@
 import React from "react";
-import LogoBtn from "../Logo/Logo";
 import {
   Container,
   Label,
+  LogoBtn,
   BtnContainer,
   CartBtn,
   UserBtn
@@ -11,7 +11,7 @@ import {
 export default function Header() {
   return (
     <Container>
-      <LogoBtn size="small"></LogoBtn>
+      <LogoBtn to="/"></LogoBtn>
       <Label htmlFor="search">
         <input
           id="search"
