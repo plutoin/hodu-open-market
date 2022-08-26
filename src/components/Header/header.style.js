@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import Logo from "../../assets/Logo-hodu.png";
 import CartIcon from "../../assets/icon-shopping-cart.svg";
 import UserIcon from "../../assets/icon-user.svg";
 import SearchIcon from "../../assets/icon-search.svg";
@@ -14,18 +13,6 @@ export const Container = styled.header`
   padding: 22px 320px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-`;
-
-export const LogoBtn = styled(Link)`
-  width: 124px;
-  height: 38px;
-  padding-right: 30px;
-  border: none;
-  background-color: transparent;
-  background-image: url(${Logo});
-  background-size: 124px 38px;
-  background-repeat: no-repeat;
-  cursor: pointer;
 `;
 
 export const Label = styled.label`
@@ -54,7 +41,6 @@ export const Label = styled.label`
     background-color: transparent;
     background-image: url(${SearchIcon});
     background-size: contain;
-    cursor: pointer;
   }
 `;
 
