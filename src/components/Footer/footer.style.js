@@ -1,37 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-  width: 1980px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   padding: 60px 320px 63px;
   background-color: var(--color-bg);
   font-size: 14px;
-  > span {
-    display: inline-block;
-    width: 631px;
-    margin-right: 531px;
-    line-height: 18px;
-    > a {
-      color: black;
-      :not(:first-child)::before {
-        content: "|";
-        margin: 0 14px;
-      }
-      strong {
-        font-weight: 700;
-      }
-    }
-  }
-  > a {
-    :last-child {
-      margin-right: 320px;
-    }
-    img {
-      width: 32px;
-      margin-left: 14px;
-    }
-  }
   address {
-    width: 1280px;
     margin-top: 30px;
     padding-top: 30px;
     border-top: 1px solid var(--color-light-gray);
@@ -39,6 +15,32 @@ export const Container = styled.footer`
     color: var(--color-deep-gray);
     strong {
       font-weight: 700;
+    }
+  }
+`;
+
+export const InfoContainer = styled.span`
+  color: black;
+  line-height: 18px;
+  > a {
+    :not(:first-child)::before {
+      content: "|";
+      margin: 0 14px;
+    }
+    > strong {
+      font-weight: 700;
+    }
+  }
+`;
+
+export const SocialLinkContainer = styled.span`
+  float: right;
+  > a {
+    width: 32px;
+    height: 32px;
+    margin-left: 14px;
+    > img {
+      width: 32px;
     }
   }
 `;
