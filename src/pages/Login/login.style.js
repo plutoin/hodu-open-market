@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import LogoImage from "../../assets/Logo-hodu.png";
@@ -45,7 +44,7 @@ export const LoginContainer = styled.div`
     line-height: 22px;
     text-align: center;
     background-color: white;
-    :nth-child(2) {
+    + button {
       background-color: var(--color-bg);
     }
   }

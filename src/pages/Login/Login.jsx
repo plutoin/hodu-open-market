@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import {
@@ -9,13 +10,17 @@ import {
   LoginButton
 } from "./login.style";
 
-import Home from "../Home/Home";
-
 export default function Login() {
+  const history = useHistory();
+
+  const home = () => {
+    history.push("/");
+  };
+
   return (
     <Container>
       <h1 className="ir">로그인 페이지</h1>
-      <LogoBtn onClick={Home}></LogoBtn>
+      <LogoBtn onClick={home}></LogoBtn>
       <LoginContainer>
         <button>구매회원 로그인</button>
         <button>판매회원 로그인</button>
@@ -25,7 +30,7 @@ export default function Login() {
           <LoginButton>로그인</LoginButton>
         </LoginForm>
       </LoginContainer>
-      <Link>회원가입</Link>
+      <Link to="/join">회원가입</Link>
       <Link>비밀번호 찾기</Link>
     </Container>
   );
