@@ -27,7 +27,7 @@ export default function Header() {
         <span>장바구니</span>
       </BtnContainer>
       <BtnContainer>
-        <UserBtn to="/"></UserBtn>
+        <UserBtn to="/login"></UserBtn>
         <span>로그인</span>
       </BtnContainer>
     </Container>
