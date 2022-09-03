@@ -32,44 +32,19 @@ export const LoginContainer = styled.div`
   margin-bottom: 30px;
   background: white;
   box-sizing: border-box;
-  > button {
-    width: 50%;
-    padding: 20px 0 38px;
-    background-color: white;
-    border: 1px solid var(--color-light-gray);
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-    text-align: center;
-    background-color: white;
-    + button {
-      background-color: var(--color-bg);
-    }
-  }
 `;
 
 export const LoginForm = styled.div`
   position: relative;
   width: 550px;
   height: 292px;
-  margin-top: -20px;
   padding: 34px 36px 35px;
   box-sizing: border-box;
   border: 1px solid var(--color-light-gray);
-  border-radius: 10px;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
   background-color: white;
   box-sizing: border-box;
-  :before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -1px;
-    width: 50%;
-    height: 10px;
-    background-color: white;
-  }
   > input {
     width: 100%;
     padding: 20px 0;

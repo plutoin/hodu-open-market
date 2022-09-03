@@ -7,47 +7,22 @@ import Check_off from "../../../assets/icon-check-off.svg";
 export const JoinContainer = styled.div`
   width: 550px;
   margin: 0 auto;
-  margin-bottom: 30px;
+  padding-bottom: 110px;
   background: white;
   box-sizing: border-box;
-  .joinTab {
-    width: 50%;
-    padding: 20px 0 38px;
-    background-color: white;
-    border: 1px solid var(--color-light-gray);
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-    text-align: center;
-    background-color: white;
-    :nth-child(2) {
-      background-color: var(--color-bg);
-    }
-  }
 `;
 
 export const JoinForm = styled.form`
   position: relative;
   width: 550px;
-  margin-top: -20px;
   padding: 40px 35px 36px;
   box-sizing: border-box;
   border: 1px solid var(--color-light-gray);
-  border-radius: 10px;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
   background-color: white;
   text-align: left;
   box-sizing: border-box;
-  ::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -1px;
-    width: 50%;
-    height: 10px;
-    background-color: white;
-  }
   > input,
   select {
     width: 100%;
@@ -74,8 +49,7 @@ export const JoinForm = styled.form`
     background-size: 28px 28px;
     background-origin: content-box;
   }
-  #userPWCheck,
-  #email {
+  #userPWCheck {
     margin-bottom: 50px;
   }
   #email {
@@ -150,7 +124,7 @@ export const CheckBoxContainer = styled.div`
 
 export const JoinButton = styled.button`
   width: 100%;
-  margin-top: 36px;
+  margin-top: 34px;
   padding: 19px 0;
   border: none;
   border-radius: 5px;
