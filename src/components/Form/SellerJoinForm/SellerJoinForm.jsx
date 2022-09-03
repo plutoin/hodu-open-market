@@ -1,7 +1,13 @@
+import styled from "styled-components";
+
+const SellerCodeLabel = styled.label`
+  margin-top: 50px;
+`;
+
 export default function BuyerJoinForm() {
   return (
     <>
-      <label htmlFor="sellerCode">사업자 등록번호</label>
+      <SellerCodeLabel htmlFor="sellerCode">사업자 등록번호</SellerCodeLabel>
       <input id="sellerCode" type="text" />
       <button className="check">인증</button>
 

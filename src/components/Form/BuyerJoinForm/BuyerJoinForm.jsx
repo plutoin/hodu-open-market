@@ -1,3 +1,8 @@
+import { useLocation } from "react-router-dom";
+
+import SellerJoinForm from "../SellerJoinForm/SellerJoinForm";
+import HeaderForm from "../HeaderForm/HeaderForm";
+
 import {
   JoinContainer,
   JoinForm,
@@ -5,13 +10,12 @@ import {
   CheckBoxContainer
 } from "./buyerJoinForm.style";
 
-import SellerJoinForm from "../SellerJoinForm/SellerJoinForm";
-
 export default function BuyerJoinForm() {
+  const location = useLocation();
+
   return (
     <JoinContainer>
-      <button className="joinTab">구매회원가입</button>
-      <button className="joinTab">판매회원가입</button>
+      <HeaderForm seller="판매회원가입" buyer="구매회원가입" />
       <JoinForm>
         <label htmlFor="userId">아이디</label>
         <input id="userId" type="id" />
@@ -42,7 +46,7 @@ export default function BuyerJoinForm() {
         <span className="at">@</span>
         <input id="email" type="text" />
 
-        <SellerJoinForm />
+        {location.pathname === "/join/seller" ? <SellerJoinForm /> : null}
       </JoinForm>
 
       <CheckBoxContainer>

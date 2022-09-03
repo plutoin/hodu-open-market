@@ -1,6 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
+import HeaderForm from "../../components/Form/HeaderForm/HeaderForm";
 
 import {
   Container,
@@ -22,8 +23,7 @@ export default function Login() {
       <h1 className="ir">로그인 페이지</h1>
       <LogoBtn onClick={home}></LogoBtn>
       <LoginContainer>
-        <button>구매회원 로그인</button>
-        <button>판매회원 로그인</button>
+        <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
         <LoginForm>
           <input type="id" placeholder="아이디" />
           <input type="password" placeholder="비밀번호" />

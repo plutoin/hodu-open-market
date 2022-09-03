@@ -14,6 +14,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/join" exact component={Join} />
+        <Route path="/join/seller" exact component={Join} />
       </Switch>
     </BrowserRouter>
   );
