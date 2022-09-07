@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   padding: 80px 320px 180px;
   background-color: white;
 `;
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled(Link)`
   display: flex;
   flex-direction: column;
   width: 380px;
