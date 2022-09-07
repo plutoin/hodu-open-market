@@ -132,6 +132,8 @@ export const ProductInfoDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 500px;
+  white-space: nowrap;
+
   > button {
     width: 320px;
     padding: 19px 0 18px;

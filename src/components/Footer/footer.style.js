@@ -7,6 +7,7 @@ export const Container = styled.footer`
   padding: 60px 320px 63px;
   background-color: var(--color-bg);
   font-size: 14px;
+  white-space: nowrap;
   address {
     margin-top: 30px;
     padding-top: 30px;
