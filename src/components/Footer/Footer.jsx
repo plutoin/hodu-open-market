@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Container, InfoContainer, SocialLinkContainer } from "./footer.style";
 
 import InstagramIcon from "../../assets/icon-insta.svg";
