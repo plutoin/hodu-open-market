@@ -14,6 +14,7 @@ export const Container = styled.header`
   padding: 22px 320px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  white-space: nowrap;
 `;
 
 export const Label = styled.label`
