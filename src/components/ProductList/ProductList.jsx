@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Container,
   ItemContainer,
@@ -11,7 +12,7 @@ export default function ProductList() {
   return (
     <Container>
       <ItemContainer to="/productDetail">
-        <ItemImage alt="상품 이미지" />
+        <ItemImage src="" alt="상품 이미지" />
         <ItemCompany>우당탕탕 라이캣의 실험실</ItemCompany>
         <ItemName>Hack Your Life 개발자 노트북 파우치</ItemName>
         <ItemPrice>

@@ -52,7 +52,8 @@ export const JoinForm = styled.form`
   #userPWCheck {
     margin-bottom: 50px;
   }
-  #email {
+  #email_1,
+  #email_2 {
     width: calc((100% - 39px) / 2);
   }
   #userId,

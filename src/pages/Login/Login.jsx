@@ -8,7 +8,7 @@ import {
   LogoBtn,
   LoginContainer,
   LoginForm,
-  LoginButton
+  LoginButton,
 } from "./login.style";
 
 export default function Login() {
@@ -31,7 +31,7 @@ export default function Login() {
         </LoginForm>
       </LoginContainer>
       <Link to="/join">회원가입</Link>
-      <Link>비밀번호 찾기</Link>
+      <Link to="#/">비밀번호 찾기</Link>
     </Container>
   );
 }

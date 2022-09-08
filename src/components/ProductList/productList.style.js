@@ -13,7 +13,7 @@ export const ItemContainer = styled(Link)`
   gap: 10px;
 `;
 
-export const ItemImage = styled.image`
+export const ItemImage = styled.img`
   width: 380px;
   height: 380px;
   margin-bottom: 16px;

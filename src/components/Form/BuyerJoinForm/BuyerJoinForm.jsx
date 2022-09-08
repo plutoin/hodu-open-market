@@ -7,7 +7,7 @@ import {
   JoinContainer,
   JoinForm,
   JoinButton,
-  CheckBoxContainer
+  CheckBoxContainer,
 } from "./buyerJoinForm.style";
 
 export default function BuyerJoinForm() {
@@ -41,10 +41,13 @@ export default function BuyerJoinForm() {
         <input type="text" title="전화번호 중간자리" className="phone" />
         <input type="text" title="전화번호 끝자리" className="phone" />
 
-        <label htmlFor="email">이메일</label>
-        <input id="email" type="text" />
+        <label htmlFor="email_1">이메일</label>
+        <input id="email_1" type="text" />
         <span className="at">@</span>
-        <input id="email" type="text" />
+        <label htmlFor="email_2" className="ir">
+          이메일
+        </label>
+        <input id="email_2" type="text" />
 
         {location.pathname === "/join/seller" ? <SellerJoinForm /> : null}
       </JoinForm>

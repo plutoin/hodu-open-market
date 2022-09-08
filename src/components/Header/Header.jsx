@@ -5,7 +5,7 @@ import {
   LogoBtn,
   BtnContainer,
   CartBtn,
-  UserBtn
+  UserBtn,
 } from "./header.style";
 
 export default function Header() {
@@ -23,7 +23,7 @@ export default function Header() {
         </button>
       </Label>
       <BtnContainer>
-        <CartBtn to="/"></CartBtn>
+        <CartBtn to="/cart"></CartBtn>
         <span>장바구니</span>
       </BtnContainer>
       <BtnContainer>
