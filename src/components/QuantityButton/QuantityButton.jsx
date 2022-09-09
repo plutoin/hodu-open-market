@@ -4,6 +4,17 @@ import styled from "styled-components";
 import Plus from "../../assets/icon-plus-line.svg";
 import Minus from "../../assets/icon-minus-line.svg";
 
+export default function QuantityButton() {
+  return (
+    <FieldSet>
+      <legend className="ir">수량 선택</legend>
+      <MinusButton></MinusButton>
+      <input type="text" defaultValue="1" />
+      <PlusButton></PlusButton>
+    </FieldSet>
+  );
+}
+
 const FieldSet = styled.fieldset`
   display: flex;
   padding: 30px 0;
@@ -36,14 +47,3 @@ const PlusButton = styled.button`
   border-radius: 0 5px 5px 0;
   background: url(${Plus}) center/ 20px 20px no-repeat;
 `;
-
-export default function QuantityButton() {
-  return (
-    <FieldSet>
-      <legend className="ir">수량 선택</legend>
-      <MinusButton></MinusButton>
-      <input type="text" value="1" />
-      <PlusButton></PlusButton>
-    </FieldSet>
-  );
-}

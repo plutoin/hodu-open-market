@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Join from "./pages/Join/Join";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Cart from "./pages/Cart/Cart";
 import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/join" exact component={Join} />
         <Route path="/join/seller" exact component={Join} />
         <Route path="/productDetail" exact component={ProductDetail} />
+        <Route path="/cart" exact component={Cart} />
         <Route path="/404" exact component={NotFound} />
       </Switch>
     </BrowserRouter>
