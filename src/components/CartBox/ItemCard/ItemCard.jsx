@@ -1,7 +1,7 @@
 import React from "react";
 import QuantityButton from "../../QuantityButton/QuantityButton";
 
-import { ItemContainer, ItemInfo, ItemPrice } from "./cartProduct.style";
+import { ItemContainer, ItemInfo, ItemPrice } from "./itemCard.style";
 
 export default function CartProduct() {
   return (
