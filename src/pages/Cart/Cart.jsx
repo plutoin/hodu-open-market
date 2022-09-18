@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import ItemHeader from "../../components/CartBox/ItemHeader/ItemHeader";
 import ItemCard from "../../components/CartBox/ItemCard/ItemCard";
 import TotalPrice from "../../components/CartBox/TotalPrice/TotalPrice";
+import EmptyCart from "../../components/CartBox/EmptyCart/EmptyCart";
 
 import { CartSection } from "./cart.style";
 
@@ -20,6 +21,7 @@ export default function Cart() {
         <ItemHeader />
         <ItemCard />
         <TotalPrice />
+        {/* <EmptyCart /> */}
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
