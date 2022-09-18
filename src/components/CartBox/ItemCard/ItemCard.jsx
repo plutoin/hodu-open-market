@@ -1,9 +1,13 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 import QuantityButton from "../../QuantityButton/QuantityButton";
 
 import { ItemContainer, ItemInfo, ItemPrice } from "./itemCard.style";
 
 export default function CartProduct() {
+  const history = useHistory();
+
   return (
     <ItemContainer>
       <input type="checkbox" />
@@ -17,7 +21,7 @@ export default function CartProduct() {
       <QuantityButton />
       <ItemPrice>
         <p>29,000원</p>
-        <button>주문하기</button>
+        <button onClick={() => history.push("/payment")}>주문하기</button>
       </ItemPrice>
     </ItemContainer>
   );
