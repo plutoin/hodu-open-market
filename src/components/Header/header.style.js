@@ -58,19 +58,22 @@ export const LogoBtn = styled(Link)`
 `;
 
 export const BtnContainer = styled.div`
+  position: relative;
   display: flex;
-  width: 46px;
+  width: 50px;
   text-align: center;
   flex-direction: column;
   margin-left: auto;
-  a {
+  > a,
+  > button {
     width: 32px;
     height: 32px;
     margin: 0 auto;
     margin-bottom: 4px;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+  }
+  > button {
+    border: none;
+    background-color: transparent;
   }
   :last-child {
     margin-left: 26px;
@@ -84,9 +87,13 @@ export const BtnContainer = styled.div`
 `;
 
 export const CartBtn = styled(Link)`
-  background-image: url(${CartIcon});
+  background: url(${CartIcon}) no-repeat center / contain;
 `;
 
 export const UserBtn = styled(Link)`
-  background-image: url(${UserIcon});
+  background: url(${UserIcon}) no-repeat center / contain;
+`;
+
+export const MyPageBtn = styled.button`
+  background: url(${UserIcon}) no-repeat center / contain;
 `;

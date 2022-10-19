@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Dropdown from "../Dropdown/Dropdown";
 import {
   Container,
   Label,
@@ -6,9 +7,35 @@ import {
   BtnContainer,
   CartBtn,
   UserBtn,
+  MyPageBtn,
 } from "./header.style";
 
 export default function Header() {
+  const modalRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModal = () => {
+    if (isOpen === true) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    const clickOutside = (e) => {
+      if (isOpen && !modalRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <Container>
       <LogoBtn to="/"></LogoBtn>
@@ -29,6 +56,11 @@ export default function Header() {
       <BtnContainer>
         <UserBtn to="/login"></UserBtn>
         <span>로그인</span>
+      </BtnContainer>
+      <BtnContainer>
+        <MyPageBtn onClick={handleModal} ref={modalRef}></MyPageBtn>
+        <span>마이페이지</span>
+        {isOpen && <Dropdown />}
       </BtnContainer>
     </Container>
   );
