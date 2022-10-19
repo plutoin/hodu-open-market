@@ -43,7 +43,7 @@ const PayContainer = styled.div`
   }
 `;
 
-export const ItemInfo = styled.div`
+const ItemInfo = styled.div`
   width: 442px;
   margin-right: 111px;
   text-align: left;

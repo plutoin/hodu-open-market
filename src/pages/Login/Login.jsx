@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import HeaderForm from "../../components/Form/HeaderForm/HeaderForm";
+import HeaderForm from "../../components/JoinForm/HeaderForm";
 
 import {
   Container,

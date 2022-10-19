@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
-import SellerJoinForm from "../SellerJoinForm/SellerJoinForm";
-import HeaderForm from "../HeaderForm/HeaderForm";
+import SellerJoinForm from "../SellerJoinForm";
+import HeaderForm from "../HeaderForm";
 
 import {
   JoinContainer,

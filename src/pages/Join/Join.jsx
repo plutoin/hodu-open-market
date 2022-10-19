@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { Container, LogoBtn } from "./join.style";
 
-import BuyerJoinForm from "../../components/Form/BuyerJoinForm/BuyerJoinForm";
+import BuyerJoinForm from "../../components/JoinForm/BuyerJoinForm/BuyerJoinForm";
 
 export default function Join() {
   const history = useHistory();

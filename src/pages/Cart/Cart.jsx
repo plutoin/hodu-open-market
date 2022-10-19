@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import ItemHeader from "../../components/CartBox/ItemHeader/ItemHeader";
+import ItemHeader from "../../components/CartBox/ItemHeader";
 import ItemCard from "../../components/CartBox/ItemCard/ItemCard";
 import TotalPrice from "../../components/CartBox/TotalPrice/TotalPrice";
-import EmptyCart from "../../components/CartBox/EmptyCart/EmptyCart";
+import EmptyCart from "../../components/CartBox/EmptyCart";
 
 import { CartSection } from "./cart.style";
 
