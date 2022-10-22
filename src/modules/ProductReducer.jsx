@@ -1,0 +1,21 @@
+export const setProduct = () => {
+  return { type: "SET_PRODUCT" };
+};
+
+const initialState = {
+  products: [],
+};
+
+const productReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_PRODUCT":
+      return {
+        ...state,
+        products: action.products,
+      };
+    default:
+      return state;
+  }
+};
+
+export default productReducer;
