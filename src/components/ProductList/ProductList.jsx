@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AxiosInstance from "../../Axios";
-import { setProduct } from "../../modules/ProductReducer";
+import { setProducts } from "../../redux/action/Actions";
 
 import {
   Container,
@@ -14,22 +14,20 @@ import {
 } from "./productList.style";
 
 export default function ProductList() {
-  const { products } = useSelector((state) => ({
-    products: state.productReducer.productList,
-  }));
   const dispatch = useDispatch();
-  const onProduct = () => dispatch(setProduct());
+  const { products } = useSelector((state) => ({
+    products: state.productReducer.products,
+  }));
 
-  console.log(products);
-  console.log(onProduct);
-
-  const productList = async () => {
+  const productList = async (products) => {
     try {
       const res = await AxiosInstance.get("products/");
-      console.log(res);
-      console.log(res.data.results[3]);
+
+      products = res.data.results;
+
+      dispatch(setProducts(products));
     } catch {
-      console.log("ERROR");
+      console.log("ERROR!");
     }
   };
 
@@ -38,15 +36,20 @@ export default function ProductList() {
   }, []);
 
   return (
-    <Container>
-      <ItemContainer to="/productDetail">
-        <ItemImage src="" alt="상품 이미지" />
-        <ItemCompany>dd</ItemCompany>
-        <ItemName>Hack Your Life 개발자 노트북 파우치</ItemName>
-        <ItemPrice>
-          <strong>29,000</strong>원
-        </ItemPrice>
-      </ItemContainer>
-    </Container>
+    <>
+      {products &&
+        products.map((item) => (
+          <Container key={item.product_id}>
+            <ItemContainer to="/productDetail">
+              <ItemImage src={item.image} alt="상품 이미지" />
+              <ItemCompany>{item.store_name}</ItemCompany>
+              <ItemName>{item.product_name}</ItemName>
+              <ItemPrice>
+                <strong>{item.price}</strong> 원
+              </ItemPrice>
+            </ItemContainer>
+          </Container>
+        ))}
+    </>
   );
 }

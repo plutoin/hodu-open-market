@@ -3,7 +3,7 @@ import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 
-import rootReducer from "./modules";
+import rootReducer from "./redux/reducer";
 import App from "./App";
 
 const store = createStore(rootReducer);
