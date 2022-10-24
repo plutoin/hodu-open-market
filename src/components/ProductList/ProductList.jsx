@@ -8,7 +8,7 @@ import {
   Container,
   ItemContainer,
   ItemImage,
-  ItemCompany,
+  ItemStore,
   ItemName,
   ItemPrice,
 } from "./productList.style";
@@ -36,20 +36,18 @@ export default function ProductList() {
   }, []);
 
   return (
-    <>
+    <Container>
       {products &&
         products.map((item) => (
-          <Container key={item.product_id}>
-            <ItemContainer to="/productDetail">
-              <ItemImage src={item.image} alt="상품 이미지" />
-              <ItemCompany>{item.store_name}</ItemCompany>
-              <ItemName>{item.product_name}</ItemName>
-              <ItemPrice>
-                <strong>{item.price}</strong> 원
-              </ItemPrice>
-            </ItemContainer>
-          </Container>
+          <ItemContainer to="/productDetail" key={item.product_id}>
+            <ItemImage src={item.image} alt="상품 이미지" />
+            <ItemStore>{item.store_name}</ItemStore>
+            <ItemName>{item.product_name}</ItemName>
+            <ItemPrice>
+              <strong>{item.price}</strong> 원
+            </ItemPrice>
+          </ItemContainer>
         ))}
-    </>
+    </Container>
   );
 }

@@ -25,7 +25,7 @@ export const ItemImage = styled.img`
   box-sizing: border-box;
 `;
 
-export const ItemCompany = styled.span`
+export const ItemStore = styled.span`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
