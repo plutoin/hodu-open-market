@@ -1,4 +1,9 @@
-import { Container, InfoContainer, SocialLinkContainer } from "./footer.style";
+import {
+  Container,
+  InfoContainer,
+  SocialLinkContainer,
+  Address,
+} from "./footer.style";
 
 import InstagramIcon from "../../assets/icon-insta.svg";
 import FacebookIcon from "../../assets/icon-fb.svg";
@@ -40,12 +45,12 @@ export default function Footer() {
           </a>
         </SocialLinkContainer>
       </InfoContainer>
-      <address>
+      <Address>
         <strong>(주)HODU SHOP</strong> <br />
         제주특별자치도 제주시 동광고 137 제주코딩베이스캠프 <br />
         사업자 번호 : 000-0000-0000 | 통신판매업 <br />
         대표 : 김호두
-      </address>
+      </Address>
     </Container>
   );
 }

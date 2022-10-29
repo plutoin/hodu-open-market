@@ -2,25 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.footer`
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  padding: 60px 320px 63px;
+  justify-content: center;
+  padding: 60px 0 63px;
   background-color: var(--color-bg);
   font-size: 14px;
   white-space: nowrap;
-  address {
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid var(--color-light-gray);
-    line-height: 24px;
-    color: var(--color-deep-gray);
-    strong {
-      font-weight: 700;
-    }
-  }
 `;
 
 export const InfoContainer = styled.span`
+  width: 1280px;
+  margin: 0 auto;
   color: black;
   line-height: 18px;
   > a {
@@ -43,5 +35,18 @@ export const SocialLinkContainer = styled.span`
     > img {
       width: 32px;
     }
+  }
+`;
+
+export const Address = styled.address`
+  width: 1280px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid var(--color-light-gray);
+  line-height: 24px;
+  color: var(--color-deep-gray);
+  strong {
+    font-weight: 700;
   }
 `;
