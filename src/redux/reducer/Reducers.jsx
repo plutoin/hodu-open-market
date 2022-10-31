@@ -2,7 +2,7 @@ const initialState = {
   products: [],
 };
 
-const productReducer = (state = initialState, action) => {
+export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PRODUCTS":
       return {
@@ -14,4 +14,14 @@ const productReducer = (state = initialState, action) => {
   }
 };
 
-export default productReducer;
+export const productDetailReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "READ_PRODUCTS":
+      return {
+        ...state,
+        products: action.products,
+      };
+    default:
+      return state;
+  }
+};

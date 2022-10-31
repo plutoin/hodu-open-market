@@ -19,7 +19,11 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/join" exact component={Join} />
         <Route path="/join/seller" exact component={Join} />
-        <Route path="/productDetail" exact component={ProductDetail} />
+        <Route
+          path="/productDetail/:product_id"
+          exact
+          component={ProductDetail}
+        />
         <Route path="/cart" exact component={Cart} />
         <Route path="/payment" exact component={Payment} />
         <Route path="/404" exact component={NotFound} />

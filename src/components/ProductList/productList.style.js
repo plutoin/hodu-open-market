@@ -10,11 +10,13 @@ export const Container = styled.div`
   background-color: white;
 `;
 
-export const ItemContainer = styled(Link)`
+export const ItemContainer = styled.button`
   display: flex;
   flex-direction: column;
   width: 380px;
   gap: 10px;
+  border: none;
+  background: none;
 `;
 
 export const ItemImage = styled.img`

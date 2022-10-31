@@ -13,7 +13,7 @@ export const DetailDiv = styled.div`
   }
 `;
 
-export const ProductImg = styled.image`
+export const ProductImg = styled.img`
   width: 600px;
   height: 600px;
   border: 1px solid lightgray;
@@ -133,7 +133,6 @@ export const ProductInfoDiv = styled.div`
   justify-content: center;
   margin-bottom: 500px;
   white-space: nowrap;
-
   > button {
     width: 320px;
     padding: 19px 0 18px;

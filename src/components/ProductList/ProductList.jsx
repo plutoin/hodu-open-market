@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import AxiosInstance from "../../Axios";
@@ -15,17 +16,16 @@ import {
 
 export default function ProductList() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const { products } = useSelector((state) => ({
     products: state.productReducer.products,
   }));
 
-  const productList = async (products) => {
+  const productList = async () => {
     try {
       const res = await AxiosInstance.get("products/");
-
-      products = res.data.results;
-
-      dispatch(setProducts(products));
+      dispatch(setProducts(res.data.results));
     } catch {
       console.log("ERROR!");
     }
@@ -39,7 +39,10 @@ export default function ProductList() {
     <Container>
       {products &&
         products.map((item) => (
-          <ItemContainer to="/productDetail" key={item.product_id}>
+          <ItemContainer
+            onClick={() => history.push(`productDetail/${item.product_id}`)}
+            key={item.product_id}
+          >
             <ItemImage src={item.image} alt="상품 이미지" />
             <ItemStore>{item.store_name}</ItemStore>
             <ItemName>{item.product_name}</ItemName>
