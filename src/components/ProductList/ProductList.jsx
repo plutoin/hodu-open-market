@@ -44,7 +44,10 @@ export default function ProductList() {
             <ItemStore>{item.store_name}</ItemStore>
             <ItemName>{item.product_name}</ItemName>
             <ItemPrice>
-              <strong>{item.price}</strong> 원
+              <strong>
+                {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </strong>
+              원
             </ItemPrice>
           </ItemContainer>
         ))}
