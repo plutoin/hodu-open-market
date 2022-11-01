@@ -6,7 +6,7 @@ import AxiosInstance from "../../Axios";
 import { getProducts } from "../../redux/action/Actions";
 
 import Header from "../../components/Header/Header";
-import ProductDetailBox from "../../components/ProductDetailBox/ProductDetailBox";
+import ProductDetailBox from "../../components/DetailBox/ProductDetailBox/ProductDetailBox";
 import Footer from "../../components/Footer/Footer";
 
 export default function ProductDetail() {

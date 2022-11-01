@@ -1,49 +1,46 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import TotalPriceBox from "../DetailBox/TotalPriceBox";
 
-import Plus from "../../assets/icon-plus-line.svg";
-import Minus from "../../assets/icon-minus-line.svg";
+import { FieldSet, MinusButton, PlusButton } from "./quantityButton.style";
 
 export default function QuantityButton() {
+  const location = useLocation();
+  const detail = useSelector((state) => state.productDetailReducer);
+  const stock = detail.products.stock;
+  const price = detail.products.price;
+
+  const [orderNum, setOrderNum] = useState(1);
+  const totalPrice = orderNum * price;
+
+  const minusStock = () => {
+    if (stock > 1 && orderNum > 0) {
+      setOrderNum(parseInt(orderNum - 1));
+    }
+  };
+
+  const plusStock = () => {
+    if (stock > orderNum) {
+      setOrderNum(parseInt(orderNum + 1));
+    }
+  };
+
   return (
-    <FieldSet>
-      <legend className="ir">수량 선택</legend>
-      <MinusButton></MinusButton>
-      <input type="text" defaultValue="1" />
-      <PlusButton></PlusButton>
-    </FieldSet>
+    <>
+      <FieldSet>
+        <legend className="ir">수량 선택</legend>
+        <MinusButton onClick={minusStock} />
+        <span>{orderNum}</span>
+        <PlusButton onClick={plusStock} />
+      </FieldSet>
+      {location.pathname === "/cart" ? null : (
+        <TotalPriceBox
+          stock={stock}
+          orderNum={orderNum}
+          totalPrice={totalPrice}
+        />
+      )}
+    </>
   );
 }
-
-const FieldSet = styled.fieldset`
-  display: flex;
-  padding: 30px 0;
-  > input,
-  button {
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    box-sizing: border-box;
-  }
-  > input {
-    border: 1px solid var(--color-light-gray);
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 23px;
-    text-align: center;
-  }
-`;
-
-const MinusButton = styled.button`
-  border: 1px solid var(--color-light-gray);
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  background: url(${Minus}) center/ 20px 20px no-repeat;
-`;
-
-const PlusButton = styled.button`
-  border: 1px solid var(--color-light-gray);
-  border-left: none;
-  border-radius: 0 5px 5px 0;
-  background: url(${Plus}) center/ 20px 20px no-repeat;
-`;

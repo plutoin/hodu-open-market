@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import QuantityButton from "../../components/QuantityButton/QuantityButton";
+import QuantityButton from "../../QuantityButton/QuantityButton";
 
 import {
   Section,
@@ -12,10 +12,6 @@ import {
   ProductName,
   ProductPrice,
   Shipping,
-  ConfirmContainer,
-  TotalInfo,
-  TotalQuantity,
-  TotalPrice,
   BuyButton,
   BasketButton,
   ProductInfoDiv,
@@ -38,22 +34,6 @@ export default function ProductDetailBox() {
           </ProductPrice>
           <Shipping>택배배송 / 무료배송</Shipping>
           <QuantityButton />
-          <ConfirmContainer>
-            <TotalInfo>총 상품 금액</TotalInfo>
-            <TotalPrice>
-              <TotalQuantity>
-                총 수량 <strong>1</strong>개
-              </TotalQuantity>
-              {detail.products.price}
-              <span>원</span>
-            </TotalPrice>
-          </ConfirmContainer>
-          <BuyButton onClick={() => history.push("/payment")}>
-            바로 구매
-          </BuyButton>
-          <BasketButton onClick={() => history.push("/cart")}>
-            장바구니
-          </BasketButton>
         </DetailDiv>
       </Section>
       <ProductInfoDiv>
