@@ -18,6 +18,7 @@ export const ProductImg = styled.img`
   height: 600px;
   border: 1px solid lightgray;
   margin-right: 50px;
+  object-fit: cover;
 `;
 
 export const Company = styled.p`

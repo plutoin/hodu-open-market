@@ -26,6 +26,7 @@ export const ItemImage = styled.img`
   border: 1px solid var(--color-light-gray);
   border-radius: 10px;
   box-sizing: border-box;
+  object-fit: cover;
 `;
 
 export const ItemStore = styled.span`
