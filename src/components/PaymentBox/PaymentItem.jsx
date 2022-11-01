@@ -3,24 +3,30 @@ import styled from "styled-components";
 
 export default function PaymentItem() {
   return (
-    <PayContainer>
-      <img src="" alt="상품 이미지" />
-      <ItemInfo>
-        <p>백엔드글로벌</p>
-        <strong>딥러닝 개발자 무릎 담요</strong>
-        <p>수량: 1개</p>
-      </ItemInfo>
-      <ItemSale>-</ItemSale>
-      <ItemDelivery>무료배송</ItemDelivery>
-      <strong>17,500원</strong>
-    </PayContainer>
+    <>
+      <PayContainer>
+        <img src="" alt="상품 이미지" />
+        <ItemInfo>
+          <p>백엔드글로벌</p>
+          <strong>딥러닝 개발자 무릎 담요</strong>
+          <p>수량: 1개</p>
+        </ItemInfo>
+        <ItemSale>-</ItemSale>
+        <ItemDelivery>무료배송</ItemDelivery>
+        <strong>17,500원</strong>
+      </PayContainer>
+      <TotalPrice>
+        총 주문금액
+        <strong>46,000원</strong>
+      </TotalPrice>
+    </>
   );
 }
 
 const PayContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 16px;
+  margin: 16px 0 35px 0;
   padding: 8px 78px 18px 8px;
   border-bottom: 1px solid #c4c4c4;
   > img {
@@ -68,4 +74,18 @@ const ItemSale = styled.p`
 
 const ItemDelivery = styled.p`
   margin-right: 158px;
+`;
+
+const TotalPrice = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  text-align: right;
+  > strong {
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #eb5757;
+  }
 `;
