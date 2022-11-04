@@ -4,7 +4,7 @@ import "./styles/app.css";
 import "./styles/reset.css";
 
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+import SignIn from "./pages/SignIn/SignIn";
 import Join from "./pages/Join/Join";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
@@ -16,7 +16,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
+        <Route path="/login" exact component={SignIn} />
         <Route path="/join" exact component={Join} />
         <Route path="/join/seller" exact component={Join} />
         <Route

@@ -68,5 +68,4 @@ export const LoginButton = styled.button`
   line-height: 22px;
   text-align: center;
   color: white;
-  background-color: var(--color-green);
 `;

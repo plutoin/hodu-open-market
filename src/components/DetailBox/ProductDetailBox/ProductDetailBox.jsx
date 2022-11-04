@@ -12,13 +12,10 @@ import {
   ProductName,
   ProductPrice,
   Shipping,
-  BuyButton,
-  BasketButton,
   ProductInfoDiv,
 } from "./productDetailBox.style";
 
 export default function ProductDetailBox() {
-  const history = useHistory();
   const detail = useSelector((state) => state.productDetailReducer);
 
   return (
@@ -32,7 +29,10 @@ export default function ProductDetailBox() {
           <ProductPrice>
             <strong>{detail.products.price}</strong>원
           </ProductPrice>
-          <Shipping>택배배송 / 무료배송</Shipping>
+          <Shipping>
+            {detail.products.shipping_method} / 배송비{" "}
+            {detail.products.shipping_fee}
+          </Shipping>
           <QuantityButton />
         </DetailDiv>
       </Section>
