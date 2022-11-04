@@ -19,7 +19,7 @@ export default function Login() {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    if (userName === "" && userPW === "") {
+    if (userName === "" || userPW === "") {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
@@ -34,8 +34,13 @@ export default function Login() {
     setUserPW(e.target.value);
   };
 
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickLogin();
+    }
+  };
+
   const onClickLogin = async (e) => {
-    e.preventDefault();
     try {
       const res = await AxiosInstance.post("accounts/login/", {
         username: userName,
@@ -68,6 +73,7 @@ export default function Login() {
             type="password"
             placeholder="비밀번호"
             onChange={onChangeUserPW}
+            onKeyPress={handleOnKeyPress}
           />
           <LoginButton
             onClick={onClickLogin}
