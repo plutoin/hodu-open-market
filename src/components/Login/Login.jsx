@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
+import { setCookie } from "../../Cookie";
 import AxiosInstance from "../../Axios";
 import HeaderForm from "../JoinForm/HeaderForm";
 
@@ -36,7 +37,11 @@ export default function Login() {
 
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
-      onClickLogin();
+      if (isEmpty === true) {
+        alert("아이디와 비밀번호를 입력해 주세요!");
+      } else {
+        onClickLogin();
+      }
     }
   };
 
@@ -48,12 +53,16 @@ export default function Login() {
         login_type: "BUYER",
       });
 
-      console.log(res);
-      console.log(res.data.token);
-      // home();
+      if (res.data.token) {
+        setCookie("refreshToken", `JWT ${res.data.token}`, {
+          path: "/",
+          sameSite: "strict",
+        });
+      }
+
+      home();
     } catch {
       console.log("ERROR!");
-      console.log(userName, userPW);
     }
   };
 
@@ -68,7 +77,12 @@ export default function Login() {
       <LoginContainer>
         <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
         <LoginForm isEmpty={isEmpty}>
-          <input type="id" placeholder="아이디" onChange={onChangeUserName} />
+          <input
+            type="id"
+            placeholder="아이디"
+            onChange={onChangeUserName}
+            onKeyPress={handleOnKeyPress}
+          />
           <input
             type="password"
             placeholder="비밀번호"
