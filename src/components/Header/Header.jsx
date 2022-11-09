@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { getCookie } from "../../Cookie";
 import Dropdown from "../Dropdown/Dropdown";
 import {
   Container,
@@ -13,6 +14,7 @@ import {
 export default function Header() {
   const modalRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const cookie = getCookie("token");
 
   const handleModal = () => {
     if (isOpen === true) {
@@ -50,18 +52,22 @@ export default function Header() {
         </button>
       </Label>
       <BtnContainer>
-        <CartBtn to="/cart"></CartBtn>
+        {cookie ? <CartBtn to="/cart" /> : <CartBtn to="/login" />}
         <span>장바구니</span>
       </BtnContainer>
-      <BtnContainer>
-        <UserBtn to="/login"></UserBtn>
-        <span>로그인</span>
-      </BtnContainer>
-      <BtnContainer>
-        <MyPageBtn onClick={handleModal} ref={modalRef}></MyPageBtn>
-        <span>마이페이지</span>
-        {isOpen && <Dropdown />}
-      </BtnContainer>
+      {cookie ? null : (
+        <BtnContainer>
+          <UserBtn to="/login"></UserBtn>
+          <span>로그인</span>
+        </BtnContainer>
+      )}
+      {cookie ? (
+        <BtnContainer>
+          <MyPageBtn onClick={handleModal} ref={modalRef} />
+          <span>마이페이지</span>
+          {isOpen && <Dropdown />}
+        </BtnContainer>
+      ) : null}
     </Container>
   );
 }

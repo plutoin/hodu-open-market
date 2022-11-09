@@ -54,7 +54,7 @@ export default function Login() {
       });
 
       if (res.data.token) {
-        setCookie("refreshToken", `JWT ${res.data.token}`, {
+        setCookie("token", `JWT ${res.data.token}`, {
           path: "/",
           sameSite: "strict",
         });

@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { removeCookie } from "../../Cookie";
 
 export default function Dropdown() {
+  const logout = removeCookie("token");
   return (
     <Container>
       <button>마이페이지</button>
-      <button>로그아웃</button>
+      <button onClick={logout}>로그아웃</button>
     </Container>
   );
 }

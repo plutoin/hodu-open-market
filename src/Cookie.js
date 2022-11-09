@@ -10,8 +10,6 @@ export const getCookie = (name) => {
   return cookies.get(name);
 };
 
-export function logout() {
-  console.log("로그아웃되었습니다.");
-  window.localStorage.setItem("logout", Date.now());
-  cookies.remove("refreshToken");
-}
+export const removeCookie = (name, option) => {
+  return cookies.remove(name, { ...option });
+};
