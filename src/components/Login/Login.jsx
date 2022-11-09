@@ -63,6 +63,11 @@ export default function Login() {
       home();
     } catch {
       console.log("ERROR!");
+      if (isEmpty === true) {
+        alert("아이디와 비밀번호를 입력해 주세요!");
+      } else {
+        alert("아이디와 비밀번호가 일치하지 않습니다.");
+      }
     }
   };
 
