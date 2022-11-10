@@ -10,14 +10,18 @@ import {
   LogoBtn,
   LoginContainer,
   LoginForm,
+  Input,
   LoginButton,
+  ErrorMsg,
 } from "./login.style";
 
 export default function Login() {
   const history = useHistory();
   const [userName, setUserName] = useState("");
   const [userPW, setUserPW] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(true);
 
   useEffect(() => {
     if (userName === "" || userPW === "") {
@@ -64,9 +68,11 @@ export default function Login() {
     } catch {
       console.log("ERROR!");
       if (isEmpty === true) {
-        alert("아이디와 비밀번호를 입력해 주세요!");
+        setIsEmpty(true);
+        setErrorMsg("아이디와 비밀번호를 입력해 주세요!");
       } else {
-        alert("아이디와 비밀번호가 일치하지 않습니다.");
+        setIsCorrect(false);
+        setErrorMsg("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
     }
   };
@@ -82,18 +88,19 @@ export default function Login() {
       <LoginContainer>
         <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
         <LoginForm isEmpty={isEmpty}>
-          <input
+          <Input
             type="id"
             placeholder="아이디"
             onChange={onChangeUserName}
             onKeyPress={handleOnKeyPress}
           />
-          <input
+          <Input
             type="password"
             placeholder="비밀번호"
             onChange={onChangeUserPW}
             onKeyPress={handleOnKeyPress}
           />
+          {!isCorrect || isEmpty ? <ErrorMsg>{errorMsg}</ErrorMsg> : null}
           <LoginButton
             onClick={onClickLogin}
             style={

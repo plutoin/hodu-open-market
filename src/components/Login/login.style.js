@@ -27,7 +27,6 @@ export const LogoBtn = styled.button`
 
 export const LoginContainer = styled.div`
   width: 550px;
-  height: 352px;
   margin: 0 auto;
   margin-bottom: 30px;
   background: white;
@@ -37,7 +36,6 @@ export const LoginContainer = styled.div`
 export const LoginForm = styled.div`
   position: relative;
   width: 550px;
-  height: 292px;
   padding: 34px 36px 35px;
   box-sizing: border-box;
   border: 1px solid var(--color-light-gray);
@@ -45,16 +43,17 @@ export const LoginForm = styled.div`
   border-radius: 0 0 10px 10px;
   background-color: white;
   box-sizing: border-box;
-  > input {
-    width: 100%;
-    padding: 20px 0;
-    border: none;
-    border-bottom: 1px solid var(--color-light-gray);
-    font-family: Spoqa Han Sans Neo;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--color-deep-gray);
-  }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 20px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-light-gray);
+  font-family: Spoqa Han Sans Neo;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-deep-gray);
 `;
 
 export const LoginButton = styled.button`
@@ -68,4 +67,13 @@ export const LoginButton = styled.button`
   line-height: 22px;
   text-align: center;
   color: white;
+`;
+
+export const ErrorMsg = styled.p`
+  margin-top: 26px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  color: var(--color-red);
 `;
