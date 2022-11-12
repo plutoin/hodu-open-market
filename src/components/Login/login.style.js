@@ -33,7 +33,7 @@ export const LoginContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const LoginForm = styled.div`
+export const LoginForm = styled.form`
   position: relative;
   width: 550px;
   padding: 34px 36px 35px;
@@ -67,6 +67,7 @@ export const LoginButton = styled.button`
   line-height: 22px;
   text-align: center;
   color: white;
+  background-color: var(--color-green);
 `;
 
 export const ErrorMsg = styled.p`

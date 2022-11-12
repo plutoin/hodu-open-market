@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import { setCookie } from "../../Cookie";
 import AxiosInstance from "../../Axios";
@@ -17,43 +18,30 @@ import {
 
 export default function Login() {
   const history = useHistory();
-  const [userName, setUserName] = useState("");
-  const [userPW, setUserPW] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(true);
 
-  useEffect(() => {
-    if (userName === "" || userPW === "") {
-      setIsEmpty(true);
-    } else {
-      setIsEmpty(false);
-    }
-  }, [userName, userPW]);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setError,
+    reset,
+  } = useForm({ mode: "onBlur" });
 
-  const onChangeUserName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const onChangeUserPW = (e) => {
-    setUserPW(e.target.value);
+  const onValid = (data) => {
+    onClickLogin(data);
   };
 
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
-      if (isEmpty === true) {
-        alert("아이디와 비밀번호를 입력해 주세요!");
-      } else {
-        onClickLogin();
-      }
+      onClickLogin();
     }
   };
 
-  const onClickLogin = async (e) => {
+  const onClickLogin = async (data) => {
     try {
       const res = await AxiosInstance.post("accounts/login/", {
-        username: userName,
-        password: userPW,
+        username: data.id,
+        password: data.password,
         login_type: "BUYER",
       });
 
@@ -65,14 +53,17 @@ export default function Login() {
       }
 
       home();
-    } catch {
-      console.log("ERROR!");
-      if (isEmpty === true) {
-        setIsEmpty(true);
-        setErrorMsg("아이디와 비밀번호를 입력해 주세요!");
-      } else {
-        setIsCorrect(false);
-        setErrorMsg("아이디 또는 비밀번호가 일치하지 않습니다.");
+    } catch (error) {
+      if (error) {
+        if (error.response.status === 401) {
+          reset();
+          setError("password", {
+            type: "loginError",
+            message: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          });
+        } else {
+          console.error(error);
+        }
       }
     }
   };
@@ -84,33 +75,29 @@ export default function Login() {
   return (
     <Container>
       <h1 className="ir">로그인 페이지</h1>
-      <LogoBtn onClick={home}></LogoBtn>
+      <LogoBtn onClick={home} />
       <LoginContainer>
         <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
-        <LoginForm isEmpty={isEmpty}>
+        <LoginForm onSubmit={handleSubmit(onValid)}>
           <Input
             type="id"
             placeholder="아이디"
-            onChange={onChangeUserName}
             onKeyPress={handleOnKeyPress}
+            {...register("id", {
+              required: "아이디를 입력해 주세요.",
+            })}
           />
+          {errors.id && <ErrorMsg>{errors.id?.message}</ErrorMsg>}
           <Input
             type="password"
             placeholder="비밀번호"
-            onChange={onChangeUserPW}
             onKeyPress={handleOnKeyPress}
+            {...register("password", {
+              required: "비밀번호를 입력해 주세요.",
+            })}
           />
-          {!isCorrect || isEmpty ? <ErrorMsg>{errorMsg}</ErrorMsg> : null}
-          <LoginButton
-            onClick={onClickLogin}
-            style={
-              isEmpty
-                ? { backgroundColor: "var(--color-light-gray)" }
-                : { backgroundColor: "var(--color-green)" }
-            }
-          >
-            로그인
-          </LoginButton>
+          {errors.password && <ErrorMsg>{errors.password?.message}</ErrorMsg>}
+          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
         </LoginForm>
       </LoginContainer>
       <Link to="/join">회원가입</Link>
