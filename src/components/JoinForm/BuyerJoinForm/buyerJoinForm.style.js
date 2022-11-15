@@ -49,9 +49,7 @@ export const JoinForm = styled.form`
     background-size: 28px 28px;
     background-origin: content-box;
   }
-  #userPWCheck {
-    margin-bottom: 50px;
-  }
+
   #email_1,
   #email_2 {
     width: calc((100% - 39px) / 2);
@@ -135,4 +133,13 @@ export const JoinButton = styled.button`
   text-align: center;
   color: white;
   background-color: var(--color-light-gray);
+`;
+
+export const ErrorMsg = styled.p`
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  color: var(--color-red);
 `;
