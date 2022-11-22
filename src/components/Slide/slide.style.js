@@ -6,8 +6,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 94px;
   height: 500px;
   background-color: var(--color-bg);
+  box-sizing: border-box;
 `;
 
 export const SwipeButton = styled.button`
