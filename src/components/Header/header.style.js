@@ -7,14 +7,20 @@ import UserIcon from "../../assets/icon-user.svg";
 import SearchIcon from "../../assets/icon-search.svg";
 
 export const Container = styled.header`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90px;
-  padding: 22px 320px;
+  position: fixed;
+  width: 100%;
+  padding: 22px 0;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   white-space: nowrap;
+  background-color: white;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 85%;
+  margin: 0 auto;
 `;
 
 export const Label = styled.label`

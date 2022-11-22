@@ -3,6 +3,7 @@ import { getCookie } from "../../Cookie";
 import Dropdown from "../Dropdown/Dropdown";
 import {
   Container,
+  Wrapper,
   Label,
   LogoBtn,
   BtnContainer,
@@ -40,34 +41,36 @@ export default function Header() {
 
   return (
     <Container>
-      <LogoBtn to="/"></LogoBtn>
-      <Label htmlFor="search">
-        <input
-          id="search"
-          type="text"
-          placeholder="상품을 검색해 보세요!"
-        ></input>
-        <button>
-          <span className="ir">검색 버튼</span>
-        </button>
-      </Label>
-      <BtnContainer>
-        {cookie ? <CartBtn to="/cart" /> : <CartBtn to="/login" />}
-        <span>장바구니</span>
-      </BtnContainer>
-      {cookie ? null : (
+      <Wrapper>
+        <LogoBtn to="/"></LogoBtn>
+        <Label htmlFor="search">
+          <input
+            id="search"
+            type="text"
+            placeholder="상품을 검색해 보세요!"
+          ></input>
+          <button>
+            <span className="ir">검색 버튼</span>
+          </button>
+        </Label>
         <BtnContainer>
-          <UserBtn to="/login"></UserBtn>
-          <span>로그인</span>
+          {cookie ? <CartBtn to="/cart" /> : <CartBtn to="/login" />}
+          <span>장바구니</span>
         </BtnContainer>
-      )}
-      {cookie ? (
-        <BtnContainer>
-          <MyPageBtn onClick={handleModal} ref={modalRef} />
-          <span>마이페이지</span>
-          {isOpen && <Dropdown />}
-        </BtnContainer>
-      ) : null}
+        {cookie ? null : (
+          <BtnContainer>
+            <UserBtn to="/login"></UserBtn>
+            <span>로그인</span>
+          </BtnContainer>
+        )}
+        {cookie ? (
+          <BtnContainer>
+            <MyPageBtn onClick={handleModal} ref={modalRef} />
+            <span>마이페이지</span>
+            {isOpen && <Dropdown />}
+          </BtnContainer>
+        ) : null}
+      </Wrapper>
     </Container>
   );
 }
