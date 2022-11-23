@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { setCookie } from "../../../Cookie";
 import AxiosInstance from "../../../Axios";
 import SellerJoinForm from "../SellerJoinForm";
 import HeaderForm from "../HeaderForm";
@@ -30,36 +29,34 @@ export default function BuyerJoinForm() {
   const onValid = (data) => {
     if (data.password !== data.password2) {
       setError(
-        "password",
+        "password2",
         { message: "비밀번호가 일치하지 않습니다." },
         { shouldFocus: true }
       );
     }
-    onClickJoin(data);
+
+    const phonenum = data.phonenum1 + data.phonenum2 + data.phonenum3;
+
+    onClickJoin(data, phonenum);
   };
 
   const home = () => {
     history.push("/");
   };
 
-  const onClickJoin = async (data) => {
+  const onClickJoin = async (data, phonenum) => {
     try {
-      const res = await AxiosInstance.post("accounts/signup/", {
+      const res = await AxiosInstance.post("/accounts/signup/", {
         username: data.id,
         password: data.password,
         password2: data.password2,
-        phone_number: data.phonenum,
+        phone_number: phonenum,
         name: data.name,
       });
 
-      if (res.data.token) {
-        setCookie("token", `JWT ${res.data.token}`, {
-          path: "/",
-          sameSite: "strict",
-        });
-      }
-
-      // home();
+      console.log(res);
+      alert("환영합니다! 로그인해 주세요!");
+      home();
     } catch (error) {
       if (error) {
         if (error.response.status === 401) {
@@ -70,6 +67,47 @@ export default function BuyerJoinForm() {
           });
         } else {
           console.error(error);
+          console.log(data);
+        }
+
+        if (error.response.data.username) {
+          setError(
+            "id",
+            {
+              message: error.response.data.username[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.password) {
+          setError(
+            "password",
+            {
+              message: error.response.data.password[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.name) {
+          setError(
+            "name",
+            {
+              message: error.response.data.name[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.phone_number) {
+          setError(
+            "phonenum2",
+            {
+              message: error.response.data.phone_number[0],
+            },
+            { shouldFocus: true }
+          );
         }
       }
     }
@@ -94,6 +132,7 @@ export default function BuyerJoinForm() {
         <input
           id="userPW"
           type="password"
+          maxLength="16"
           {...register("password", {
             required: "비밀번호를 입력해 주세요.",
             minLength: {
@@ -101,8 +140,12 @@ export default function BuyerJoinForm() {
               message: "8글자 이상 입력해 주세요.",
             },
             pattern: {
-              value: /^[A-za-z0-9가-힣]{8,10}$/,
-              message: "비밀번호는 8자 이상, 영소문자를 포함해야 합니다.",
+              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,16}$/,
+              message: "8~16자 영문 대소문자, 숫자, 특수문자를 사용하세요.",
+            },
+            maxLength: {
+              value: 16,
+              message: "16자 이하로 입력해 주세요.",
             },
           })}
         />
@@ -129,7 +172,7 @@ export default function BuyerJoinForm() {
         {errors.name && <ErrorMsg>{errors.name?.message}</ErrorMsg>}
 
         <label htmlFor="userNumber">휴대폰번호</label>
-        <select id="phone" className="phone">
+        <select id="phone" className="phone" {...register("phonenum1")}>
           <option>010</option>
           <option>011</option>
           <option>016</option>
@@ -138,16 +181,28 @@ export default function BuyerJoinForm() {
         </select>
         <input
           type="text"
-          title="전화번호 중간자리"
           className="phone"
           maxLength="4"
+          {...register("phonenum2", {
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
         />
         <input
           type="text"
-          title="전화번호 끝자리"
           className="phone"
           maxLength="4"
+          {...register("phonenum3", {
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
         />
+        {errors.phonenum2 && <ErrorMsg>{errors.phonenum2?.message}</ErrorMsg>}
+        {errors.phonenum3 && <ErrorMsg>{errors.phonenum3?.message}</ErrorMsg>}
 
         <label htmlFor="email_1">이메일</label>
         <input id="email_1" type="text" />
@@ -157,20 +212,19 @@ export default function BuyerJoinForm() {
         </label>
         <input id="email_2" type="text" />
         {location.pathname === "/join/seller" ? <SellerJoinForm /> : null}
+        <CheckBoxContainer>
+          <input id="check" type="checkbox" />
+          <label htmlFor="check"></label>
+          <span>
+            호두샵의 <strong>이용약관</strong> 및{" "}
+            <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고
+            동의합니다.
+          </span>
+        </CheckBoxContainer>
+        <JoinButton type="submit" onClick={onClickJoin}>
+          가입하기
+        </JoinButton>
       </JoinForm>
-
-      <CheckBoxContainer>
-        <input id="check" type="checkbox" />
-        <label htmlFor="check"></label>
-        <span>
-          호두샵의 <strong>이용약관</strong> 및{" "}
-          <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동의합니다.
-        </span>
-      </CheckBoxContainer>
-
-      <JoinButton type="submit" onClick={onClickJoin}>
-        가입하기
-      </JoinButton>
     </JoinContainer>
   );
 }
