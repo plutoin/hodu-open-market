@@ -2,8 +2,7 @@ import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { setCookie } from "../../Cookie";
-import { AxiosInstance } from "../../Axios";
+import { useAuth } from "../../auth/useAuth";
 import HeaderForm from "../JoinForm/HeaderForm";
 
 import {
@@ -17,6 +16,7 @@ import {
 } from "./login.style";
 
 export default function Login() {
+  const { onClickLogin } = useAuth();
   const history = useHistory();
 
   const {
@@ -27,9 +27,13 @@ export default function Login() {
     reset,
   } = useForm({ mode: "onBlur" });
 
-  const onValid = (data) => {
-    onClickLogin(data);
+  const goToHome = () => {
+    history.push("/");
   };
+
+  const onSubmit = handleSubmit((data) => {
+    onClickLogin(data, setError, reset, goToHome);
+  });
 
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -37,48 +41,13 @@ export default function Login() {
     }
   };
 
-  const onClickLogin = async (data) => {
-    try {
-      const res = await AxiosInstance.post("accounts/login/", {
-        username: data.id,
-        password: data.password,
-        login_type: "BUYER",
-      });
-
-      if (res.data.token) {
-        setCookie("token", `JWT ${res.data.token}`, {
-          path: "/",
-          sameSite: "strict",
-        });
-      }
-
-      home();
-    } catch (error) {
-      if (error) {
-        if (error.response.status === 401) {
-          reset();
-          setError("password", {
-            type: "loginError",
-            message: "아이디 또는 비밀번호가 일치하지 않습니다.",
-          });
-        } else {
-          console.error(error);
-        }
-      }
-    }
-  };
-
-  const home = () => {
-    history.push("/");
-  };
-
   return (
     <Container>
       <h1 className="ir">로그인 페이지</h1>
-      <LogoBtn onClick={home} />
+      <LogoBtn onClick={goToHome} />
       <LoginContainer>
         <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
-        <LoginForm onSubmit={handleSubmit(onValid)}>
+        <LoginForm onSubmit={onSubmit}>
           <Input
             type="id"
             placeholder="아이디"
