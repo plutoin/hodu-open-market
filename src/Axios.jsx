@@ -1,10 +1,12 @@
 import axios from "axios";
 
-const AxiosInstance = axios.create({
+export const AxiosInstance = axios.create({
   baseURL: "https://openmarket.weniv.co.kr/",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export default AxiosInstance;
+export function getJWTHeader(user) {
+  return { headers: `JWT ${user.token}` };
+}

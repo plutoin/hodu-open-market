@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import AxiosInstance from "../../Axios";
+import { AxiosInstance } from "../../Axios";
 import { getProducts } from "../../redux/action/Actions";
 
 import Header from "../../components/Header/Header";

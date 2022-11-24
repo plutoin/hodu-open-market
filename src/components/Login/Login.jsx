@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { setCookie } from "../../Cookie";
-import AxiosInstance from "../../Axios";
+import { AxiosInstance } from "../../Axios";
 import HeaderForm from "../JoinForm/HeaderForm";
 
 import {

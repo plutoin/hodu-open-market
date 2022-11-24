@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import AxiosInstance from "../../../Axios";
+import { AxiosInstance } from "../../../Axios";
 import SellerJoinForm from "../SellerJoinForm";
 import HeaderForm from "../HeaderForm";
 
