@@ -2,6 +2,7 @@ import { setCookie } from "../Cookie";
 import { AxiosInstance } from "../Axios";
 
 export const useAuth = () => {
+  // 로그인
   const onClickLogin = async (data, setError, reset, goToHome) => {
     try {
       const res = await AxiosInstance.post("accounts/login/", {
@@ -58,9 +59,10 @@ export const useAuth = () => {
     }
   };
 
+  // 회원가입
   const onClickJoin = async (data, phonenum, setError, reset, goToLogin) => {
     try {
-      const res = await AxiosInstance.post("/accounts/signup/", {
+      const res = await AxiosInstance.post("accounts/signup/", {
         username: data.id,
         password: data.password,
         password2: data.password2,
@@ -127,5 +129,26 @@ export const useAuth = () => {
     }
   };
 
-  return { onClickLogin, onClickJoin };
+  // 아이디 중복 검사
+  const validID = async (setError) => {
+    try {
+      const res = await AxiosInstance.post("accounts/signup/valid/username/");
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+
+      if (error.response.data.FAIL_Message) {
+        setError(
+          "id",
+          {
+            message: error.response.data.FAIL_Message,
+          },
+          { shouldFocus: true }
+        );
+      }
+    }
+  };
+
+  return { onClickLogin, onClickJoin, validID };
 };

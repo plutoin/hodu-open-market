@@ -15,7 +15,7 @@ import {
 } from "./buyerJoinForm.style";
 
 export default function BuyerJoinForm() {
-  const { onClickJoin } = useAuth();
+  const { onClickJoin, validID } = useAuth();
   const location = useLocation();
   const history = useHistory();
 
@@ -45,6 +45,10 @@ export default function BuyerJoinForm() {
     onClickJoin(data, phonenum, setError, reset, goToLogin);
   });
 
+  const onValidID = () => {
+    validID(setError);
+  };
+
   return (
     <JoinContainer>
       <HeaderForm seller="판매회원가입" buyer="구매회원가입" />
@@ -57,7 +61,9 @@ export default function BuyerJoinForm() {
             required: "아이디를 입력해 주세요.",
           })}
         />
-        <button className="check">중복확인</button>
+        <button className="check" onClick={onValidID}>
+          중복확인
+        </button>
         {errors.id && <ErrorMsg>{errors.id?.message}</ErrorMsg>}
 
         <label htmlFor="userPW">비밀번호</label>
