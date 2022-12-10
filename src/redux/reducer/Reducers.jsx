@@ -1,6 +1,7 @@
 const initialState = {
   products: [],
   carts: [],
+  cartArr: [],
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -33,6 +34,18 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         carts: action.carts,
+      };
+    default:
+      return state;
+  }
+};
+
+export const cartDetailReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_CARTS":
+      return {
+        ...state,
+        carts: [...state.carts, action.carts],
       };
     default:
       return state;

@@ -31,10 +31,7 @@ export default function Cart() {
           Authorization: token,
         },
       });
-
       dispatch(setCarts(res.data.results));
-
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +47,10 @@ export default function Cart() {
       <CartSection>
         <h1>장바구니</h1>
         <ItemHeader />
-        {carts && carts.map((item) => <ItemCard key={carts.product_id} />)}
+        {carts &&
+          carts.map((item) => (
+            <ItemCard key={item.product_id} productId={item.product_id} />
+          ))}
         <TotalPrice />
         {!carts && <EmptyCart />}
         <button onClick={() => history.push("/payment")}>주문하기</button>

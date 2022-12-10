@@ -11,3 +11,7 @@ export const getProducts = (products) => {
 export const setCarts = (carts) => {
   return { type: ActionTypes.SET_CARTS, carts };
 };
+
+export const getCarts = (carts) => {
+  return { type: ActionTypes.GET_CARTS, carts };
+};
