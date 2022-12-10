@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getCookie } from "../../Cookie";
+import { AxiosInstance } from "../../Axios";
+import { setCarts } from "../../redux/action/Actions";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -12,6 +17,32 @@ import { CartSection } from "./cart.style";
 
 export default function Cart() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const token = getCookie("token");
+
+  const { carts } = useSelector((state) => ({
+    carts: state.cartReducer.carts,
+  }));
+
+  const getCartItem = async () => {
+    try {
+      const res = await AxiosInstance.get("cart/", {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      dispatch(setCarts(res.data.results));
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCartItem();
+  }, []);
 
   return (
     <>
@@ -19,9 +50,9 @@ export default function Cart() {
       <CartSection>
         <h1>장바구니</h1>
         <ItemHeader />
-        <ItemCard />
+        {carts && carts.map((item) => <ItemCard key={carts.my_cart} />)}
         <TotalPrice />
-        {/* <EmptyCart /> */}
+        {carts && <EmptyCart />}
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />

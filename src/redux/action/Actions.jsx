@@ -7,3 +7,7 @@ export const setProducts = (products) => {
 export const getProducts = (products) => {
   return { type: ActionTypes.READ_PRODUCTS, products };
 };
+
+export const setCarts = (carts) => {
+  return { type: ActionTypes.SET_CARTS, carts };
+};
