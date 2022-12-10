@@ -50,9 +50,9 @@ export default function Cart() {
       <CartSection>
         <h1>장바구니</h1>
         <ItemHeader />
-        {carts && carts.map((item) => <ItemCard key={carts.my_cart} />)}
+        {carts && carts.map((item) => <ItemCard key={carts.product_id} />)}
         <TotalPrice />
-        {carts && <EmptyCart />}
+        {!carts && <EmptyCart />}
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
