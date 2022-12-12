@@ -6,7 +6,3 @@ export const AxiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-export function getJWTHeader(user) {
-  return { headers: `JWT ${user.token}` };
-}
