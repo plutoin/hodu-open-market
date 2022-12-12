@@ -25,7 +25,7 @@ export default function BuyerJoinForm() {
     handleSubmit,
     setError,
     reset,
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onBlur" });
 
   const goToLogin = () => {
     history.push("/login");
@@ -45,8 +45,10 @@ export default function BuyerJoinForm() {
     onClickJoin(data, phonenum, setError, reset, goToLogin);
   });
 
-  const onValidID = () => {
-    validID(setError);
+  const onValidID = (data) => {
+    console.log(data);
+    console.log(data.id);
+    validID(data, setError);
   };
 
   return (
@@ -54,13 +56,7 @@ export default function BuyerJoinForm() {
       <HeaderForm seller="판매회원가입" buyer="구매회원가입" />
       <JoinForm onSubmit={onSubmit}>
         <label htmlFor="userId">아이디</label>
-        <input
-          id="userId"
-          type="id"
-          {...register("id", {
-            required: "아이디를 입력해 주세요.",
-          })}
-        />
+        <input id="userId" type="id" {...register("id")} />
         <button className="check" onClick={onValidID}>
           중복확인
         </button>
@@ -159,7 +155,7 @@ export default function BuyerJoinForm() {
             동의합니다.
           </span>
         </CheckBoxContainer>
-        <JoinButton type="submit" onClick={onClickJoin}>
+        <JoinButton type="submit" onClick={onSubmit}>
           가입하기
         </JoinButton>
       </JoinForm>

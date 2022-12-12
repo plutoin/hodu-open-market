@@ -66,7 +66,7 @@ export default function Login() {
             })}
           />
           {errors.password && <ErrorMsg>{errors.password?.message}</ErrorMsg>}
-          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+          <LoginButton onClick={onSubmit}>로그인</LoginButton>
         </LoginForm>
       </LoginContainer>
       <Link to="/join">회원가입</Link>
