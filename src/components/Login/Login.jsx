@@ -21,7 +21,7 @@ export default function Login() {
 
   const {
     register,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     handleSubmit,
     setError,
     reset,
@@ -66,7 +66,9 @@ export default function Login() {
             })}
           />
           {errors.password && <ErrorMsg>{errors.password?.message}</ErrorMsg>}
-          <LoginButton onClick={onSubmit}>로그인</LoginButton>
+          <LoginButton disabled={isSubmitting} onClick={onSubmit}>
+            로그인
+          </LoginButton>
         </LoginForm>
       </LoginContainer>
       <Link to="/join">회원가입</Link>

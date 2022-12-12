@@ -21,7 +21,7 @@ export default function BuyerJoinForm() {
 
   const {
     register,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     handleSubmit,
     setError,
     reset,
@@ -155,7 +155,7 @@ export default function BuyerJoinForm() {
             동의합니다.
           </span>
         </CheckBoxContainer>
-        <JoinButton type="submit" onClick={onSubmit}>
+        <JoinButton type="submit" disabled={isSubmitting} onClick={onSubmit}>
           가입하기
         </JoinButton>
       </JoinForm>
