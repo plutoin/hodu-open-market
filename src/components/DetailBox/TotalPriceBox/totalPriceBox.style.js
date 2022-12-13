@@ -1,28 +1,4 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
-export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
-  const history = useHistory();
-  return (
-    <>
-      <ConfirmContainer>
-        <TotalInfo>총 상품 금액</TotalInfo>
-        <TotalPrice>
-          <TotalQuantity>
-            총 수량 <strong>{orderNum}</strong>개
-          </TotalQuantity>
-          {totalPrice}
-          <span>원</span>
-        </TotalPrice>
-      </ConfirmContainer>
-      <BuyButton onClick={() => history.push("/payment")}>바로 구매</BuyButton>
-      <BasketButton onClick={() => history.push("/cart")}>
-        장바구니
-      </BasketButton>
-    </>
-  );
-}
 
 export const ConfirmContainer = styled.div`
   display: flex;
@@ -82,7 +58,7 @@ export const BuyButton = styled.button`
   text-align: center;
 `;
 
-export const BasketButton = styled.button`
+export const CartButton = styled.button`
   width: calc((100% - 14px) / 3);
   padding: 19px 0;
   border: none;

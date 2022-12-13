@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Section = styled.section`
   display: flex;
   justify-content: center;
-  padding: 80px 0 140px;
+  padding: 174px 0 140px;
 `;
 
 export const DetailDiv = styled.div`

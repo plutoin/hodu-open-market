@@ -39,7 +39,7 @@ export default function Cart() {
 
   useEffect(() => {
     getCartItem();
-  }, []);
+  });
 
   return (
     <>

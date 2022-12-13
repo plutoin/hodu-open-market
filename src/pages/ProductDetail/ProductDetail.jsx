@@ -16,7 +16,8 @@ export default function ProductDetail() {
   const productDetails = async () => {
     try {
       const res = await AxiosInstance.get(`products/${product_id}`);
-      dispatch(getProducts(res.data));
+      const data = res.data;
+      dispatch(getProducts(data));
     } catch {
       console.log("ERROR!");
     }
@@ -29,7 +30,7 @@ export default function ProductDetail() {
   return (
     <>
       <Header />
-      <ProductDetailBox />
+      <ProductDetailBox productId={product_id} />
       <Footer />
     </>
   );
