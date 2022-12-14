@@ -11,6 +11,7 @@ import Footer from "../../components/Footer/Footer";
 import ItemHeader from "../../components/CartBox/ItemHeader";
 import ItemCard from "../../components/CartBox/ItemCard/ItemCard";
 import TotalPrice from "../../components/CartBox/TotalPrice/TotalPrice";
+import Modal from "../../components/Modal/Modal";
 import EmptyCart from "../../components/CartBox/EmptyCart";
 
 import { CartSection } from "./cart.style";
@@ -56,6 +57,7 @@ export default function Cart() {
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
+      <Modal />
     </>
   );
 }
