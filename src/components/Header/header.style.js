@@ -14,6 +14,7 @@ export const Container = styled.header`
   box-sizing: border-box;
   white-space: nowrap;
   background-color: white;
+  z-index: 10;
 `;
 
 export const Wrapper = styled.div`

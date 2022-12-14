@@ -33,6 +33,7 @@ const PayContainer = styled.div`
     width: 104px;
     height: 104px;
     margin-right: 36px;
+    object-fit: cover;
     border-radius: 10px;
     background-color: gray;
   }

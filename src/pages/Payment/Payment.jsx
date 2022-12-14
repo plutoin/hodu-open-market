@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 import Header from "../../components/Header/Header";
 import PaymentHeader from "../../components/PaymentBox/PaymentHeader";
