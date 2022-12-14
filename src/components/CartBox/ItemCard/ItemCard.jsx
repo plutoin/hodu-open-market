@@ -6,7 +6,7 @@ import { AxiosInstance } from "../../../Axios";
 import { getCarts } from "../../../redux/action/Actions";
 import QuantityButton from "../../QuantityButton/QuantityButton";
 
-import { ItemContainer, ItemInfo, ItemPrice } from "./itemCard.style";
+import { ItemContainer, ItemInfo, ItemPrice, CloseBtn } from "./itemCard.style";
 
 export default function ItemCard({ productId }) {
   const history = useHistory();
@@ -36,6 +36,7 @@ export default function ItemCard({ productId }) {
           <ItemContainer key={item.product_id}>
             <input type="checkbox" />
             <img src={item.image} alt="상품이미지" />
+            <CloseBtn />
             <ItemInfo>
               <span>{item.store_name}</span>
               <strong>{item.product_name}</strong>

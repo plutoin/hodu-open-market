@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
+import deleteIcon from "../../../assets/icon-delete.svg";
+
 export const ItemContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -86,4 +89,16 @@ export const ItemPrice = styled.div`
     line-height: 20px;
     text-align: center;
   }
+`;
+
+export const CloseBtn = styled.button`
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background-color: transparent;
+  background-image: url(${deleteIcon});
+  cursor: pointer;
 `;
