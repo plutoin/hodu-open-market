@@ -31,6 +31,7 @@ export const ItemContainer = styled.div`
     width: 160px;
     height: 160px;
     margin: 0 36px 0 40px;
+    object-fit: cover;
     border-radius: 10px;
     background-color: #e0e0e0;
   }
