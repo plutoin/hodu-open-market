@@ -27,17 +27,17 @@ export const Container = styled.div`
   }
 `;
 
-export const ModifyBtn = styled.button`
-  margin-right: 10px;
-  border: none;
-  color: white;
-  background-color: var(--color-green);
-`;
-
 export const CancelBtn = styled.button`
+  margin-right: 10px;
   border: 1px solid var(--color-light-gray);
   color: var(--color-deep-gray);
   background-color: white;
+`;
+
+export const ModifyBtn = styled.button`
+  border: none;
+  color: white;
+  background-color: var(--color-green);
 `;
 
 export const Text = styled.p`

@@ -92,7 +92,7 @@ export const ItemPrice = styled.div`
   }
 `;
 
-export const CloseBtn = styled.button`
+export const DeleteBtn = styled.button`
   position: absolute;
   top: 18px;
   right: 18px;

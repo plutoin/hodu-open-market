@@ -57,7 +57,6 @@ export default function Cart() {
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
-      <Modal />
     </>
   );
 }
