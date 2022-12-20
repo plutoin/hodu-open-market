@@ -15,7 +15,7 @@ import {
   DeleteBtn,
 } from "./itemCard.style";
 
-export default function ItemCard({ productId }) {
+export default function ItemCard({ productId, cartId }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -24,9 +24,7 @@ export default function ItemCard({ productId }) {
     setModal(!modal);
   };
 
-  const { carts } = useSelector((state) => ({
-    carts: state.cartDetailReducer.carts,
-  }));
+  const carts = useSelector((state) => state.cartDetailReducer.carts);
 
   const cartItemDetails = async () => {
     try {
@@ -38,14 +36,16 @@ export default function ItemCard({ productId }) {
   };
 
   useEffect(() => {
-    cartItemDetails(productId);
+    cartItemDetails();
   }, [productId]);
+
+  // key={item.product_id}
 
   return (
     <>
       {carts &&
         carts.map((item) => (
-          <ItemContainer key={item.product_id}>
+          <ItemContainer>
             <input type="checkbox" />
             <img src={item.image} alt="상품이미지" />
             <DeleteBtn onClick={onClickModal} />
@@ -66,7 +66,7 @@ export default function ItemCard({ productId }) {
             </ItemPrice>
           </ItemContainer>
         ))}
-      {modal && <Modal option="delete" />}
+      {modal && <Modal option="delete" cartId={cartId} />}
     </>
   );
 }

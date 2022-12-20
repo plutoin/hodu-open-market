@@ -27,14 +27,14 @@ export const Container = styled.div`
   }
 `;
 
-export const CancelBtn = styled.button`
+export const FirstBtn = styled.button`
   margin-right: 10px;
   border: 1px solid var(--color-light-gray);
   color: var(--color-deep-gray);
   background-color: white;
 `;
 
-export const ModifyBtn = styled.button`
+export const SecBtn = styled.button`
   border: none;
   color: white;
   background-color: var(--color-green);

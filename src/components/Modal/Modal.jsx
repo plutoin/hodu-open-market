@@ -1,12 +1,34 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import QuantityButton from "../QuantityButton/QuantityButton";
 
-import { Container, Text, ModifyBtn, CancelBtn } from "./modal.style";
+import { AxiosInstance } from "../../Axios";
+import { getCookie } from "../../Cookie";
+
+import { Container, Text, FirstBtn, SecBtn } from "./modal.style";
 import { DeleteBtn } from "../CartBox/ItemCard/itemCard.style";
 
-export default function Modal({ option, text, button1, button2 }) {
+export default function Modal({ option, cartId }) {
   const [modal, setModal] = useState(true);
+  const token = getCookie("token");
+  const location = useLocation();
+
+  const deleteItem = async () => {
+    try {
+      const res = await AxiosInstance.delete(`/cart/${cartId}/`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      alert("삭제되었습니다.");
+      location.reload();
+      console.log(res);
+      console.log(token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -24,16 +46,16 @@ export default function Modal({ option, text, button1, button2 }) {
           ) : null}
           <div>
             {option === "delete" || option === "quantity" ? (
-              <CancelBtn onClick={() => setModal(false)}>취소</CancelBtn>
+              <FirstBtn onClick={() => setModal(false)}>취소</FirstBtn>
             ) : option === "login" ? (
-              <CancelBtn onClick={() => setModal(false)}>아니오</CancelBtn>
+              <FirstBtn onClick={() => setModal(false)}>아니오</FirstBtn>
             ) : null}
             {option === "delete" ? (
-              <ModifyBtn>확인</ModifyBtn>
+              <SecBtn onClick={deleteItem}>확인</SecBtn>
             ) : option === "quantity" ? (
-              <ModifyBtn>수정</ModifyBtn>
+              <SecBtn>수정</SecBtn>
             ) : option === "login" ? (
-              <ModifyBtn>예</ModifyBtn>
+              <SecBtn>예</SecBtn>
             ) : null}
           </div>
           <DeleteBtn onClick={() => setModal(false)} />
