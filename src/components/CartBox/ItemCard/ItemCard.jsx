@@ -24,12 +24,33 @@ export default function ItemCard({ productId, cartId }) {
     setModal(!modal);
   };
 
-  const carts = useSelector((state) => state.cartDetailReducer.carts);
+  const { image, store_name, product_name, shipping_method, price } =
+    useSelector((state) => state.cartDetailReducer);
 
-  const cartItemDetails = async () => {
+  const cartItemDetails = async (
+    image,
+    store_name,
+    product_name,
+    shipping_method,
+    price
+  ) => {
     try {
       const res = await AxiosInstance.get(`products/${productId}/`);
-      dispatch(getCarts(res.data));
+
+      image = res.data.image;
+      store_name = res.data.store_name;
+      product_name = res.data.product_name;
+      shipping_method = res.data.shipping_method;
+      price = res.data.price;
+
+      dispatch({
+        type: "GET_CARTS",
+        image,
+        store_name,
+        product_name,
+        shipping_method,
+        price,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -39,33 +60,24 @@ export default function ItemCard({ productId, cartId }) {
     cartItemDetails();
   }, [productId]);
 
-  // key={item.product_id}
-
   return (
     <>
-      {carts &&
-        carts.map((item) => (
-          <ItemContainer>
-            <input type="checkbox" />
-            <img src={item.image} alt="상품이미지" />
-            <DeleteBtn onClick={onClickModal} />
-            <ItemInfo>
-              <span>{item.store_name}</span>
-              <strong>{item.product_name}</strong>
-              <p>
-                {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
-              </p>
-              <span>{item.shipping_method}</span>
-            </ItemInfo>
-            <QuantityButton onClick={onClickModal} />
-            <ItemPrice>
-              <p>
-                {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
-              </p>
-              <button onClick={() => history.push("/payment")}>주문하기</button>
-            </ItemPrice>
-          </ItemContainer>
-        ))}
+      <ItemContainer>
+        <input type="checkbox" />
+        <img src={image} alt="상품이미지" />
+        <DeleteBtn onClick={onClickModal} />
+        <ItemInfo>
+          <span>{store_name}</span>
+          <strong>{product_name}</strong>
+          <p>{price}원</p>
+          <span>{shipping_method}</span>
+        </ItemInfo>
+        <QuantityButton onClick={onClickModal} />
+        <ItemPrice>
+          <p>{price}원</p>
+          <button onClick={() => history.push("/payment")}>주문하기</button>
+        </ItemPrice>
+      </ItemContainer>
       {modal && <Modal option="delete" cartId={cartId} />}
     </>
   );

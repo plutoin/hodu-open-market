@@ -1,7 +1,11 @@
 const initialState = {
   products: [],
   carts: [],
-  cartArr: [],
+  image: "",
+  store_name: "",
+  product_name: "",
+  shipping_method: "",
+  price: "",
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -45,7 +49,11 @@ export const cartDetailReducer = (state = initialState, action) => {
     case "GET_CARTS":
       return {
         ...state,
-        carts: [...state.carts, action.carts],
+        image: action.image,
+        store_name: action.store_name,
+        product_name: action.product_name,
+        shipping_method: action.shipping_method,
+        price: action.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       };
     default:
       return state;
