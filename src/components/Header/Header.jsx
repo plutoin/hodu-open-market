@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getCookie } from "../../Cookie";
 import Dropdown from "../Dropdown/Dropdown";
 import {
@@ -9,11 +10,11 @@ import {
   BtnContainer,
   CartBtn,
   UserBtn,
-  MyPageBtn,
 } from "./header.style";
 
 export default function Header() {
   const modalRef = useRef();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const cookie = getCookie("token");
 
@@ -25,24 +26,10 @@ export default function Header() {
     }
   };
 
-  useEffect(() => {
-    const clickOutside = (e) => {
-      if (isOpen && !modalRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", clickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, [isOpen]);
-
   return (
     <Container>
       <Wrapper>
-        <LogoBtn to="/"></LogoBtn>
+        <LogoBtn to="/" />
         <Label htmlFor="search">
           <input
             id="search"
@@ -54,18 +41,22 @@ export default function Header() {
           </button>
         </Label>
         <BtnContainer>
-          {cookie ? <CartBtn to="/cart" /> : <CartBtn to="/login" />}
+          {cookie ? (
+            <CartBtn onClick={() => history.push("/cart")} />
+          ) : (
+            <CartBtn onClick={() => history.push("/login")} />
+          )}
           <span>장바구니</span>
         </BtnContainer>
         {cookie ? null : (
           <BtnContainer>
-            <UserBtn to="/login"></UserBtn>
+            <UserBtn onClick={() => history.push("/login")} />
             <span>로그인</span>
           </BtnContainer>
         )}
         {cookie ? (
           <BtnContainer>
-            <MyPageBtn onClick={handleModal} ref={modalRef} />
+            <UserBtn onClick={handleModal} ref={modalRef} />
             <span>마이페이지</span>
             {isOpen && <Dropdown />}
           </BtnContainer>

@@ -100,7 +100,3 @@ export const CartBtn = styled(Link)`
 export const UserBtn = styled(Link)`
   background: url(${UserIcon}) no-repeat center / contain;
 `;
-
-export const MyPageBtn = styled.button`
-  background: url(${UserIcon}) no-repeat center / contain;
-`;

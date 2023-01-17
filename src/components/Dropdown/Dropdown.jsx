@@ -1,28 +1,45 @@
 import React from "react";
 import styled from "styled-components";
+
+import { AxiosInstance } from "../../Axios";
 import { removeCookie } from "../../Cookie";
 
-export default function Dropdown() {
-  const logout = removeCookie("token");
+export default function Dropdown(props) {
+  function handleModal(e) {
+    e.stopPropagation();
+    props.setModal(false);
+  }
+
+  const handleLogout = async () => {
+    try {
+      const res = await AxiosInstance.post("accounts/logout/");
+      console.log(res);
+      removeCookie("token");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
-      <button>마이페이지</button>
-      <button onClick={logout}>로그아웃</button>
+      <li onClick={handleModal}>마이페이지</li>
+      <li onClick={handleLogout}>로그아웃</li>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.ul`
   position: absolute;
   top: 70px;
-  left: -50px;
+  left: -90%;
   width: 130px;
   padding: 10px;
   border: 1px solid var(--color-light-gray);
   border-radius: 10px;
   background-color: white;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.3));
-  > button {
+  > li {
     display: block;
     width: 100%;
     margin-bottom: 8px;
