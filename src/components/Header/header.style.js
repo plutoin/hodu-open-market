@@ -71,14 +71,11 @@ export const BtnContainer = styled.div`
   text-align: center;
   flex-direction: column;
   margin-left: auto;
-  > a,
   > button {
     width: 32px;
     height: 32px;
     margin: 0 auto;
     margin-bottom: 4px;
-  }
-  > button {
     border: none;
     background-color: transparent;
   }
@@ -93,10 +90,10 @@ export const BtnContainer = styled.div`
   }
 `;
 
-export const CartBtn = styled(Link)`
+export const CartBtn = styled.button`
   background: url(${CartIcon}) no-repeat center / contain;
 `;
 
-export const UserBtn = styled(Link)`
+export const UserBtn = styled.button`
   background: url(${UserIcon}) no-repeat center / contain;
 `;
