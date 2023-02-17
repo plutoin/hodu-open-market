@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
-import { getCarts } from "../../../redux/action/Actions";
 import Modal from "../../Modal/Modal";
-
 import QuantityButton from "../../QuantityButton/QuantityButton";
 
 import {
@@ -17,64 +14,43 @@ import {
 
 export default function ItemCard({ productId, cartId }) {
   const history = useHistory();
-  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [cartItem, setCartItem] = useState([]);
 
   const onClickModal = () => {
     setModal(!modal);
   };
 
-  const { image, store_name, product_name, shipping_method, price } =
-    useSelector((state) => state.cartDetailReducer);
-
-  const cartItemDetails = async (
-    image,
-    store_name,
-    product_name,
-    shipping_method,
-    price
-  ) => {
-    try {
-      const res = await AxiosInstance.get(`products/${productId}/`);
-
-      image = res.data.image;
-      store_name = res.data.store_name;
-      product_name = res.data.product_name;
-      shipping_method = res.data.shipping_method;
-      price = res.data.price;
-
-      dispatch({
-        type: "GET_CARTS",
-        image,
-        store_name,
-        product_name,
-        shipping_method,
-        price,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  function getCartDetail(id) {
+    return AxiosInstance.get(`/products/${id}`).then((res) => res.data);
+  }
 
   useEffect(() => {
-    cartItemDetails();
+    async function getCart() {
+      const cartDetail = getCartDetail(productId).then((detail) => {
+        setCartItem(detail);
+      });
+      return cartDetail;
+    }
+
+    getCart();
   }, [productId]);
 
   return (
     <>
       <ItemContainer>
         <input type="checkbox" />
-        <img src={image} alt="상품이미지" />
+        <img src={cartItem.image} alt="상품이미지" />
         <DeleteBtn onClick={onClickModal} />
         <ItemInfo>
-          <span>{store_name}</span>
-          <strong>{product_name}</strong>
-          <p>{price}원</p>
-          <span>{shipping_method}</span>
+          <span>{cartItem.store_name}</span>
+          <strong>{cartItem.product_name}</strong>
+          <p>{cartItem.price}원</p>
+          <span>{cartItem.shipping_method}</span>
         </ItemInfo>
         <QuantityButton onClick={onClickModal} />
         <ItemPrice>
-          <p>{price}원</p>
+          <p>{cartItem.price}원</p>
           <button onClick={() => history.push("/payment")}>주문하기</button>
         </ItemPrice>
       </ItemContainer>
