@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 
 import QuantityButton from "../QuantityButton/QuantityButton";
 
@@ -12,19 +11,16 @@ import { DeleteBtn } from "../CartBox/ItemCard/itemCard.style";
 export default function Modal({ option, cartId }) {
   const [modal, setModal] = useState(true);
   const token = getCookie("token");
-  const location = useLocation();
 
   const deleteItem = async () => {
     try {
-      const res = await AxiosInstance.delete(`/cart/${cartId}/`, {
+      await AxiosInstance.delete(`/cart/${cartId}/`, {
         headers: {
           Authorization: token,
         },
       });
       alert("삭제되었습니다.");
-      location.reload();
-      console.log(res);
-      console.log(token);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
