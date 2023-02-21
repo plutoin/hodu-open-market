@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AxiosInstance } from "../../Axios";
 import { setProducts } from "../../redux/action/Actions";
+
+import Loading from "../Loading/Loading";
 
 import {
   Container,
@@ -18,6 +20,8 @@ export default function ProductList() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [loading, setLoading] = useState(null);
+
   const { products } = useSelector((state) => ({
     products: state.productReducer.products,
   }));
@@ -26,6 +30,7 @@ export default function ProductList() {
     try {
       const res = await AxiosInstance.get("products/");
       dispatch(setProducts(res.data.results));
+      setLoading(false);
     } catch {
       console.log("ERROR!");
     }
@@ -33,10 +38,12 @@ export default function ProductList() {
 
   useEffect(() => {
     productList();
+    setLoading(true);
   }, []);
 
   return (
     <Container>
+      {loading && <Loading />}
       {products &&
         products.map((item) => (
           <ItemContainer
