@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import ProductDetailBox from "../../components/DetailBox/ProductDetailBox/ProductDetailBox";
 import Footer from "../../components/Footer/Footer";
 import Loading from "../../components/Loading/Loading";
+import SkeletonDetail from "../../components/DetailBox/ProductDetailBox/SkeletonDetail";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function ProductDetail() {
     <>
       {loading && <Loading />}
       <Header />
-      <ProductDetailBox productId={product_id} />
+      <ProductDetailBox productId={product_id} loading={loading} />
       <Footer />
     </>
   );

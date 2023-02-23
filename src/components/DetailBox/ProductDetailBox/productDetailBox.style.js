@@ -4,6 +4,7 @@ export const Section = styled.section`
   display: flex;
   justify-content: center;
   padding: 174px 0 140px;
+  gap: 50px;
 `;
 
 export const DetailDiv = styled.div`
@@ -17,7 +18,6 @@ export const ProductImg = styled.img`
   width: 600px;
   height: 600px;
   border: 1px solid lightgray;
-  margin-right: 50px;
   object-fit: cover;
 `;
 

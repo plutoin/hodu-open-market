@@ -6,6 +6,7 @@ import { AxiosInstance } from "../../Axios";
 import { setProducts } from "../../redux/action/Actions";
 
 import Loading from "../Loading/Loading";
+import SkeletonList from "./SkeletonList";
 
 import {
   Container,
@@ -44,6 +45,10 @@ export default function ProductList() {
   return (
     <Container>
       {loading && <Loading />}
+      {loading &&
+        new Array(10).fill(1).map((_, i) => {
+          return <SkeletonList key={i} />;
+        })}
       {products &&
         products.map((item) => (
           <ItemContainer
