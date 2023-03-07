@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../Axios";
 import Modal from "../../Modal/Modal";
 import QuantityButton from "../../QuantityButton/QuantityButton";
+import TotalPrice from "../TotalPrice/TotalPrice";
 
 import {
   ItemContainer,

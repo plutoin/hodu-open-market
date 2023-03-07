@@ -22,29 +22,66 @@ export default function Cart() {
   const token = getCookie("token");
 
   const [loading, setLoading] = useState(null);
+  const [productPrice, setProductPrice] = useState([]);
+
+  let cartArr = [];
 
   const { carts } = useSelector((state) => ({
     carts: state.cartReducer.carts,
   }));
 
-  const getCartItem = async () => {
-    try {
-      const res = await AxiosInstance.get("cart/", {
-        headers: {
-          Authorization: token,
-        },
+  useEffect(() => {
+    function getCartDetail() {
+      return AxiosInstance.get("/products/").then((res) => {
+        setProductPrice(res.data.results);
       });
-      dispatch(setCarts(res.data.results));
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
     }
+
+    const getCartItem = async () => {
+      try {
+        const res = await AxiosInstance.get("cart/", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        dispatch(setCarts(res.data.results));
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setLoading(true);
+    getCartDetail();
+    getCartItem();
+  }, []);
+
+  productPrice.map((p) =>
+    carts
+      .filter((c) => p.product_id === c.product_id)
+      .map((c) => {
+        p.cart_item_id = c.cart_item_id;
+        p.quantity = c.quantity;
+        p.is_active = c.is_active;
+        return cartArr.push(p);
+      })
+  );
+
+  const priceArr = productPrice.map((i) =>
+    i.is_active ? i.price * i.quantity : 0
+  );
+
+  const feeArr = cartArr.map((i) => (i.is_active ? i.shipping_fee : 0));
+
+  const total = (arr) => {
+    const res = arr.reduce((acc, cur) => {
+      acc += cur;
+      return acc;
+    }, 0);
+    return res;
   };
 
-  useEffect(() => {
-    getCartItem();
-    setLoading(true);
-  }, []);
+  const totalPrice = total(priceArr).toLocaleString();
+  const totalFee = total(feeArr).toLocaleString();
 
   return (
     <>
@@ -62,7 +99,7 @@ export default function Cart() {
               cartId={item.cart_item_id}
             />
           ))}
-        <TotalPrice />
+        <TotalPrice totalPrice={totalPrice} totalFee={totalFee} />
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
