@@ -12,7 +12,7 @@ import {
   DeleteBtn,
 } from "./itemCard.style";
 
-export default function ItemCard({ productId, cartId }) {
+export default function ItemCard({ productId, cartId, quantity }) {
   const history = useHistory();
   const [modal, setModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
@@ -36,8 +36,6 @@ export default function ItemCard({ productId, cartId }) {
     getCart();
   }, [productId]);
 
-  console.log(cartItem);
-
   return (
     <>
       <ItemContainer>
@@ -53,9 +51,9 @@ export default function ItemCard({ productId, cartId }) {
             {cartItem.shipping_fee?.toLocaleString()}원
           </span>
         </ItemInfo>
-        <QuantityButton onClick={onClickModal} />
+        <QuantityButton onClick={onClickModal} quantity={quantity} />
         <ItemPrice>
-          <p>{cartItem.price?.toLocaleString()}원</p>
+          <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
           <button onClick={() => history.push("/payment")}>주문하기</button>
         </ItemPrice>
       </ItemContainer>

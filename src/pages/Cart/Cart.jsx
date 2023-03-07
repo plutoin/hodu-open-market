@@ -26,10 +26,6 @@ export default function Cart() {
 
   let cartArr = [];
 
-  // const { carts } = useSelector((state) => ({
-  //   carts: state.cartReducer.carts,
-  // }));
-
   const carts = useSelector((state) => state.cartReducer.carts);
 
   useEffect(() => {
@@ -55,7 +51,7 @@ export default function Cart() {
     setLoading(true);
     getCartDetail();
     getCartItem();
-  }, []);
+  }, [dispatch, token]);
 
   productPrice.map((p) =>
     carts
@@ -99,6 +95,7 @@ export default function Cart() {
               key={item.product_id}
               productId={item.product_id}
               cartId={item.cart_item_id}
+              quantity={item.quantity}
             />
           ))}
         <TotalPrice totalPrice={totalPrice} totalFee={totalFee} />
