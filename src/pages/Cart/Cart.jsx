@@ -26,9 +26,11 @@ export default function Cart() {
 
   let cartArr = [];
 
-  const { carts } = useSelector((state) => ({
-    carts: state.cartReducer.carts,
-  }));
+  // const { carts } = useSelector((state) => ({
+  //   carts: state.cartReducer.carts,
+  // }));
+
+  const carts = useSelector((state) => state.cartReducer.carts);
 
   useEffect(() => {
     function getCartDetail() {

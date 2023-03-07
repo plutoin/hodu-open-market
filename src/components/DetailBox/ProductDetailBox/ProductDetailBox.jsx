@@ -30,11 +30,11 @@ export default function ProductDetailBox({ loading }) {
             <Company>{detail.products.store_name}</Company>
             <ProductName>{detail.products.product_name}</ProductName>
             <ProductPrice>
-              <strong>{detail.products.price}</strong>원
+              <strong>{detail.products.price.toLocaleString()}</strong>원
             </ProductPrice>
             <Shipping>
               {detail.products.shipping_method} / 배송비{" "}
-              {detail.products.shipping_fee}
+              {detail.products.shipping_fee.toLocaleString()}
             </Shipping>
             <QuantityButton />
           </DetailDiv>

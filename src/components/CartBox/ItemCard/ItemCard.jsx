@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../Axios";
 import Modal from "../../Modal/Modal";
 import QuantityButton from "../../QuantityButton/QuantityButton";
-import TotalPrice from "../TotalPrice/TotalPrice";
 
 import {
   ItemContainer,
@@ -37,6 +36,8 @@ export default function ItemCard({ productId, cartId }) {
     getCart();
   }, [productId]);
 
+  console.log(cartItem);
+
   return (
     <>
       <ItemContainer>
@@ -46,12 +47,15 @@ export default function ItemCard({ productId, cartId }) {
         <ItemInfo>
           <span>{cartItem.store_name}</span>
           <strong>{cartItem.product_name}</strong>
-          <p>{cartItem.price}원</p>
-          <span>{cartItem.shipping_method}</span>
+          <p>{cartItem.price?.toLocaleString()}원</p>
+          <span>
+            {cartItem.shipping_method} /{" "}
+            {cartItem.shipping_fee?.toLocaleString()}원
+          </span>
         </ItemInfo>
         <QuantityButton onClick={onClickModal} />
         <ItemPrice>
-          <p>{cartItem.price}원</p>
+          <p>{cartItem.price?.toLocaleString()}원</p>
           <button onClick={() => history.push("/payment")}>주문하기</button>
         </ItemPrice>
       </ItemContainer>
