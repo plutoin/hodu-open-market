@@ -25,6 +25,18 @@ export default function ItemCard({ productId, cartId, quantity }) {
     return AxiosInstance.get(`/products/${id}`).then((res) => res.data);
   }
 
+  function shipping(method, fee) {
+    if (method === "DELIVERY" && fee !== 0) {
+      return `택배배송 / ${fee.toLocaleString()}원`;
+    } else if (method === "PARCEL" && fee !== 0) {
+      return `소포배송 / ${fee.toLocaleString()}원`;
+    } else if (method === "DELIVERY" && fee === 0) {
+      return `택배배송 / 무료배송`;
+    } else if (method === "PARCEL" && fee === 0) {
+      return `소포배송 / 무료배송`;
+    }
+  }
+
   useEffect(() => {
     async function getCart() {
       const cartDetail = getCartDetail(productId).then((detail) => {
@@ -47,8 +59,7 @@ export default function ItemCard({ productId, cartId, quantity }) {
           <strong>{cartItem.product_name}</strong>
           <p>{cartItem.price?.toLocaleString()}원</p>
           <span>
-            {cartItem.shipping_method} /{" "}
-            {cartItem.shipping_fee?.toLocaleString()}원
+            {shipping(cartItem.shipping_method, cartItem.shipping_fee)}
           </span>
         </ItemInfo>
         <QuantityButton onClick={onClickModal} quantity={quantity} />

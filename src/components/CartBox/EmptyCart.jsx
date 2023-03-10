@@ -5,7 +5,7 @@ export default function EmptyCart() {
   return (
     <Container>
       <strong>장바구니에 담긴 상품이 없습니다.</strong>
-      <p>원하는 상품을 장바구니에 담아보세요!</p>
+      <p>원하는 상품을 장바구니에 담아 보세요!</p>
     </Container>
   );
 }

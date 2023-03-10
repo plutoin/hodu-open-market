@@ -18,6 +18,18 @@ import {
 export default function ProductDetailBox({ loading }) {
   const detail = useSelector((state) => state.productDetailReducer);
 
+  function shipping(method, fee) {
+    if (method === "DELIVERY" && fee !== 0) {
+      return `택배배송 / ${fee.toLocaleString()}원`;
+    } else if (method === "PARCEL" && fee !== 0) {
+      return `소포배송 / ${fee.toLocaleString()}원`;
+    } else if (method === "DELIVERY" && fee === 0) {
+      return `택배배송 / 무료배송`;
+    } else if (method === "PARCEL" && fee === 0) {
+      return `소포배송 / 무료배송`;
+    }
+  }
+
   return (
     <>
       {loading ? (
@@ -33,8 +45,10 @@ export default function ProductDetailBox({ loading }) {
               <strong>{detail.products.price.toLocaleString()}</strong>원
             </ProductPrice>
             <Shipping>
-              {detail.products.shipping_method} / 배송비{" "}
-              {detail.products.shipping_fee.toLocaleString()}
+              {shipping(
+                detail.products.shipping_method,
+                detail.products.shipping_fee.toLocaleString()
+              )}
             </Shipping>
             <QuantityButton />
           </DetailDiv>

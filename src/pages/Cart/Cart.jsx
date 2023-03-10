@@ -64,11 +64,11 @@ export default function Cart() {
       })
   );
 
-  const priceArr = productPrice.map((i) =>
-    i.is_active ? i.price * i.quantity : 0
-  );
+  const priceArr = productPrice
+    .filter((i) => i.is_active)
+    .map((i) => i.price * i.quantity);
 
-  const feeArr = cartArr.map((i) => (i.is_active ? i.shipping_fee : 0));
+  const feeArr = cartArr.filter((i) => i.is_active).map((i) => i.shipping_fee);
 
   const total = (arr) => {
     const res = arr.reduce((acc, cur) => {
@@ -88,8 +88,7 @@ export default function Cart() {
       <CartSection>
         <h1>장바구니</h1>
         <ItemHeader />
-        {!carts && <EmptyCart />}
-        {carts &&
+        {carts.length > 0 ? (
           carts.map((item) => (
             <ItemCard
               key={item.product_id}
@@ -97,7 +96,10 @@ export default function Cart() {
               cartId={item.cart_item_id}
               quantity={item.quantity}
             />
-          ))}
+          ))
+        ) : (
+          <EmptyCart />
+        )}
         <TotalPrice totalPrice={totalPrice} totalFee={totalFee} />
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
