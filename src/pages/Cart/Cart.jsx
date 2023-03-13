@@ -78,8 +78,9 @@ export default function Cart() {
     return res;
   };
 
-  const totalPrice = total(priceArr).toLocaleString();
-  const totalFee = total(feeArr).toLocaleString();
+  const totalPrice = total(priceArr);
+  const totalFee = total(feeArr);
+  const totalPay = totalPrice + totalFee;
 
   return (
     <>
@@ -100,7 +101,11 @@ export default function Cart() {
         ) : (
           <EmptyCart />
         )}
-        <TotalPrice totalPrice={totalPrice} totalFee={totalFee} />
+        <TotalPrice
+          totalPrice={totalPrice}
+          totalFee={totalFee}
+          totalPay={totalPay}
+        />
         <button onClick={() => history.push("/payment")}>주문하기</button>
       </CartSection>
       <Footer />
