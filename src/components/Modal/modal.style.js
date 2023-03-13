@@ -15,6 +15,7 @@ export const Container = styled.div`
   background: white;
   border: 1px solid var(--color-light-gray);
   box-sizing: border-box;
+  z-index: 9999;
   > div > button {
     width: 100px;
     padding: 10px 0;
