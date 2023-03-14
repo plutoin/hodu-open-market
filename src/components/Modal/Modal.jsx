@@ -8,9 +8,30 @@ import { getCookie } from "../../Cookie";
 import { Container, Text, FirstBtn, SecBtn } from "./modal.style";
 import { DeleteBtn } from "../CartBox/ItemCard/itemCard.style";
 
-export default function Modal({ option, cartId }) {
+export default function Modal({ option, productId, cartId, quantity, active }) {
   const [modal, setModal] = useState(true);
   const token = getCookie("token");
+
+  const editQuantity = async () => {
+    try {
+      await AxiosInstance.put(
+        `/cart/${cartId}/`,
+        {
+          product_id: productId,
+          quantity: quantity,
+          is_active: active,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const deleteItem = async () => {
     try {
@@ -30,7 +51,9 @@ export default function Modal({ option, cartId }) {
     <>
       {modal && (
         <Container>
-          {option === "quantity" ? <QuantityButton /> : null}
+          {option === "quantity" ? (
+            <QuantityButton quantity={quantity} />
+          ) : null}
           {option === "delete" ? (
             <Text>상품을 삭제하시겠습니까?</Text>
           ) : option === "login" ? (
@@ -49,7 +72,7 @@ export default function Modal({ option, cartId }) {
             {option === "delete" ? (
               <SecBtn onClick={deleteItem}>확인</SecBtn>
             ) : option === "quantity" ? (
-              <SecBtn>수정</SecBtn>
+              <SecBtn onClick={editQuantity}>수정</SecBtn>
             ) : option === "login" ? (
               <SecBtn>예</SecBtn>
             ) : null}

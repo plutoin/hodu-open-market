@@ -96,6 +96,7 @@ export default function Cart() {
               productId={item.product_id}
               cartId={item.cart_item_id}
               quantity={item.quantity}
+              active={item.is_active}
             />
           ))
         ) : (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
+
 import Modal from "../../Modal/Modal";
 import QuantityButton from "../../QuantityButton/QuantityButton";
 
@@ -12,13 +13,18 @@ import {
   DeleteBtn,
 } from "./itemCard.style";
 
-export default function ItemCard({ productId, cartId, quantity }) {
+export default function ItemCard({ productId, cartId, quantity, active }) {
   const history = useHistory();
-  const [modal, setModal] = useState(false);
+  const [delModal, setDelModal] = useState(false);
+  const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
 
-  const onClickModal = () => {
-    setModal(!modal);
+  const onClickDelModal = () => {
+    setDelModal(!delModal);
+  };
+
+  const onClickQuantityModal = () => {
+    setQuantityModal(!quantityModal);
   };
 
   function getCartDetail(id) {
@@ -53,7 +59,7 @@ export default function ItemCard({ productId, cartId, quantity }) {
       <ItemContainer>
         <input type="checkbox" />
         <img src={cartItem.image} alt="상품이미지" />
-        <DeleteBtn onClick={onClickModal} />
+        <DeleteBtn onClick={onClickDelModal} />
         <ItemInfo>
           <span>{cartItem.store_name}</span>
           <strong>{cartItem.product_name}</strong>
@@ -62,13 +68,26 @@ export default function ItemCard({ productId, cartId, quantity }) {
             {shipping(cartItem.shipping_method, cartItem.shipping_fee)}
           </span>
         </ItemInfo>
-        <QuantityButton onClick={onClickModal} quantity={quantity} />
+        <QuantityButton
+          quantity={quantity}
+          onClickQuantityModal={onClickQuantityModal}
+        />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
           <button onClick={() => history.push("/payment")}>주문하기</button>
         </ItemPrice>
       </ItemContainer>
-      {modal && <Modal option="delete" cartId={cartId} />}
+
+      {delModal && <Modal option="delete" cartId={cartId} />}
+      {quantityModal && (
+        <Modal
+          option="quantity"
+          cartId={cartId}
+          productId={productId}
+          quantity={quantity}
+          active={active}
+        />
+      )}
     </>
   );
 }
