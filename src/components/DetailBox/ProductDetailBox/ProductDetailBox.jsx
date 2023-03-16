@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import QuantityButton from "../../QuantityButton/QuantityButton";
@@ -16,7 +16,25 @@ import {
 } from "./productDetailBox.style";
 
 export default function ProductDetailBox({ loading }) {
+  const [orderNum, setOrderNum] = useState(1);
+
   const detail = useSelector((state) => state.productDetailReducer);
+
+  const price = detail.products.price;
+  const stock = detail.products.stock;
+  const totalPrice = orderNum * price;
+
+  const minusStock = () => {
+    if (stock > 1 && orderNum > 0) {
+      setOrderNum(parseInt(orderNum - 1));
+    }
+  };
+
+  const plusStock = () => {
+    if (stock > orderNum) {
+      setOrderNum(parseInt(orderNum + 1));
+    }
+  };
 
   function shipping(method, fee) {
     if (method === "DELIVERY" && fee !== 0) {
@@ -50,7 +68,12 @@ export default function ProductDetailBox({ loading }) {
                 detail.products.shipping_fee.toLocaleString()
               )}
             </Shipping>
-            <QuantityButton />
+            <QuantityButton
+              totalPrice={totalPrice}
+              orderNum={orderNum}
+              minusStock={minusStock}
+              plusStock={plusStock}
+            />
           </DetailDiv>
         </Section>
       )}

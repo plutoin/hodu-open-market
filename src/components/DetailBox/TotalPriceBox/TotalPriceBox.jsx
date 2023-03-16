@@ -47,7 +47,7 @@ export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
           <TotalQuantity>
             총 수량 <strong>{orderNum}</strong>개
           </TotalQuantity>
-          {totalPrice.toLocaleString()}
+          {totalPrice?.toLocaleString()}
           <span>원</span>
         </TotalPrice>
       </ConfirmContainer>

@@ -8,7 +8,16 @@ import { getCookie } from "../../Cookie";
 import { Container, Text, FirstBtn, SecBtn } from "./modal.style";
 import { DeleteBtn } from "../CartBox/ItemCard/itemCard.style";
 
-export default function Modal({ option, productId, cartId, quantity, active }) {
+export default function Modal({
+  option,
+  productId,
+  cartId,
+  quantity,
+  orderNum,
+  active,
+  minusStock,
+  plusStock,
+}) {
   const [modal, setModal] = useState(true);
   const token = getCookie("token");
 
@@ -18,7 +27,7 @@ export default function Modal({ option, productId, cartId, quantity, active }) {
         `/cart/${cartId}/`,
         {
           product_id: productId,
-          quantity: quantity,
+          quantity: orderNum,
           is_active: active,
         },
         {
@@ -52,7 +61,11 @@ export default function Modal({ option, productId, cartId, quantity, active }) {
       {modal && (
         <Container>
           {option === "quantity" ? (
-            <QuantityButton quantity={quantity} />
+            <QuantityButton
+              orderNum={orderNum}
+              minusStock={minusStock}
+              plusStock={plusStock}
+            />
           ) : null}
           {option === "delete" ? (
             <Text>상품을 삭제하시겠습니까?</Text>

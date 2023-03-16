@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { AxiosInstance } from "../../../Axios";
 
@@ -14,10 +15,17 @@ import {
 } from "./itemCard.style";
 
 export default function ItemCard({ productId, cartId, quantity, active }) {
+  const detail = useSelector((state) => state.productDetailReducer);
+
+  const stock = detail.products.stock;
+
   const history = useHistory();
+  const [orderNum, setOrderNum] = useState(quantity);
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
+
+  // console.log(stock);
 
   const onClickDelModal = () => {
     setDelModal(!delModal);
@@ -43,6 +51,18 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
     }
   }
 
+  const minusStock = () => {
+    if (cartItem.stock > 1 && orderNum > 0) {
+      setOrderNum(parseInt(orderNum - 1));
+    }
+  };
+
+  const plusStock = () => {
+    if (cartItem.stock > orderNum) {
+      setOrderNum(parseInt(orderNum + 1));
+    }
+  };
+
   useEffect(() => {
     async function getCart() {
       const cartDetail = getCartDetail(productId).then((detail) => {
@@ -52,7 +72,7 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
     }
 
     getCart();
-  }, [productId]);
+  }, [quantity, productId]);
 
   return (
     <>
@@ -69,8 +89,11 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
           </span>
         </ItemInfo>
         <QuantityButton
+          stock={stock}
           quantity={quantity}
-          onClickQuantityModal={onClickQuantityModal}
+          orderNum={orderNum}
+          minusStock={onClickQuantityModal}
+          plusStock={onClickQuantityModal}
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
@@ -86,6 +109,9 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
           productId={productId}
           quantity={quantity}
           active={active}
+          orderNum={orderNum}
+          minusStock={minusStock}
+          plusStock={plusStock}
         />
       )}
     </>
