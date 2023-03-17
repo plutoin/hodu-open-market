@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/app.css";
 import "./styles/reset.css";
 
@@ -14,20 +14,16 @@ import NotFound from "./pages/NotFound/NotFound";
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={SignIn} />
-        <Route path="/join" exact component={Join} />
-        <Route path="/join/seller" exact component={Join} />
-        <Route
-          path="/productDetail/:product_id"
-          exact
-          component={ProductDetail}
-        />
-        <Route path="/cart" exact component={Cart} />
-        <Route path="/payment" exact component={Payment} />
-        <Route path="/404" exact component={NotFound} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/join/seller" element={<Join />} />
+        <Route path="/productDetail/:product_id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 }

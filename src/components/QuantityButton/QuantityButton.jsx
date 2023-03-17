@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import TotalPriceBox from "../DetailBox/TotalPriceBox/TotalPriceBox";
 
@@ -12,13 +11,7 @@ export default function QuantityButton({
   plusStock,
   totalPrice,
 }) {
-  const location = useLocation();
-
-  // useEffect(() => {
-  //   if (location.pathname === "/cart") {
-  //     setOrderNum(quantity);
-  //   }
-  // }, [setOrderNum, location.pathname, quantity]);
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -28,7 +21,7 @@ export default function QuantityButton({
         <span>{orderNum}</span>
         <PlusButton onClick={plusStock} />
       </FieldSet>
-      {location.pathname === "/cart" ? null : (
+      {pathname === "/cart" ? null : (
         <TotalPriceBox
           stock={stock}
           orderNum={orderNum}

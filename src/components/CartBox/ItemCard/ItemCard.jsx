@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { AxiosInstance } from "../../../Axios";
@@ -19,7 +19,7 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
 
   const stock = detail.products.stock;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const [orderNum, setOrderNum] = useState(quantity);
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
@@ -97,7 +97,7 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
-          <button onClick={() => history.push("/payment")}>주문하기</button>
+          <button onClick={() => navigate("/payment")}>주문하기</button>
         </ItemPrice>
       </ItemContainer>
 

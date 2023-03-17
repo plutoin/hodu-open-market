@@ -1,15 +1,15 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Container, LogoBtn } from "./join.style";
 
 import BuyerJoinForm from "../../components/JoinForm/BuyerJoinForm/BuyerJoinForm";
 
 export default function Join() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const home = () => {
-    history.push("/");
+    navigate("/");
   };
 
   return (

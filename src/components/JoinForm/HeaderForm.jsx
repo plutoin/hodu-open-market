@@ -19,16 +19,16 @@ const Tab = styled.div`
 `;
 
 export default function HeaderForm({ buyer, seller }) {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <Tab>
       <Link
-        to={location.pathname.includes("/join") ? "/join" : "/login"}
+        to={pathname.includes("/join") ? "/join" : "/login"}
         style={
-          location.pathname === "/join"
+          pathname === "/join"
             ? { backgroundColor: "white" }
-            : location.pathname !== "/login"
+            : pathname !== "/login"
             ? { backgroundColor: "#f2f2f2" }
             : null
         }
@@ -36,11 +36,9 @@ export default function HeaderForm({ buyer, seller }) {
         {buyer}
       </Link>
       <Link
-        to={location.pathname.includes("/join") ? "/join/seller" : "/login"}
+        to={pathname.includes("/join") ? "/join/seller" : "/login"}
         style={
-          location.pathname !== "/join/seller"
-            ? { backgroundColor: "#f2f2f2" }
-            : null
+          pathname !== "/join/seller" ? { backgroundColor: "#f2f2f2" } : null
         }
       >
         {seller}

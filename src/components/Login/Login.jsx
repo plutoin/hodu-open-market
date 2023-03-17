@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../auth/useAuth";
@@ -17,7 +17,7 @@ import {
 
 export default function Login() {
   const { onClickLogin } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,7 +28,7 @@ export default function Login() {
   } = useForm({ mode: "onBlur" });
 
   const goToHome = () => {
-    history.push("/");
+    navigate("/");
   };
 
   const onSubmit = handleSubmit((data) => {

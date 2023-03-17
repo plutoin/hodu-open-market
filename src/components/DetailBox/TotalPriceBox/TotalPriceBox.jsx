@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
@@ -15,7 +15,7 @@ import {
 
 export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
   const { product_id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const token = getCookie("token");
 
   const addCart = async () => {
@@ -33,7 +33,7 @@ export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
           },
         }
       );
-      history.push("/cart");
+      navigate("/cart");
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +51,7 @@ export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
           <span>원</span>
         </TotalPrice>
       </ConfirmContainer>
-      <BuyButton onClick={() => history.push("/payment")}>바로 구매</BuyButton>
+      <BuyButton onClick={() => navigate("/payment")}>바로 구매</BuyButton>
       <CartButton onClick={addCart}>장바구니</CartButton>
     </>
   );

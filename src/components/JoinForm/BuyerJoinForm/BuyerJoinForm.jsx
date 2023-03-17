@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../../auth/useAuth";
@@ -16,8 +16,8 @@ import {
 
 export default function BuyerJoinForm() {
   const { onClickJoin, validID } = useAuth();
-  const location = useLocation();
-  const history = useHistory();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,7 +28,7 @@ export default function BuyerJoinForm() {
   } = useForm({ mode: "onBlur" });
 
   const goToLogin = () => {
-    history.push("/login");
+    navigate("/login");
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -145,7 +145,7 @@ export default function BuyerJoinForm() {
           이메일
         </label>
         <input id="email_2" type="text" />
-        {location.pathname === "/join/seller" ? <SellerJoinForm /> : null}
+        {pathname === "/join/seller" ? <SellerJoinForm /> : null}
         <CheckBoxContainer>
           <input id="check" type="checkbox" />
           <label htmlFor="check"></label>

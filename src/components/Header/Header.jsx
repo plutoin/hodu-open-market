@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../Cookie";
 import Dropdown from "../Dropdown/Dropdown";
 import {
@@ -14,7 +14,7 @@ import {
 
 export default function Header() {
   const modalRef = useRef();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const cookie = getCookie("token");
 
@@ -42,15 +42,15 @@ export default function Header() {
         </Label>
         <BtnContainer>
           {cookie ? (
-            <CartBtn onClick={() => history.push("/cart")} />
+            <CartBtn onClick={() => navigate("/cart")} />
           ) : (
-            <CartBtn onClick={() => history.push("/login")} />
+            <CartBtn onClick={() => navigate("/login")} />
           )}
           <span>장바구니</span>
         </BtnContainer>
         {cookie ? null : (
           <BtnContainer>
-            <UserBtn onClick={() => history.push("/login")} />
+            <UserBtn onClick={() => navigate("/login")} />
             <span>로그인</span>
           </BtnContainer>
         )}

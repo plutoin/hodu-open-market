@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getCookie } from "../../Cookie";
@@ -17,7 +17,7 @@ import Loading from "../../components/Loading/Loading";
 import { CartSection } from "./cart.style";
 
 export default function Cart() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = getCookie("token");
 
@@ -82,6 +82,12 @@ export default function Cart() {
   const totalFee = total(feeArr);
   const totalPay = totalPrice + totalFee;
 
+  const goToPayment = () => {
+    navigate("/payment", {
+      state: {},
+    });
+  };
+
   return (
     <>
       {loading && <Loading />}
@@ -107,7 +113,7 @@ export default function Cart() {
           totalFee={totalFee}
           totalPay={totalPay}
         />
-        <button onClick={() => history.push("/payment")}>주문하기</button>
+        <button onClick={goToPayment}>주문하기</button>
       </CartSection>
       <Footer />
     </>

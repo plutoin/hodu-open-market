@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AxiosInstance } from "../../Axios";
@@ -19,7 +19,7 @@ import {
 
 export default function ProductList() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(null);
 
@@ -52,7 +52,7 @@ export default function ProductList() {
       {products &&
         products.map((item) => (
           <ItemContainer
-            onClick={() => history.push(`productDetail/${item.product_id}`)}
+            onClick={() => navigate(`productDetail/${item.product_id}`)}
             key={item.product_id}
           >
             <ItemImage src={item.image} alt="상품 이미지" />
