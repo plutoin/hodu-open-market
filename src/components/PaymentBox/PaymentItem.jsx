@@ -30,8 +30,8 @@ export default function PaymentItem({
 const PayContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 16px 0 35px 0;
-  padding: 8px 78px 18px 8px;
+  margin: 16px 0;
+  padding: 8px 0px 18px 8px;
   border-bottom: 1px solid #c4c4c4;
   > img {
     width: 104px;
@@ -48,6 +48,7 @@ const PayContainer = styled.div`
     color: var(--color-deep-gray);
   }
   > strong {
+    width: 120px;
     font-weight: 700;
     font-size: 18px;
     line-height: 23px;
@@ -78,5 +79,6 @@ const ItemSale = styled.p`
 `;
 
 const ItemDelivery = styled.p`
-  margin-right: 158px;
+  width: 200px;
+  text-align: left;
 `;

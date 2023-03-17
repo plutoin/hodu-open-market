@@ -28,6 +28,7 @@ export const CartSection = styled.section`
 `;
 
 export const TotalPrice = styled.p`
+  margin-top: 35px;
   font-size: 18px;
   font-weight: 500;
   line-height: 23px;

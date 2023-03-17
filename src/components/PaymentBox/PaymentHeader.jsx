@@ -14,7 +14,6 @@ export default function PaymentHeader() {
 
 const PayHeader = styled.div`
   display: flex;
-  margin-bottom: 35px;
   padding: 19px 82px 18px 0px;
   border-radius: 10px;
   background-color: #f2f2f2;
