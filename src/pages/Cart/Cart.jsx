@@ -84,7 +84,7 @@ export default function Cart() {
 
   const goToPayment = () => {
     navigate("/payment", {
-      state: {},
+      state: { products: cartArr },
     });
   };
 

@@ -26,3 +26,17 @@ export const CartSection = styled.section`
     line-height: 30px;
   }
 `;
+
+export const TotalPrice = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  text-align: right;
+  > strong {
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #eb5757;
+  }
+`;
