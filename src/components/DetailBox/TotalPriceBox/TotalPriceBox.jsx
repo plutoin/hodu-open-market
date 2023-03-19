@@ -13,7 +13,7 @@ import {
   CartButton,
 } from "./totalPriceBox.style";
 
-export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
+export default function TotalPriceBox({ detail, quantity, totalPrice }) {
   const { product_id } = useParams();
   const navigate = useNavigate();
   const token = getCookie("token");
@@ -24,7 +24,7 @@ export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
         "cart/",
         {
           product_id: parseInt(product_id),
-          quantity: orderNum,
+          quantity: quantity,
           check: true,
         },
         {
@@ -39,19 +39,33 @@ export default function TotalPriceBox({ stock, orderNum, totalPrice }) {
     }
   };
 
+  const goToPayment = () => {
+    navigate("/payment", {
+      state: {
+        products: [
+          {
+            ...detail,
+            quantity,
+            order_kind: "direct_order",
+          },
+        ],
+      },
+    });
+  };
+
   return (
     <>
       <ConfirmContainer>
         <TotalInfo>총 상품 금액</TotalInfo>
         <TotalPrice>
           <TotalQuantity>
-            총 수량 <strong>{orderNum}</strong>개
+            총 수량 <strong>{quantity}</strong>개
           </TotalQuantity>
           {totalPrice?.toLocaleString()}
           <span>원</span>
         </TotalPrice>
       </ConfirmContainer>
-      <BuyButton onClick={() => navigate("/payment")}>바로 구매</BuyButton>
+      <BuyButton onClick={goToPayment}>바로 구매</BuyButton>
       <CartButton onClick={addCart}>장바구니</CartButton>
     </>
   );

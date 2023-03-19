@@ -73,6 +73,7 @@ export default function ProductDetailBox({ loading }) {
               orderNum={orderNum}
               minusStock={minusStock}
               plusStock={plusStock}
+              detail={detail.products}
             />
           </DetailDiv>
         </Section>

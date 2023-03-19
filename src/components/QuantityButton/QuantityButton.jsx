@@ -5,11 +5,11 @@ import TotalPriceBox from "../DetailBox/TotalPriceBox/TotalPriceBox";
 import { FieldSet, MinusButton, PlusButton } from "./quantityButton.style";
 
 export default function QuantityButton({
-  stock,
   orderNum,
   minusStock,
   plusStock,
   totalPrice,
+  detail,
 }) {
   const { pathname } = useLocation();
 
@@ -23,8 +23,8 @@ export default function QuantityButton({
       </FieldSet>
       {pathname === "/cart" ? null : (
         <TotalPriceBox
-          stock={stock}
-          orderNum={orderNum}
+          detail={detail}
+          quantity={orderNum}
           totalPrice={totalPrice}
         />
       )}

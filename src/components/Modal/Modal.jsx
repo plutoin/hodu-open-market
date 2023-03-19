@@ -12,7 +12,6 @@ export default function Modal({
   option,
   productId,
   cartId,
-  quantity,
   orderNum,
   active,
   minusStock,
