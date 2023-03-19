@@ -14,7 +14,12 @@ import {
   DeleteBtn,
 } from "./itemCard.style";
 
-export default function ItemCard({ productId, cartId, quantity, active }) {
+export default function ItemCard({
+  product_id,
+  cart_item_id,
+  quantity,
+  is_active,
+}) {
   const detail = useSelector((state) => state.productDetailReducer);
 
   const stock = detail.products.stock;
@@ -24,8 +29,6 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
-
-  // console.log(stock);
 
   const onClickDelModal = () => {
     setDelModal(!delModal);
@@ -63,16 +66,30 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
     }
   };
 
+  const goToPayment = () => {
+    navigate("/payment", {
+      state: {
+        products: [
+          {
+            ...cartItem,
+            quantity,
+            order_kind: "cart_one_order",
+          },
+        ],
+      },
+    });
+  };
+
   useEffect(() => {
     async function getCart() {
-      const cartDetail = getCartDetail(productId).then((detail) => {
+      const cartDetail = getCartDetail(product_id).then((detail) => {
         setCartItem(detail);
       });
       return cartDetail;
     }
 
     getCart();
-  }, [quantity, productId]);
+  }, [quantity, product_id]);
 
   return (
     <>
@@ -97,18 +114,18 @@ export default function ItemCard({ productId, cartId, quantity, active }) {
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
-          <button onClick={() => navigate("/payment")}>주문하기</button>
+          <button onClick={goToPayment}>주문하기</button>
         </ItemPrice>
       </ItemContainer>
 
-      {delModal && <Modal option="delete" cartId={cartId} />}
+      {delModal && <Modal option="delete" cartId={cart_item_id} />}
       {quantityModal && (
         <Modal
           option="quantity"
-          cartId={cartId}
-          productId={productId}
+          cartId={cart_item_id}
+          productId={product_id}
           quantity={quantity}
-          active={active}
+          active={is_active}
           orderNum={orderNum}
           minusStock={minusStock}
           plusStock={plusStock}

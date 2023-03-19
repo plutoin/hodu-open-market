@@ -96,15 +96,7 @@ export default function Cart() {
         <h1>장바구니</h1>
         <ItemHeader />
         {carts.length > 0 ? (
-          carts.map((item) => (
-            <ItemCard
-              key={item.product_id}
-              productId={item.product_id}
-              cartId={item.cart_item_id}
-              quantity={item.quantity}
-              active={item.is_active}
-            />
-          ))
+          carts.map((item) => <ItemCard key={item.product_id} {...item} />)
         ) : (
           <EmptyCart />
         )}
