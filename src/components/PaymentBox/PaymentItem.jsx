@@ -20,7 +20,11 @@ export default function PaymentItem({
           <p>수량: {quantity}개</p>
         </ItemInfo>
         <ItemSale>-</ItemSale>
-        <ItemDelivery>{shipping_fee?.toLocaleString()}원</ItemDelivery>
+        {shipping_fee ? (
+          <ItemDelivery>{shipping_fee?.toLocaleString()}원</ItemDelivery>
+        ) : (
+          <ItemDelivery>무료배송</ItemDelivery>
+        )}
         <strong>{price?.toLocaleString()}원</strong>
       </PayContainer>
     </>
