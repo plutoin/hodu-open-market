@@ -25,7 +25,7 @@ export default function PaymentItem({
         ) : (
           <ItemDelivery>무료배송</ItemDelivery>
         )}
-        <strong>{price?.toLocaleString()}원</strong>
+        <strong>{(price * quantity)?.toLocaleString()}원</strong>
       </PayContainer>
     </>
   );
