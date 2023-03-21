@@ -31,6 +31,7 @@ export default function PaymentForm({
   const navigate = useNavigate();
   const token = getCookie("token");
 
+  console.log(products);
   async function payFunc(data) {
     try {
       await AxiosInstance.post("order/", data, {
@@ -38,6 +39,7 @@ export default function PaymentForm({
           Authorization: token,
         },
       });
+      console.log(data);
     } catch (error) {
       console.log(error.response.data);
       return error.response.data;
@@ -68,7 +70,7 @@ export default function PaymentForm({
 
     const cart_order_data = {
       total_price: totalPay,
-      order_kind: "cart_order",
+      order_kind,
       receiver,
       receiver_phone_number,
       address,
@@ -96,6 +98,7 @@ export default function PaymentForm({
       } else if (order_kind === "cart_one_order") {
         await payFunc(cart_one_order_data);
       }
+      console.log(order_kind);
       alert("주문 완료되었습니다.");
       navigate("/");
     } catch (error) {

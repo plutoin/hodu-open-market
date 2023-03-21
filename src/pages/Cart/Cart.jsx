@@ -83,8 +83,12 @@ export default function Cart() {
   const totalPay = totalPrice + totalFee;
 
   const goToPayment = () => {
+    const selectedItems = cartArr.map((cartArr) => ({
+      ...cartArr,
+      order_kind: "cart_order",
+    }));
     navigate("/payment", {
-      state: { products: cartArr },
+      state: { products: selectedItems },
     });
   };
 
