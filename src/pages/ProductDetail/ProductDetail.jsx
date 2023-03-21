@@ -16,21 +16,21 @@ export default function ProductDetail() {
 
   const [loading, setLoading] = useState(true);
 
-  const productDetails = async () => {
-    try {
-      const res = await AxiosInstance.get(`products/${product_id}`);
-      const data = res.data;
-      dispatch(getProducts(data));
-      setLoading(false);
-    } catch {
-      console.log("ERROR!");
-    }
-  };
-
   useEffect(() => {
+    const productDetails = async () => {
+      try {
+        const res = await AxiosInstance.get(`products/${product_id}`);
+        const data = res.data;
+        dispatch(getProducts(data));
+        setLoading(false);
+      } catch {
+        console.log("ERROR!");
+      }
+    };
+
     productDetails(product_id);
     setLoading(true);
-  }, [product_id]);
+  }, [product_id, dispatch]);
 
   return (
     <>

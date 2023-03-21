@@ -56,6 +56,10 @@ export const BuyButton = styled.button`
   font-weight: 700;
   line-height: 22px;
   text-align: center;
+  :disabled {
+    width: 100%;
+    background-color: var(--color-light-gray);
+  }
 `;
 
 export const CartButton = styled.button`

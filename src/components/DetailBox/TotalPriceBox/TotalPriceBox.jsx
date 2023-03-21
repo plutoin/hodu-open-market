@@ -65,8 +65,14 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
           <span>원</span>
         </TotalPrice>
       </ConfirmContainer>
-      <BuyButton onClick={goToPayment}>바로 구매</BuyButton>
-      <CartButton onClick={addCart}>장바구니</CartButton>
+      {detail?.stock === 0 ? (
+        <BuyButton disabled>품절</BuyButton>
+      ) : (
+        <>
+          <BuyButton onClick={goToPayment}>바로 구매</BuyButton>
+          <CartButton onClick={addCart}>장바구니</CartButton>
+        </>
+      )}
     </>
   );
 }
