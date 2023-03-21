@@ -24,6 +24,8 @@ export default function ProductDetailBox({ loading }) {
   const stock = detail.products.stock;
   const totalPrice = orderNum * price;
 
+  console.log(stock);
+
   const minusStock = () => {
     if (stock > 1 && orderNum > 0) {
       setOrderNum(parseInt(orderNum - 1));

@@ -41,7 +41,12 @@ export default function Payment() {
           총 주문금액
           <strong>{totalPay?.toLocaleString()}원</strong>
         </TotalPrice>
-        <PaymentForm />
+        <PaymentForm
+          products={products}
+          totalPrice={totalPrice}
+          totalFee={totalFee}
+          totalPay={totalPay}
+        />
       </CartSection>
       <Footer />
     </>

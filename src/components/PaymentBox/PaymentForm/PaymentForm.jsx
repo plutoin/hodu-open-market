@@ -1,4 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AxiosInstance } from "../../../Axios";
+import { getCookie } from "../../../Cookie";
 
 import {
   Container,
@@ -18,7 +22,87 @@ import {
   CheckForm,
 } from "./paymentForm.style";
 
-export default function PaymentForm() {
+export default function PaymentForm({
+  products,
+  totalPrice,
+  totalFee,
+  totalPay,
+}) {
+  const navigate = useNavigate();
+  const token = getCookie("token");
+
+  async function payFunc(data) {
+    try {
+      await AxiosInstance.post("order/", data, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+
+  const postOrder = async () => {
+    const product_id = products[0].product_id;
+    const quantity = products[0].quantity;
+    const order_kind = products[0].order_kind;
+    const receiver = "sdf";
+    const receiver_phone_number = "01012341234";
+    const address = "sdf";
+    const address_message = "sdf";
+    const payment_method = "CARD";
+
+    const direct_order_data = {
+      product_id,
+      quantity,
+      order_kind,
+      receiver,
+      receiver_phone_number,
+      address,
+      address_message,
+      payment_method,
+      total_price: totalPay,
+    };
+
+    const cart_order_data = {
+      total_price: totalPay,
+      order_kind: "cart_order",
+      receiver,
+      receiver_phone_number,
+      address,
+      address_message,
+      payment_method,
+    };
+
+    const cart_one_order_data = {
+      product_id,
+      quantity,
+      order_kind,
+      total_price: totalPay,
+      receiver,
+      receiver_phone_number,
+      address,
+      address_message,
+      payment_method, // CARD, DEPOSIT, PHONE_PAYMENT, NAVERPAY, KAKAOPAY 중 하나 선택
+    };
+
+    try {
+      if (order_kind === "direct_order") {
+        await payFunc(direct_order_data);
+      } else if (order_kind === "cart_order") {
+        await payFunc(cart_order_data);
+      } else if (order_kind === "cart_one_order") {
+        await payFunc(cart_one_order_data);
+      }
+      alert("주문 완료되었습니다.");
+      navigate("/");
+    } catch (error) {
+      return error.response.data;
+    }
+  };
+
   return (
     <Container>
       <h2>배송정보</h2>
@@ -114,7 +198,7 @@ export default function PaymentForm() {
           <CheckBox>
             <div>
               <span>- 상품금액</span>
-              <Price>46,500</Price>
+              <Price>{totalPrice.toLocaleString()}</Price>
             </div>
             <div>
               <span>- 할인금액</span>
@@ -122,11 +206,11 @@ export default function PaymentForm() {
             </div>
             <div>
               <span>- 배송비</span>
-              <Price>0</Price>
+              <Price>{totalFee.toLocaleString()}</Price>
             </div>
             <PayPriceDiv>
               <span>- 결제금액</span>
-              <strong>46,500원</strong>
+              <strong>{totalPay.toLocaleString()}원</strong>
             </PayPriceDiv>
           </CheckBox>
           <CheckForm>
@@ -134,7 +218,7 @@ export default function PaymentForm() {
             <label htmlFor="check">
               주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
             </label>
-            <button>결제하기</button>
+            <button onClick={postOrder}>결제하기</button>
           </CheckForm>
         </CheckInfoDiv>
       </FinalCheckDiv>

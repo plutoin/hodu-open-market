@@ -172,7 +172,7 @@ export const PayPriceDiv = styled.div`
   }
 `;
 
-export const CheckForm = styled.form`
+export const CheckForm = styled.div`
   padding: 30px 30px 34px;
   border: 2px solid var(--color-green);
   border-top: none;
