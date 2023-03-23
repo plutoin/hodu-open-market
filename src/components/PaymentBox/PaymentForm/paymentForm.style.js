@@ -184,12 +184,15 @@ export const CheckForm = styled.div`
     margin-top: 30px;
     padding: 19px 0;
     border: none;
-    background-color: var(--color-light-gray);
+    background-color: var(--color-green);
     border-radius: 5px;
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
     color: white;
+    :disabled {
+      background-color: var(--color-light-gray);
+    }
   }
   > input[type="checkbox"] {
     width: 20px;

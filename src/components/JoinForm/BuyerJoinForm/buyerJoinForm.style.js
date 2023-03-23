@@ -132,7 +132,10 @@ export const JoinButton = styled.button`
   line-height: 22px;
   text-align: center;
   color: white;
-  background-color: var(--color-light-gray);
+  background-color: var(--color-green);
+  :disabled {
+    background-color: var(--color-light-gray);
+  }
 `;
 
 export const ErrorMsg = styled.p`

@@ -35,9 +35,15 @@ export default function PaymentForm({
 
   const {
     register,
-    formState: { isSubmitting, errors },
+    formState: { errors },
     handleSubmit,
-  } = useForm({ mode: "onBlur" });
+    watch,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: { checkBox: false },
+  });
+
+  const isValid = watch("checkBox");
 
   async function payFunc(data) {
     try {
@@ -116,7 +122,6 @@ export default function PaymentForm({
       data.receiver_phonenum2 +
       data.receiver_phonenum3;
     postOrder(data, receiver_phoneNum);
-    console.log(data, receiver_phoneNum);
   });
 
   return (
@@ -323,11 +328,15 @@ export default function PaymentForm({
             </PayPriceDiv>
           </CheckBox>
           <CheckForm>
-            <input type="checkbox" id="check" />
+            <input
+              type="checkbox"
+              id="check"
+              {...register("checkBox", { required: true })}
+            />
             <label htmlFor="check">
               주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
             </label>
-            <button disabled={isSubmitting} onClick={onSubmit}>
+            <button disabled={!isValid} onClick={onSubmit}>
               결제하기
             </button>
           </CheckForm>

@@ -21,11 +21,14 @@ export default function BuyerJoinForm() {
 
   const {
     register,
-    formState: { isSubmitting, errors },
+    formState: { errors },
     handleSubmit,
     setError,
     reset,
-  } = useForm({ mode: "onBlur" });
+    watch,
+  } = useForm({ mode: "onBlur", defaultValues: { checkBox: false } });
+
+  const isValid = watch("checkBox");
 
   const goToLogin = () => {
     navigate("/login");
@@ -46,8 +49,6 @@ export default function BuyerJoinForm() {
   });
 
   const onValidID = (data) => {
-    console.log(data);
-    console.log(data.id);
     validID(data, setError);
   };
 
@@ -147,7 +148,7 @@ export default function BuyerJoinForm() {
         <input id="email_2" type="text" />
         {pathname === "/join/seller" ? <SellerJoinForm /> : null}
         <CheckBoxContainer>
-          <input id="check" type="checkbox" />
+          <input id="check" type="checkbox" {...register("checkBox")} />
           <label htmlFor="check"></label>
           <span>
             호두샵의 <strong>이용약관</strong> 및{" "}
@@ -155,7 +156,7 @@ export default function BuyerJoinForm() {
             동의합니다.
           </span>
         </CheckBoxContainer>
-        <JoinButton type="submit" disabled={isSubmitting} onClick={onSubmit}>
+        <JoinButton type="submit" disabled={!isValid} onClick={onSubmit}>
           가입하기
         </JoinButton>
       </JoinForm>
