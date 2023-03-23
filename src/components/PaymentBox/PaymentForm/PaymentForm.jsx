@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
@@ -20,6 +21,7 @@ import {
   Price,
   PayPriceDiv,
   CheckForm,
+  ErrorMsg,
 } from "./paymentForm.style";
 
 export default function PaymentForm({
@@ -31,7 +33,12 @@ export default function PaymentForm({
   const navigate = useNavigate();
   const token = getCookie("token");
 
-  console.log(products);
+  const {
+    register,
+    formState: { isSubmitting, errors },
+    handleSubmit,
+  } = useForm({ mode: "onBlur" });
+
   async function payFunc(data) {
     try {
       await AxiosInstance.post("order/", data, {
@@ -39,22 +46,20 @@ export default function PaymentForm({
           Authorization: token,
         },
       });
-      console.log(data);
     } catch (error) {
-      console.log(error.response.data);
       return error.response.data;
     }
   }
 
-  const postOrder = async () => {
+  const postOrder = async (data, receiver_phoneNum) => {
     const product_id = products[0].product_id;
     const quantity = products[0].quantity;
     const order_kind = products[0].order_kind;
-    const receiver = "sdf";
-    const receiver_phone_number = "01012341234";
+    const receiver = data.receiver;
+    const receiver_phone_number = receiver_phoneNum;
     const address = "sdf";
-    const address_message = "sdf";
-    const payment_method = "CARD";
+    const address_message = data.address_message;
+    const payment_method = data.payMethod;
 
     const direct_order_data = {
       product_id,
@@ -87,7 +92,7 @@ export default function PaymentForm({
       receiver_phone_number,
       address,
       address_message,
-      payment_method, // CARD, DEPOSIT, PHONE_PAYMENT, NAVERPAY, KAKAOPAY 중 하나 선택
+      payment_method,
     };
 
     try {
@@ -98,7 +103,6 @@ export default function PaymentForm({
       } else if (order_kind === "cart_one_order") {
         await payFunc(cart_one_order_data);
       }
-      console.log(order_kind);
       alert("주문 완료되었습니다.");
       navigate("/");
     } catch (error) {
@@ -106,42 +110,132 @@ export default function PaymentForm({
     }
   };
 
+  const onSubmit = handleSubmit((data) => {
+    const receiver_phoneNum =
+      data.receiver_phonenum1 +
+      data.receiver_phonenum2 +
+      data.receiver_phonenum3;
+    postOrder(data, receiver_phoneNum);
+    console.log(data, receiver_phoneNum);
+  });
+
   return (
-    <Container>
+    <Container onSubmit={onSubmit}>
       <h2>배송정보</h2>
       <h3>주문자 정보</h3>
       <WrapperDiv>
         <label htmlFor="name">이름</label>
-        <Input type="text" />
+        <Input
+          type="text"
+          {...register("orderer", { required: "필수 응답 항목입니다." })}
+        />
+        {errors.orderer && <ErrorMsg>{errors.orderer?.message}</ErrorMsg>}
       </WrapperDiv>
 
       <WrapperDiv>
         <label htmlFor="phoneNum">휴대폰</label>
-        <FirstPhoneInput type="text" />
+        <FirstPhoneInput
+          type="text"
+          maxLength="3"
+          {...register("orderer_phonenum1", {
+            required: "필수 응답 항목입니다.",
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
         <span>-</span>
-        <PhoneInput type="text" />
+        <PhoneInput
+          type="text"
+          maxLength="4"
+          {...register("orderer_phonenum2", {
+            required: "필수 응답 항목입니다.",
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
         <span>-</span>
-        <PhoneInput type="text" />
+        <PhoneInput
+          type="text"
+          maxLength="4"
+          {...register("orderer_phonenum3", {
+            required: "필수 응답 항목입니다.",
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
+        {(errors.orderer_phonenum1 ||
+          errors.orderer_phonenum2 ||
+          errors.orderer_phonenum) && (
+          <ErrorMsg>{errors.orderer_phonenum1?.message}</ErrorMsg>
+        )}
       </WrapperDiv>
 
       <WrapperDiv>
         <label htmlFor="Email">이메일</label>
-        <Input type="email" id="Email" />
+        <Input
+          type="email"
+          id="Email"
+          {...register("email", {
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+              message: "이메일 형식이 아닙니다.",
+            },
+          })}
+        />
+        {errors.email && <ErrorMsg>{errors.email?.message}</ErrorMsg>}
       </WrapperDiv>
 
       <h3>배송지 정보</h3>
       <WrapperDiv>
-        <label htmlFor="recipient">수령인</label>
-        <Input type="text" id="recipient" />
+        <label htmlFor="receiver">수령인</label>
+        <Input
+          type="text"
+          id="receiver"
+          {...register("receiver", { required: "필수 응답 항목입니다." })}
+        />
+        {errors.receiver && <ErrorMsg>{errors.receiver?.message}</ErrorMsg>}
       </WrapperDiv>
 
       <WrapperDiv>
         <label htmlFor="phoneNum">휴대폰</label>
-        <FirstPhoneInput type="text" />
+        <FirstPhoneInput
+          type="text"
+          maxLength="3"
+          {...register("receiver_phonenum1", {
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
         <span>-</span>
-        <PhoneInput type="text" />
+        <PhoneInput
+          type="text"
+          maxLength="4"
+          {...register("receiver_phonenum2", {
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
         <span>-</span>
-        <PhoneInput type="text" />
+        <PhoneInput
+          type="text"
+          maxLength="4"
+          {...register("receiver_phonenum3", {
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "숫자만 입력해 주세요.",
+            },
+          })}
+        />
       </WrapperDiv>
 
       <WrapperDiv>
@@ -153,8 +247,12 @@ export default function PaymentForm({
       </WrapperDiv>
 
       <WrapperDiv>
-        <label htmlFor="message">배송메시지</label>
-        <Message type="text" id="message" />
+        <label htmlFor="address_message">배송메시지</label>
+        <Message
+          type="text"
+          id="address_message"
+          {...register("address_message")}
+        />
       </WrapperDiv>
 
       <FinalCheckDiv>
@@ -162,39 +260,47 @@ export default function PaymentForm({
           <h2>결제수단</h2>
           <input
             type="radio"
-            value="신용/체크카드"
+            value="CARD"
             id="card"
             name="payMethod"
+            {...register("payMethod", {
+              required: "결제 수단을 선택해 주세요.",
+            })}
           />
           <label htmlFor="card">신용/체크카드</label>
           <input
             type="radio"
-            value="무통장 입금"
+            value="DEPOSIT"
             id="deposit"
             name="payMethod"
+            {...register("payMethod")}
           />
           <label htmlFor="deposit">무통장 입금</label>
           <input
             type="radio"
-            value="휴대폰 결제"
+            value="PHONE_PAYMENT"
             id="phonePay"
             name="payMethod"
+            {...register("payMethod")}
           />
           <label htmlFor="phonePay">휴대폰 결제</label>
           <input
             type="radio"
-            value="네이버페이"
+            value="NAVERPAY"
             id="naverPay"
             name="payMethod"
+            {...register("payMethod")}
           />
           <label htmlFor="naverPay">네이버페이</label>
           <input
             type="radio"
-            value="카카오페이"
+            value="KAKAOPAY"
             id="kakaoPay"
             name="payMethod"
+            {...register("payMethod")}
           />
           <label htmlFor="kakaoPay">카카오페이</label>
+          {errors.receiver && <p>{errors.receiver?.message}</p>}
         </PayForm>
         <CheckInfoDiv>
           <h2>최종결제 정보</h2>
@@ -221,7 +327,9 @@ export default function PaymentForm({
             <label htmlFor="check">
               주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
             </label>
-            <button onClick={postOrder}>결제하기</button>
+            <button disabled={isSubmitting} onClick={onSubmit}>
+              결제하기
+            </button>
           </CheckForm>
         </CheckInfoDiv>
       </FinalCheckDiv>

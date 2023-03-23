@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import checkIcon from "../../../assets/icon-check.svg";
 
-export const Container = styled.section`
+export const Container = styled.form`
   margin-top: 98px;
   text-align: left;
   font-weight: 400;
@@ -90,7 +90,7 @@ export const FinalCheckDiv = styled.div`
   align-items: baseline;
 `;
 
-export const PayForm = styled.form`
+export const PayForm = styled.div`
   width: 760px;
   padding-bottom: 18px;
   border-bottom: 2px solid var(--color-light-gray);
@@ -213,4 +213,12 @@ export const CheckForm = styled.div`
     font-size: 16px;
     line-height: 20px;
   }
+`;
+
+export const ErrorMsg = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  color: var(--color-red);
 `;
