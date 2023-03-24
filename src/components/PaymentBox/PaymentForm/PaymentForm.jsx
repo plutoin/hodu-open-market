@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import DaumPostcode from "react-daum-postcode";
 
 import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
@@ -33,6 +34,10 @@ export default function PaymentForm({
   const navigate = useNavigate();
   const token = getCookie("token");
 
+  const [addressValue, setAddressValue] = useState("");
+  const [popup, setPopup] = useState("");
+  const [zipcode, setZipCode] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -44,6 +49,19 @@ export default function PaymentForm({
   });
 
   const isValid = watch("checkBox");
+
+  const onCompletePost = (data) => {
+    setAddressValue(data.address);
+    setZipCode(data.zonecode);
+  };
+
+  const postCodeStyle = {
+    margin: "25px 0 0 170px",
+    width: "800px",
+    height: "450px",
+    border: "1px solid var(--color-deep-gray)",
+    zIndex: 100,
+  };
 
   async function payFunc(data) {
     try {
@@ -57,13 +75,13 @@ export default function PaymentForm({
     }
   }
 
-  const postOrder = async (data, receiver_phoneNum) => {
+  const postOrder = async (data, receiver_phoneNum, receiver_address) => {
     const product_id = products[0].product_id;
     const quantity = products[0].quantity;
     const order_kind = products[0].order_kind;
     const receiver = data.receiver;
     const receiver_phone_number = receiver_phoneNum;
-    const address = "sdf";
+    const address = receiver_address;
     const address_message = data.address_message;
     const payment_method = data.payMethod;
 
@@ -121,7 +139,8 @@ export default function PaymentForm({
       data.receiver_phonenum1 +
       data.receiver_phonenum2 +
       data.receiver_phonenum3;
-    postOrder(data, receiver_phoneNum);
+    const receiver_address = addressValue + " " + data.address;
+    postOrder(data, receiver_phoneNum, receiver_address);
   });
 
   return (
@@ -245,10 +264,23 @@ export default function PaymentForm({
 
       <WrapperDiv>
         <label htmlFor="address">배송주소</label>
-        <ZipCode type="text" />
-        <button>우편번호 조회</button>
-        <Address type="text" />
-        <Address type="text" />
+        <ZipCode type="text" placeholder="우편번호" value={zipcode} disabled />
+        <button onClick={() => setPopup(!popup)}>우편번호 조회</button>
+        {popup && (
+          <span>
+            <DaumPostcode
+              style={postCodeStyle}
+              autoClose
+              onComplete={onCompletePost}
+            />
+          </span>
+        )}
+        <Address type="text" placeholder="주소" value={addressValue} disabled />
+        <Address
+          type="text"
+          placeholder="상세주소"
+          {...register("address", { required: "필수 응답 항목입니다." })}
+        />
       </WrapperDiv>
 
       <WrapperDiv>
