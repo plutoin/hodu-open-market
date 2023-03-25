@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
+
+import Modal from "../../Modal/Modal";
 
 import {
   ConfirmContainer,
@@ -17,6 +19,8 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
   const { product_id } = useParams();
   const navigate = useNavigate();
   const token = getCookie("token");
+
+  const [modal, setModal] = useState(false);
 
   const addCart = async () => {
     try {
@@ -53,6 +57,14 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
     });
   };
 
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <>
       <ConfirmContainer>
@@ -69,9 +81,16 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
         <BuyButton disabled>품절</BuyButton>
       ) : (
         <>
-          <BuyButton onClick={goToPayment}>바로 구매</BuyButton>
-          <CartButton onClick={addCart}>장바구니</CartButton>
+          <BuyButton onClick={token ? goToPayment : openModal}>
+            바로 구매
+          </BuyButton>
+          <CartButton onClick={token ? addCart : openModal}>
+            장바구니
+          </CartButton>
         </>
+      )}
+      {modal && (
+        <Modal option="login" openModal={openModal} closeModal={closeModal} />
       )}
     </>
   );

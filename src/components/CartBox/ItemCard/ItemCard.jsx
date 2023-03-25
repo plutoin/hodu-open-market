@@ -30,12 +30,20 @@ export default function ItemCard({
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
 
-  const onClickDelModal = () => {
-    setDelModal(!delModal);
+  const openDelModal = () => {
+    setDelModal(true);
   };
 
-  const onClickQuantityModal = () => {
-    setQuantityModal(!quantityModal);
+  const closeDelModal = () => {
+    setDelModal(false);
+  };
+
+  const openQuantityModal = () => {
+    setQuantityModal(true);
+  };
+
+  const closeQuantityModal = () => {
+    setQuantityModal(false);
   };
 
   function getCartDetail(id) {
@@ -96,7 +104,7 @@ export default function ItemCard({
       <ItemContainer>
         <input type="checkbox" />
         <img src={cartItem.image} alt="상품이미지" />
-        <DeleteBtn onClick={onClickDelModal} />
+        <DeleteBtn onClick={openDelModal} />
         <ItemInfo>
           <span>{cartItem.store_name}</span>
           <strong>{cartItem.product_name}</strong>
@@ -109,8 +117,8 @@ export default function ItemCard({
           stock={stock}
           quantity={quantity}
           orderNum={orderNum}
-          minusStock={onClickQuantityModal}
-          plusStock={onClickQuantityModal}
+          minusStock={openQuantityModal}
+          plusStock={openQuantityModal}
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
@@ -118,7 +126,14 @@ export default function ItemCard({
         </ItemPrice>
       </ItemContainer>
 
-      {delModal && <Modal option="delete" cartId={cart_item_id} />}
+      {delModal && (
+        <Modal
+          option="delete"
+          cartId={cart_item_id}
+          openModal={openDelModal}
+          closeModal={closeDelModal}
+        />
+      )}
       {quantityModal && (
         <Modal
           option="quantity"
@@ -129,6 +144,8 @@ export default function ItemCard({
           orderNum={orderNum}
           minusStock={minusStock}
           plusStock={plusStock}
+          openModal={openQuantityModal}
+          closeModal={closeQuantityModal}
         />
       )}
     </>

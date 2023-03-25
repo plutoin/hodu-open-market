@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-
-import QuantityButton from "../QuantityButton/QuantityButton";
+import React from "react";
+import { useNavigate } from "react-router";
 
 import { AxiosInstance } from "../../Axios";
 import { getCookie } from "../../Cookie";
+
+import QuantityButton from "../QuantityButton/QuantityButton";
 
 import { Container, Text, FirstBtn, SecBtn } from "./modal.style";
 import { DeleteBtn } from "../CartBox/ItemCard/itemCard.style";
@@ -16,8 +17,10 @@ export default function Modal({
   active,
   minusStock,
   plusStock,
+  openModal,
+  closeModal,
 }) {
-  const [modal, setModal] = useState(true);
+  const navigate = useNavigate();
   const token = getCookie("token");
 
   const editQuantity = async () => {
@@ -57,7 +60,7 @@ export default function Modal({
 
   return (
     <>
-      {modal && (
+      {openModal && (
         <Container>
           {option === "quantity" ? (
             <QuantityButton
@@ -77,19 +80,19 @@ export default function Modal({
           ) : null}
           <div>
             {option === "delete" || option === "quantity" ? (
-              <FirstBtn onClick={() => setModal(false)}>취소</FirstBtn>
+              <FirstBtn onClick={closeModal}>취소</FirstBtn>
             ) : option === "login" ? (
-              <FirstBtn onClick={() => setModal(false)}>아니오</FirstBtn>
+              <FirstBtn onClick={closeModal}>아니오</FirstBtn>
             ) : null}
             {option === "delete" ? (
               <SecBtn onClick={deleteItem}>확인</SecBtn>
             ) : option === "quantity" ? (
               <SecBtn onClick={editQuantity}>수정</SecBtn>
             ) : option === "login" ? (
-              <SecBtn>예</SecBtn>
+              <SecBtn onClick={() => navigate("/login")}>예</SecBtn>
             ) : null}
           </div>
-          <DeleteBtn onClick={() => setModal(false)} />
+          <DeleteBtn onClick={closeModal} />
         </Container>
       )}
     </>
