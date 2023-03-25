@@ -20,11 +20,8 @@ export default function ItemCard({
   quantity,
   is_active,
 }) {
-  const detail = useSelector((state) => state.productDetailReducer);
-
-  const stock = detail.products.stock;
-
   const navigate = useNavigate();
+
   const [orderNum, setOrderNum] = useState(quantity);
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
@@ -114,8 +111,6 @@ export default function ItemCard({
           </span>
         </ItemInfo>
         <QuantityButton
-          stock={stock}
-          quantity={quantity}
           orderNum={orderNum}
           minusStock={openQuantityModal}
           plusStock={openQuantityModal}
@@ -137,9 +132,8 @@ export default function ItemCard({
       {quantityModal && (
         <Modal
           option="quantity"
-          cartId={cart_item_id}
           productId={product_id}
-          quantity={quantity}
+          cartId={cart_item_id}
           active={is_active}
           orderNum={orderNum}
           minusStock={minusStock}
