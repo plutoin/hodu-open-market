@@ -35,12 +35,6 @@ export default function Login() {
     onClickLogin(data, setError, reset, goToHome);
   });
 
-  const handleOnKeyPress = (e) => {
-    if (e.key === "Enter") {
-      onClickLogin();
-    }
-  };
-
   return (
     <Container>
       <h1 className="ir">로그인 페이지</h1>
@@ -51,7 +45,6 @@ export default function Login() {
           <Input
             type="id"
             placeholder="아이디"
-            onKeyPress={handleOnKeyPress}
             {...register("id", {
               required: "아이디를 입력해 주세요.",
             })}
@@ -60,7 +53,6 @@ export default function Login() {
           <Input
             type="password"
             placeholder="비밀번호"
-            onKeyPress={handleOnKeyPress}
             {...register("password", {
               required: "비밀번호를 입력해 주세요.",
             })}
