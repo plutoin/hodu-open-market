@@ -91,7 +91,7 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
     getCart();
   }, [token]);
 
-  const isCart = cart?.map((i) => i.product_id === product_id);
+  const isCart = cart?.filter((i) => i.product_id === parseInt(product_id));
 
   return (
     <>
@@ -111,13 +111,23 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
         <>
           <BuyButton
             onClick={
-              !token ? openLoginModal : isCart ? openCartModal : goToPayment
+              !token
+                ? openLoginModal
+                : isCart.length > 0
+                ? openCartModal
+                : goToPayment
             }
           >
             바로 구매
           </BuyButton>
           <CartButton
-            onClick={!token ? openLoginModal : isCart ? openCartModal : addCart}
+            onClick={
+              !token
+                ? openLoginModal
+                : isCart.length > 0
+                ? openCartModal
+                : addCart
+            }
           >
             장바구니
           </CartButton>
