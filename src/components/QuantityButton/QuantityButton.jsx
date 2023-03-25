@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+
 import TotalPriceBox from "../DetailBox/TotalPriceBox/TotalPriceBox";
 
 import { FieldSet, MinusButton, PlusButton } from "./quantityButton.style";

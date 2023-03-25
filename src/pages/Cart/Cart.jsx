@@ -45,7 +45,7 @@ export default function Cart() {
         dispatch(setCarts(res.data.results));
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        return error.response.data;
       }
     };
     setLoading(true);

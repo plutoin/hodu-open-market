@@ -37,7 +37,7 @@ export default function Modal({
       );
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
 
@@ -51,7 +51,7 @@ export default function Modal({
       alert("삭제되었습니다.");
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
 

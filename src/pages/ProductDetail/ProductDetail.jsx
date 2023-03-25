@@ -23,8 +23,8 @@ export default function ProductDetail() {
         const data = res.data;
         dispatch(getProducts(data));
         setLoading(false);
-      } catch {
-        console.log("ERROR!");
+      } catch (error) {
+        return error.response.data;
       }
     };
 

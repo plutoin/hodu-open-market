@@ -32,8 +32,8 @@ export default function ProductList() {
       const res = await AxiosInstance.get("products/");
       dispatch(setProducts(res.data.results));
       setLoading(false);
-    } catch {
-      console.log("ERROR!");
+    } catch (error) {
+      return error.response.data;
     }
   };
 

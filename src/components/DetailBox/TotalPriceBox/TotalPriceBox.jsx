@@ -35,7 +35,7 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
       );
       navigate("/cart");
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
 

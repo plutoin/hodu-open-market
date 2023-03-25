@@ -12,12 +12,11 @@ export default function Dropdown(props) {
 
   const handleLogout = async () => {
     try {
-      const res = await AxiosInstance.post("accounts/logout/");
-      console.log(res);
+      await AxiosInstance.post("accounts/logout/");
       removeCookie("token");
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   };
 

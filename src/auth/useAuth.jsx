@@ -33,7 +33,7 @@ export const useAuth = () => {
             { shouldFocus: true }
           );
         } else {
-          console.error(error);
+          return error.response.data;
         }
       }
 
@@ -62,7 +62,7 @@ export const useAuth = () => {
   // 회원가입
   const onClickJoin = async (data, phonenum, setError, reset, goToLogin) => {
     try {
-      const res = await AxiosInstance.post("accounts/signup/", {
+      await AxiosInstance.post("accounts/signup/", {
         username: data.id,
         password: data.password,
         password2: data.password2,
@@ -70,7 +70,6 @@ export const useAuth = () => {
         name: data.name,
       });
 
-      console.log(res);
       alert("환영합니다! 로그인해 주세요!");
       goToLogin();
     } catch (error) {
@@ -82,8 +81,7 @@ export const useAuth = () => {
             message: "아이디 또는 비밀번호가 일치하지 않습니다.",
           });
         } else {
-          console.error(error);
-          console.log(data);
+          return error.response.data;
         }
 
         if (error.response.data.username) {
@@ -132,12 +130,8 @@ export const useAuth = () => {
   // 아이디 중복 검사
   const validID = async (setError) => {
     try {
-      const res = await AxiosInstance.post("accounts/signup/valid/username/");
-
-      console.log(res);
+      await AxiosInstance.post("accounts/signup/valid/username/");
     } catch (error) {
-      console.log(error);
-
       if (error.response.data.FAIL_Message) {
         setError(
           "id",
@@ -147,6 +141,7 @@ export const useAuth = () => {
           { shouldFocus: true }
         );
       }
+      return error.response.data;
     }
   };
 
