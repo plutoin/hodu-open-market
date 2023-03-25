@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 import { AxiosInstance } from "../../Axios";
 import { removeCookie } from "../../Cookie";
 
 export default function Dropdown(props) {
+  const navigate = useNavigate();
   function handleModal(e) {
     e.stopPropagation();
     props.setModal(false);
@@ -14,7 +16,7 @@ export default function Dropdown(props) {
     try {
       await AxiosInstance.post("accounts/logout/");
       removeCookie("token");
-      window.location.reload();
+      navigate("/");
     } catch (error) {
       return error.response.data;
     }
