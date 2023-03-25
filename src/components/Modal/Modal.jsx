@@ -77,11 +77,19 @@ export default function Modal({
               <br />
               로그인 하시겠습니까?
             </Text>
+          ) : option === "cart" ? (
+            <Text>
+              이미 장바구니에 있는 상품입니다.
+              <br />
+              장바구니로 이동하시겠습니까?
+            </Text>
           ) : null}
           <div>
             {option === "delete" || option === "quantity" ? (
               <FirstBtn onClick={closeModal}>취소</FirstBtn>
             ) : option === "login" ? (
+              <FirstBtn onClick={closeModal}>아니오</FirstBtn>
+            ) : option === "cart" ? (
               <FirstBtn onClick={closeModal}>아니오</FirstBtn>
             ) : null}
             {option === "delete" ? (
@@ -90,6 +98,8 @@ export default function Modal({
               <SecBtn onClick={editQuantity}>수정</SecBtn>
             ) : option === "login" ? (
               <SecBtn onClick={() => navigate("/login")}>예</SecBtn>
+            ) : option === "cart" ? (
+              <SecBtn onClick={() => navigate("/cart")}>예</SecBtn>
             ) : null}
           </div>
           <DeleteBtn onClick={closeModal} />

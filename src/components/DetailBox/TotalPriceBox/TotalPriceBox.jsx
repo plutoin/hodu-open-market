@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
@@ -20,7 +20,9 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
   const navigate = useNavigate();
   const token = getCookie("token");
 
-  const [modal, setModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const addCart = async () => {
     try {
@@ -57,13 +59,39 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
     });
   };
 
-  const openModal = () => {
-    setModal(true);
+  const openLoginModal = () => {
+    setLoginModal(true);
   };
 
-  const closeModal = () => {
-    setModal(false);
+  const closeLoginModal = () => {
+    setLoginModal(false);
   };
+
+  const openCartModal = () => {
+    setCartModal(true);
+  };
+
+  const closeCartModal = () => {
+    setCartModal(false);
+  };
+
+  useEffect(() => {
+    async function getCart() {
+      try {
+        const res = await AxiosInstance.get("cart", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setCart(res.data.results);
+      } catch (error) {
+        return error.response.data;
+      }
+    }
+    getCart();
+  }, [token]);
+
+  const isCart = cart?.map((i) => i.product_id === product_id);
 
   return (
     <>
@@ -81,16 +109,33 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
         <BuyButton disabled>품절</BuyButton>
       ) : (
         <>
-          <BuyButton onClick={token ? goToPayment : openModal}>
+          <BuyButton
+            onClick={
+              !token ? openLoginModal : isCart ? openCartModal : goToPayment
+            }
+          >
             바로 구매
           </BuyButton>
-          <CartButton onClick={token ? addCart : openModal}>
+          <CartButton
+            onClick={!token ? openLoginModal : isCart ? openCartModal : addCart}
+          >
             장바구니
           </CartButton>
         </>
       )}
-      {modal && (
-        <Modal option="login" openModal={openModal} closeModal={closeModal} />
+      {loginModal && (
+        <Modal
+          option="login"
+          openModal={openLoginModal}
+          closeModal={closeLoginModal}
+        />
+      )}
+      {cartModal && (
+        <Modal
+          option="cart"
+          openModal={openCartModal}
+          closeModal={closeCartModal}
+        />
       )}
     </>
   );
