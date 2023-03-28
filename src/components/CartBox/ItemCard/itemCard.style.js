@@ -3,6 +3,7 @@ import styled from "styled-components";
 import deleteIcon from "../../../assets/icon-delete.svg";
 
 export const ItemContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   margin-top: 10px;

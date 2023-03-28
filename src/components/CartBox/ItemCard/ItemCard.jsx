@@ -19,6 +19,8 @@ export default function ItemCard({
   cart_item_id,
   quantity,
   is_active,
+  checkedItemHandler,
+  checkedArr,
 }) {
   const navigate = useNavigate();
 
@@ -26,6 +28,13 @@ export default function ItemCard({
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
+  const [checked, setChecked] = useState(false);
+
+  // const checkHandler = ({ target }) => {
+  //   // setChecked(!checked);
+  //   checkedItemHandler(cartItem, target.checked);
+  //   console.log(target.checked);
+  // };
 
   const openDelModal = () => {
     setDelModal(true);
@@ -99,7 +108,17 @@ export default function ItemCard({
   return (
     <>
       <ItemContainer>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={
+            checkedArr.map((el) => el.product_id).includes(cartItem.product_id)
+              ? true
+              : false
+          }
+          onChange={(e) =>
+            checkedItemHandler(e.target.checked, cartItem, cartItem.product_id)
+          }
+        />
         <img src={cartItem.image} alt="상품이미지" />
         <DeleteBtn onClick={openDelModal} />
         <ItemInfo>

@@ -22,18 +22,18 @@ export default function Cart() {
   const token = getCookie("token");
 
   const [loading, setLoading] = useState(null);
-  const [productPrice, setProductPrice] = useState([]);
+  const [checkedArr, setCheckedArr] = useState([]);
 
   let cartArr = [];
 
   const carts = useSelector((state) => state.cartReducer.carts);
 
   useEffect(() => {
-    function getCartDetail() {
-      return AxiosInstance.get("/products/").then((res) => {
-        setProductPrice(res.data.results);
-      });
-    }
+    // function getCartDetail() {
+    //   return AxiosInstance.get("/products/").then((res) => {
+    //     setProductPrice(res.data.results);
+    //   });
+    // }
 
     const getCartItem = async () => {
       try {
@@ -48,23 +48,41 @@ export default function Cart() {
         return error.response.data;
       }
     };
+
     setLoading(true);
-    getCartDetail();
+    // getCartDetail();
     getCartItem();
   }, [dispatch, token]);
 
-  productPrice.map((p) =>
+  // const checkedItemHandler = (checked, id) => {
+  //   if (checked) {
+  //     checkedArr.push({ ...item });
+  //     setCheckedArr(item => [...item, item]);
+  //   } else {
+  //     setCheckedArr(checkedArr?.filter((i) => i.product_id !== id));
+  //   }
+  // };
+
+  const checkedItemHandler = (checked, item, id) => {
+    if (checked) {
+      // checkedArr.push({ ...item });
+      setCheckedArr((prev) => [...prev, item]);
+    } else {
+      setCheckedArr(checkedArr.filter((i) => i.product_id !== id));
+    }
+  };
+
+  checkedArr.map((p) =>
     carts
       .filter((c) => p.product_id === c.product_id)
       .map((c) => {
-        p.cart_item_id = c.cart_item_id;
         p.quantity = c.quantity;
         p.is_active = c.is_active;
         return cartArr.push(p);
       })
   );
 
-  const priceArr = productPrice
+  const priceArr = cartArr
     .filter((i) => i.is_active)
     .map((i) => i.price * i.quantity);
 
@@ -83,8 +101,8 @@ export default function Cart() {
   const totalPay = totalPrice + totalFee;
 
   const goToPayment = () => {
-    const selectedItems = cartArr.map((cartArr) => ({
-      ...cartArr,
+    const selectedItems = cartArr.map((selected) => ({
+      ...selected,
       order_kind: "cart_order",
     }));
     navigate("/payment", {
@@ -100,7 +118,14 @@ export default function Cart() {
         <h1>장바구니</h1>
         <ItemHeader />
         {carts.length > 0 ? (
-          carts.map((item) => <ItemCard key={item.product_id} {...item} />)
+          carts.map((item) => (
+            <ItemCard
+              key={item.product_id}
+              checkedItemHandler={checkedItemHandler}
+              checkedArr={checkedArr}
+              {...item}
+            />
+          ))
         ) : (
           <EmptyCart />
         )}

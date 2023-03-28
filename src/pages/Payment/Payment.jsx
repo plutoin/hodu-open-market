@@ -28,6 +28,8 @@ export default function Payment() {
   const totalFee = total(feeArr);
   const totalPay = totalPrice + totalFee;
 
+  console.log(products);
+
   return (
     <>
       <Header />
