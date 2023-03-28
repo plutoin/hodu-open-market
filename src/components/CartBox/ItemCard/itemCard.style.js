@@ -3,7 +3,6 @@ import styled from "styled-components";
 import deleteIcon from "../../../assets/icon-delete.svg";
 
 export const ItemContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -12,6 +11,7 @@ export const ItemContainer = styled.div`
   border-radius: 10px;
   box-sizing: border-box;
   > input[type="checkbox"] {
+    position: relative;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -19,12 +19,17 @@ export const ItemContainer = styled.div`
     appearance: none;
     background-color: white;
     :checked {
-      position: relative;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: var(--color-green);
-      appearance: none;
+      ::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 2px solid white;
+        border-radius: 50%;
+        background-color: var(--color-green);
+        appearance: none;
+        box-sizing: border-box;
+      }
     }
   }
   > img {

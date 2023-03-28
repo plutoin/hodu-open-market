@@ -36,12 +36,17 @@ const CartHeader = styled.div`
     appearance: none;
     background-color: white;
     :checked {
-      position: relative;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: var(--color-green);
-      appearance: none;
+      ::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 2px solid white;
+        border-radius: 50%;
+        background-color: var(--color-green);
+        appearance: none;
+        box-sizing: border-box;
+      }
     }
   }
 `;

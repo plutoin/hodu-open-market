@@ -105,17 +105,8 @@ export const PayForm = styled.div`
     width: 20px;
     height: 20px;
     vertical-align: sub;
-    border-radius: 50%;
-    border: 2px solid var(--color-light-gray);
-    appearance: none;
     background-color: white;
-    :checked {
-      position: relative;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: var(--color-light-gray);
-    }
+    accent-color: gray;
   }
 `;
 
