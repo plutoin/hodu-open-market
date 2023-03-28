@@ -29,12 +29,6 @@ export default function Cart() {
   const carts = useSelector((state) => state.cartReducer.carts);
 
   useEffect(() => {
-    // function getCartDetail() {
-    //   return AxiosInstance.get("/products/").then((res) => {
-    //     setProductPrice(res.data.results);
-    //   });
-    // }
-
     const getCartItem = async () => {
       try {
         const res = await AxiosInstance.get("cart/", {
@@ -50,22 +44,11 @@ export default function Cart() {
     };
 
     setLoading(true);
-    // getCartDetail();
     getCartItem();
   }, [dispatch, token]);
 
-  // const checkedItemHandler = (checked, id) => {
-  //   if (checked) {
-  //     checkedArr.push({ ...item });
-  //     setCheckedArr(item => [...item, item]);
-  //   } else {
-  //     setCheckedArr(checkedArr?.filter((i) => i.product_id !== id));
-  //   }
-  // };
-
   const checkedItemHandler = (checked, item, id) => {
     if (checked) {
-      // checkedArr.push({ ...item });
       setCheckedArr((prev) => [...prev, item]);
     } else {
       setCheckedArr(checkedArr.filter((i) => i.product_id !== id));

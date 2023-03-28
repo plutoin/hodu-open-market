@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { AxiosInstance } from "../../../Axios";
 
@@ -28,13 +27,6 @@ export default function ItemCard({
   const [delModal, setDelModal] = useState(false);
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
-  const [checked, setChecked] = useState(false);
-
-  // const checkHandler = ({ target }) => {
-  //   // setChecked(!checked);
-  //   checkedItemHandler(cartItem, target.checked);
-  //   console.log(target.checked);
-  // };
 
   const openDelModal = () => {
     setDelModal(true);
