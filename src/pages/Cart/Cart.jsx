@@ -55,6 +55,29 @@ export default function Cart() {
     }
   };
 
+  // async function getCartDetail(id) {
+  //   AxiosInstance.get(`/products/${id}`).then((res) => res.data);
+  // }
+
+  const getData = () => {
+    const result = Promise.all(
+      carts.map((el) => {
+        return AxiosInstance.get(`/products/${el.product_id}`).then(
+          (res) => res.data
+        );
+      })
+    );
+    return result;
+  };
+
+  const checkedAllHandler = (checked) => {
+    if (checked) {
+      getData().then((arr) => setCheckedArr(arr));
+    } else {
+      setCheckedArr([]);
+    }
+  };
+
   checkedArr.map((p) =>
     carts
       .filter((c) => p.product_id === c.product_id)
@@ -99,7 +122,11 @@ export default function Cart() {
       <Header />
       <CartSection>
         <h1>장바구니</h1>
-        <ItemHeader />
+        <ItemHeader
+          checkedAllHandler={checkedAllHandler}
+          checkedArr={checkedArr}
+          carts={carts}
+        />
         {carts.length > 0 ? (
           carts.map((item) => (
             <ItemCard

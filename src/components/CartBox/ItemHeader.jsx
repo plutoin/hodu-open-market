@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function ItemHeader() {
+export default function ItemHeader({ checkedAllHandler, checkedArr, carts }) {
   return (
     <CartHeader>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={checkedArr.length === carts.length ? true : false}
+        onChange={(e) => checkedAllHandler(e.target.checked)}
+      />
       <span colSpan="2">상품정보</span>
       <span>수량</span>
       <span>상품금액</span>
