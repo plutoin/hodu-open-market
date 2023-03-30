@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import LogoImage from "../../assets/Logo-hodu.png";
 import CartIcon from "../../assets/icon-shopping-cart.svg";
+import CartIcon2 from "../../assets/icon-shopping-cart-2.svg";
 import UserIcon from "../../assets/icon-user.svg";
+import UserIcon2 from "../../assets/icon-user-2.svg";
 import SearchIcon from "../../assets/icon-search.svg";
 
 export const Container = styled.header`
@@ -71,6 +73,8 @@ export const BtnContainer = styled.div`
   text-align: center;
   flex-direction: column;
   margin-left: auto;
+  color: ${(props) =>
+    props.modal === true ? "var(--color-green)" : "var(--color-deep-gray)"};
   > button {
     width: 32px;
     height: 32px;
@@ -78,22 +82,33 @@ export const BtnContainer = styled.div`
     margin-bottom: 4px;
     border: none;
     background-color: transparent;
+    :active + span {
+      color: var(--color-green);
+    }
   }
   :last-child {
     margin-left: 26px;
   }
-  span {
+  > span {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
-    color: var(--color-deep-gray);
   }
 `;
 
 export const CartBtn = styled.button`
   background: url(${CartIcon}) no-repeat center / contain;
+  :active {
+    background: url(${CartIcon2}) no-repeat center / contain;
+  }
 `;
 
 export const UserBtn = styled.button`
-  background: url(${UserIcon}) no-repeat center / contain;
+  background: ${(props) =>
+    props.modal === true
+      ? `url(${UserIcon2}) no-repeat center / contain`
+      : `url(${UserIcon}) no-repeat center / contain`};
+  :active {
+    background: url(${UserIcon2}) no-repeat center / contain;
+  }
 `;

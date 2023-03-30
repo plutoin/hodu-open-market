@@ -57,8 +57,8 @@ export default function Header() {
           </BtnContainer>
         )}
         {cookie ? (
-          <BtnContainer>
-            <UserBtn onClick={handleModal} ref={modalRef} />
+          <BtnContainer modal={isOpen}>
+            <UserBtn onClick={handleModal} ref={modalRef} modal={isOpen} />
             <span>마이페이지</span>
             {isOpen && <Dropdown />}
           </BtnContainer>
