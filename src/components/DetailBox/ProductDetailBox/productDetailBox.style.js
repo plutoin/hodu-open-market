@@ -60,23 +60,39 @@ export const Shipping = styled.p`
 
 export const ProductInfoDiv = styled.div`
   display: flex;
-  justify-content: center;
   margin-bottom: 500px;
-  white-space: nowrap;
-  > button {
+  justify-content: center;
+  flex-wrap: wrap;
+  > input {
+    display: none;
+    :checked + label {
+      border-bottom: 6px solid var(--color-green);
+      color: var(--color-green);
+    }
+  }
+  > label {
+    display: inline-block;
     width: 320px;
+    margin-bottom: 20px;
     padding: 19px 0 18px;
     border: none;
     background-color: #fff;
     font-size: 18px;
     font-weight: 700;
     line-height: 23px;
+    text-align: center;
     box-sizing: border-box;
     border-bottom: 6px solid #e0e0e0;
     color: var(--color-deep-gray);
-    :focus {
-      border-bottom: 6px solid var(--color-green);
-      color: var(--color-green);
-    }
+    cursor: pointer;
+  }
+  > div {
+    display: none;
+    width: 1280px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  #detail:checked ~ #content {
+    display: flex;
   }
 `;
