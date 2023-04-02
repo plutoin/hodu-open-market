@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../../auth/useAuth";
-import SellerJoinForm from "../SellerJoinForm";
 
 import {
   JoinContainer,
@@ -17,7 +16,8 @@ import {
 import { Tab } from "../../Login/login.style";
 
 export default function BuyerJoinForm() {
-  const { onClickBuyerJoin, onClickSellerJoin, validID } = useAuth();
+  const { onClickBuyerJoin, onClickSellerJoin, validID, validSellerCode } =
+    useAuth();
   const navigate = useNavigate();
 
   const {
@@ -61,6 +61,11 @@ export default function BuyerJoinForm() {
     validID(id, setError);
   };
 
+  const onValidSellerCode = () => {
+    const code = getValues("sellerCode");
+    validSellerCode(code, setError);
+  };
+
   return (
     <JoinContainer>
       <ul>
@@ -82,8 +87,8 @@ export default function BuyerJoinForm() {
         </Tab>
       </ul>
       <JoinForm onSubmit={onSubmit}>
-        <label htmlFor="userId">아이디</label>
-        <input id="userId" type="id" {...register("userID")} />
+        <label htmlFor="userID">아이디</label>
+        <input id="userID" type="id" {...register("userID")} />
         <button className="check" onClick={onValidID}>
           중복확인
         </button>
@@ -184,8 +189,17 @@ export default function BuyerJoinForm() {
               사업자 등록번호
             </SellerCodeLabel>
             <input id="sellerCode" type="text" {...register("sellerCode")} />
-            <button className="check">인증</button>
-            {errors.sellerCode && (
+            <button className="check" onClick={onValidSellerCode}>
+              인증
+            </button>
+
+            {errors.sellerCode &&
+            errors.sellerCode.message ===
+              "사용 가능한 사업자등록번호입니다." ? (
+              <ErrorMsg style={{ color: "var(--color-green)" }}>
+                {errors.sellerCode?.message}
+              </ErrorMsg>
+            ) : (
               <ErrorMsg>{errors.sellerCode?.message}</ErrorMsg>
             )}
 

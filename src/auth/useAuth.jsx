@@ -2,7 +2,6 @@ import { setCookie } from "../Cookie";
 import { AxiosInstance } from "../Axios";
 
 export const useAuth = () => {
-  // 로그인
   const onClickLogin = async (data, loginType, setError, reset, goToHome) => {
     try {
       const res = await AxiosInstance.post("accounts/login/", {
@@ -59,7 +58,6 @@ export const useAuth = () => {
     }
   };
 
-  // 회원가입
   const onClickBuyerJoin = async (
     data,
     phonenum,
@@ -167,7 +165,7 @@ export const useAuth = () => {
 
         if (error.response.data.username) {
           setError(
-            "id",
+            "userID",
             {
               message: error.response.data.username[0],
             },
@@ -217,7 +215,7 @@ export const useAuth = () => {
 
         if (error.response.data.store_name) {
           setError(
-            "phonenum2",
+            "storeName",
             {
               message: error.response.data.store_name[0],
             },
@@ -228,7 +226,6 @@ export const useAuth = () => {
     }
   };
 
-  // 아이디 중복 검사
   const validID = async (id, setError) => {
     try {
       const res = await AxiosInstance.post("accounts/signup/valid/username/", {
@@ -265,5 +262,40 @@ export const useAuth = () => {
     }
   };
 
-  return { onClickLogin, onClickBuyerJoin, onClickSellerJoin, validID };
+  const validSellerCode = async (code, setError) => {
+    try {
+      const res = await AxiosInstance.post(
+        "accounts/signup/valid/company_registration_number/",
+        {
+          company_registration_number: code,
+        }
+      );
+      if (res.data.Success) {
+        setError("sellerCode", {
+          message: res.data.Success,
+        });
+      }
+    } catch (error) {
+      if (
+        error.response.data.FAIL_Message === "이미 등록된 사업자등록번호입니다."
+      ) {
+        setError(
+          "sellerCode",
+          {
+            message: error.response.data.FAIL_Message,
+          },
+          { shouldFocus: true }
+        );
+      }
+      return error.response.data;
+    }
+  };
+
+  return {
+    onClickLogin,
+    onClickBuyerJoin,
+    onClickSellerJoin,
+    validID,
+    validSellerCode,
+  };
 };

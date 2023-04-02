@@ -54,7 +54,7 @@ export const JoinForm = styled.form`
   #email_2 {
     width: calc((100% - 39px) / 2);
   }
-  #userId,
+  #userID,
   #sellerCode {
     width: 346px;
     margin-right: 10px;
