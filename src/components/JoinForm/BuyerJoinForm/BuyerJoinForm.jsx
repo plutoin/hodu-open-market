@@ -26,6 +26,7 @@ export default function BuyerJoinForm() {
     setError,
     reset,
     watch,
+    getValues,
   } = useForm({ mode: "onBlur", defaultValues: { checkBox: false } });
 
   const isValid = watch("checkBox");
@@ -48,8 +49,9 @@ export default function BuyerJoinForm() {
     onClickJoin(data, phonenum, setError, reset, goToLogin);
   });
 
-  const onValidID = (data) => {
-    validID(data, setError);
+  const onValidID = () => {
+    const id = getValues("userID");
+    validID(id, setError);
   };
 
   return (
@@ -57,11 +59,17 @@ export default function BuyerJoinForm() {
       <HeaderForm seller="판매회원가입" buyer="구매회원가입" />
       <JoinForm onSubmit={onSubmit}>
         <label htmlFor="userId">아이디</label>
-        <input id="userId" type="id" {...register("id")} />
+        <input id="userId" type="id" {...register("userID")} />
         <button className="check" onClick={onValidID}>
           중복확인
         </button>
-        {errors.id && <ErrorMsg>{errors.id?.message}</ErrorMsg>}
+        {errors.userID && errors.userID.message === "멋진 아이디네요 :)" ? (
+          <ErrorMsg style={{ color: "var(--color-green)" }}>
+            {errors.userID?.message}
+          </ErrorMsg>
+        ) : (
+          <ErrorMsg>{errors.userID?.message}</ErrorMsg>
+        )}
 
         <label htmlFor="userPW">비밀번호</label>
         <input

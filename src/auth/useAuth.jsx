@@ -128,13 +128,32 @@ export const useAuth = () => {
   };
 
   // 아이디 중복 검사
-  const validID = async (setError) => {
+  const validID = async (id, setError) => {
     try {
-      await AxiosInstance.post("accounts/signup/valid/username/");
+      const res = await AxiosInstance.post("accounts/signup/valid/username/", {
+        username: id,
+      });
+      if (res.data.Success) {
+        setError("userID", {
+          message: res.data.Success,
+        });
+      }
     } catch (error) {
-      if (error.response.data.FAIL_Message) {
+      if (
+        error.response.data.FAIL_Message === "username 필드를 추가해주세요 :)"
+      ) {
         setError(
-          "id",
+          "userID",
+          {
+            message: "아이디를 입력해 주세요.",
+          },
+          { shouldFocus: true }
+        );
+      } else if (
+        error.response.data.FAIL_Message === "이미 사용 중인 아이디입니다."
+      ) {
+        setError(
+          "userID",
           {
             message: error.response.data.FAIL_Message,
           },
