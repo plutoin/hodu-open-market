@@ -16,6 +16,7 @@ export default function Dropdown(props) {
     try {
       await AxiosInstance.post("accounts/logout/");
       removeCookie("token");
+      removeCookie("loginType");
       navigate("/");
     } catch (error) {
       return error.response.data;

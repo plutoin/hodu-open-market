@@ -15,6 +15,7 @@ export const useAuth = () => {
           path: "/",
           sameSite: "strict",
         });
+        setCookie("loginType", loginType);
       }
 
       alert("환영합니다!");
