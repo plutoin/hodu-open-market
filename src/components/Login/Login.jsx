@@ -28,13 +28,16 @@ export default function Login() {
   } = useForm({ mode: "onBlur" });
 
   const [isSelected, setIsSelected] = useState(true);
-  const [loginType, setLoginType] = useState("");
+  const [loginType, setLoginType] = useState("BUYER");
 
   const goToHome = () => {
     navigate("/");
   };
 
+  console.log(loginType);
+
   const onSubmit = handleSubmit((data) => {
+    console.log(loginType);
     onClickLogin(data, loginType, setError, reset, goToHome);
   });
 
