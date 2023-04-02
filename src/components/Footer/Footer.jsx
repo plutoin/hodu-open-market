@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <Container>
       <InfoContainer>
-        <a href="#/">호두샵 소개</a>
+        <a href="#/">호두마켓 소개</a>
         <a href="#/">이용약관</a>
         <a href="#/">
           <strong>개인정보처리방침</strong>
@@ -46,9 +46,9 @@ export default function Footer() {
         </SocialLinkContainer>
       </InfoContainer>
       <Address>
-        <strong>(주)HODU SHOP</strong> <br />
-        제주특별자치도 제주시 동광고 137 제주코딩베이스캠프 <br />
-        사업자 번호 : 000-0000-0000 | 통신판매업 <br />
+        <strong>(주) HODU</strong> <br />
+        서울특별시 강남구 호두로 777 <br />
+        사업자 번호 : 123-4567-8910 | 통신판매업 <br />
         대표 : 김호두
       </Address>
     </Container>
