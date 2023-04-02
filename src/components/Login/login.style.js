@@ -14,6 +14,24 @@ export const Container = styled.section`
   }
 `;
 
+export const Tab = styled.li`
+  display: inline-block;
+  width: 50%;
+  padding: 20px 0px;
+  border: 1px solid var(--color-light-gray);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: ${(props) =>
+    props.isSelected === true ? "white" : "#f2f2f2"};
+  /* border-bottom: ${(props) => (props.select ? 0 : 1)}; */
+  cursor: pointer;
+`;
+
 export const LogoBtn = styled.button`
   width: 238px;
   height: 74px;

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../auth/useAuth";
-import HeaderForm from "../JoinForm/HeaderForm";
 
 import {
   Container,
+  Tab,
   LogoBtn,
   LoginContainer,
   LoginForm,
@@ -27,12 +27,15 @@ export default function Login() {
     reset,
   } = useForm({ mode: "onBlur" });
 
+  const [isSelected, setIsSelected] = useState(true);
+  const [loginType, setLoginType] = useState("");
+
   const goToHome = () => {
     navigate("/");
   };
 
   const onSubmit = handleSubmit((data) => {
-    onClickLogin(data, setError, reset, goToHome);
+    onClickLogin(data, loginType, setError, reset, goToHome);
   });
 
   return (
@@ -40,7 +43,26 @@ export default function Login() {
       <h1 className="ir">로그인 페이지</h1>
       <LogoBtn onClick={goToHome} />
       <LoginContainer>
-        <HeaderForm buyer="구매회원 로그인" seller="판매회원 로그인" />
+        <ul>
+          <Tab
+            isSelected={isSelected}
+            onClick={() => {
+              setIsSelected(true);
+              setLoginType("BUYER");
+            }}
+          >
+            구매회원 로그인
+          </Tab>
+          <Tab
+            isSelected={!isSelected}
+            onClick={() => {
+              setIsSelected(false);
+              setLoginType("SELLER");
+            }}
+          >
+            판매회원 로그인
+          </Tab>
+        </ul>
         <LoginForm onSubmit={onSubmit}>
           <Input
             type="id"

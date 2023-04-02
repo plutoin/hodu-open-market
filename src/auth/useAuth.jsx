@@ -3,12 +3,12 @@ import { AxiosInstance } from "../Axios";
 
 export const useAuth = () => {
   // 로그인
-  const onClickLogin = async (data, setError, reset, goToHome) => {
+  const onClickLogin = async (data, loginType, setError, reset, goToHome) => {
     try {
       const res = await AxiosInstance.post("accounts/login/", {
         username: data.id,
         password: data.password,
-        login_type: "BUYER",
+        login_type: loginType,
       });
 
       if (res.data.token) {
