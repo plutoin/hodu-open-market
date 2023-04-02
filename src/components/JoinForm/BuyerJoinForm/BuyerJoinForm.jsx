@@ -1,22 +1,23 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../../auth/useAuth";
 import SellerJoinForm from "../SellerJoinForm";
-import HeaderForm from "../HeaderForm";
 
 import {
   JoinContainer,
   JoinForm,
   JoinButton,
+  SellerCodeLabel,
   CheckBoxContainer,
   ErrorMsg,
 } from "./buyerJoinForm.style";
 
+import { Tab } from "../../Login/login.style";
+
 export default function BuyerJoinForm() {
-  const { onClickJoin, validID } = useAuth();
-  const { pathname } = useLocation();
+  const { onClickBuyerJoin, onClickSellerJoin, validID } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -28,6 +29,8 @@ export default function BuyerJoinForm() {
     watch,
     getValues,
   } = useForm({ mode: "onBlur", defaultValues: { checkBox: false } });
+
+  const [isSelected, setIsSelected] = useState(true);
 
   const isValid = watch("checkBox");
 
@@ -46,7 +49,11 @@ export default function BuyerJoinForm() {
 
     const phonenum = data.phonenum1 + data.phonenum2 + data.phonenum3;
 
-    onClickJoin(data, phonenum, setError, reset, goToLogin);
+    if (isSelected) {
+      onClickBuyerJoin(data, phonenum, setError, reset, goToLogin);
+    } else {
+      onClickSellerJoin(data, phonenum, setError, reset, goToLogin);
+    }
   });
 
   const onValidID = () => {
@@ -56,7 +63,24 @@ export default function BuyerJoinForm() {
 
   return (
     <JoinContainer>
-      <HeaderForm seller="판매회원가입" buyer="구매회원가입" />
+      <ul>
+        <Tab
+          isSelected={isSelected}
+          onClick={() => {
+            setIsSelected(true);
+          }}
+        >
+          구매회원가입
+        </Tab>
+        <Tab
+          isSelected={!isSelected}
+          onClick={() => {
+            setIsSelected(false);
+          }}
+        >
+          판매회원가입
+        </Tab>
+      </ul>
       <JoinForm onSubmit={onSubmit}>
         <label htmlFor="userId">아이디</label>
         <input id="userId" type="id" {...register("userID")} />
@@ -154,7 +178,24 @@ export default function BuyerJoinForm() {
           이메일
         </label>
         <input id="email_2" type="text" />
-        {pathname === "/join/seller" ? <SellerJoinForm /> : null}
+        {!isSelected && (
+          <>
+            <SellerCodeLabel htmlFor="sellerCode">
+              사업자 등록번호
+            </SellerCodeLabel>
+            <input id="sellerCode" type="text" {...register("sellerCode")} />
+            <button className="check">인증</button>
+            {errors.sellerCode && (
+              <ErrorMsg>{errors.sellerCode?.message}</ErrorMsg>
+            )}
+
+            <label htmlFor="storeName">스토어 이름</label>
+            <input id="storeName" type="text" {...register("storeName")} />
+            {errors.storeName && (
+              <ErrorMsg>{errors.storeName?.message}</ErrorMsg>
+            )}
+          </>
+        )}
         <CheckBoxContainer>
           <input id="check" type="checkbox" {...register("checkBox")} />
           <label htmlFor="check"></label>

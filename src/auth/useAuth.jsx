@@ -60,10 +60,16 @@ export const useAuth = () => {
   };
 
   // 회원가입
-  const onClickJoin = async (data, phonenum, setError, reset, goToLogin) => {
+  const onClickBuyerJoin = async (
+    data,
+    phonenum,
+    setError,
+    reset,
+    goToLogin
+  ) => {
     try {
       await AxiosInstance.post("accounts/signup/", {
-        username: data.id,
+        username: data.userID,
         password: data.password,
         password2: data.password2,
         phone_number: phonenum,
@@ -127,6 +133,101 @@ export const useAuth = () => {
     }
   };
 
+  const onClickSellerJoin = async (
+    data,
+    phonenum,
+    setError,
+    reset,
+    goToLogin
+  ) => {
+    try {
+      await AxiosInstance.post("/accounts/signup_seller/", {
+        username: data.userID,
+        password: data.password,
+        password2: data.password2,
+        phone_number: phonenum,
+        name: data.name,
+        company_registration_number: data.sellerCode,
+        store_name: data.storeName,
+      });
+
+      alert("환영합니다! 로그인해 주세요!");
+      goToLogin();
+    } catch (error) {
+      if (error) {
+        if (error.response.status === 401) {
+          reset();
+          setError("password", {
+            type: "loginError",
+            message: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          });
+        } else {
+          return error.response.data;
+        }
+
+        if (error.response.data.username) {
+          setError(
+            "id",
+            {
+              message: error.response.data.username[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.password) {
+          setError(
+            "password",
+            {
+              message: error.response.data.password[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.name) {
+          setError(
+            "name",
+            {
+              message: error.response.data.name[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.phone_number) {
+          setError(
+            "phonenum2",
+            {
+              message: error.response.data.phone_number[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.company_registration_number) {
+          setError(
+            "phonenum2",
+            {
+              message: error.response.data.company_registration_number[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+
+        if (error.response.data.store_name) {
+          setError(
+            "phonenum2",
+            {
+              message: error.response.data.store_name[0],
+            },
+            { shouldFocus: true }
+          );
+        }
+      }
+    }
+  };
+
   // 아이디 중복 검사
   const validID = async (id, setError) => {
     try {
@@ -164,5 +265,5 @@ export const useAuth = () => {
     }
   };
 
-  return { onClickLogin, onClickJoin, validID };
+  return { onClickLogin, onClickBuyerJoin, onClickSellerJoin, validID };
 };

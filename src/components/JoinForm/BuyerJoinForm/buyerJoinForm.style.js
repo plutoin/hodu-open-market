@@ -121,6 +121,10 @@ export const CheckBoxContainer = styled.div`
   }
 `;
 
+export const SellerCodeLabel = styled.label`
+  margin-top: 50px;
+`;
+
 export const JoinButton = styled.button`
   width: 100%;
   margin-top: 34px;

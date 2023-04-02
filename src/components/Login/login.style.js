@@ -28,7 +28,6 @@ export const Tab = styled.li`
   box-sizing: border-box;
   background-color: ${(props) =>
     props.isSelected === true ? "white" : "#f2f2f2"};
-  /* border-bottom: ${(props) => (props.select ? 0 : 1)}; */
   cursor: pointer;
 `;
 
