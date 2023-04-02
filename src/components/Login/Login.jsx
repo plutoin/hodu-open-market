@@ -34,10 +34,7 @@ export default function Login() {
     navigate("/");
   };
 
-  console.log(loginType);
-
   const onSubmit = handleSubmit((data) => {
-    console.log(loginType);
     onClickLogin(data, loginType, setError, reset, goToHome);
   });
 
