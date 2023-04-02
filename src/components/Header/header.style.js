@@ -7,6 +7,7 @@ import CartIcon2 from "../../assets/icon-shopping-cart-2.svg";
 import UserIcon from "../../assets/icon-user.svg";
 import UserIcon2 from "../../assets/icon-user-2.svg";
 import SearchIcon from "../../assets/icon-search.svg";
+import ShoppingBag from "../../assets/icon-shopping-bag.svg";
 
 export const Container = styled.header`
   position: fixed;
@@ -69,7 +70,8 @@ export const LogoBtn = styled(Link)`
 export const BtnContainer = styled.div`
   position: relative;
   display: flex;
-  width: 50px;
+  width: ${(props) =>
+    props.width === "50" ? "50px" : props.width === "56" ? "56px" : "46px"};
   text-align: center;
   flex-direction: column;
   margin-left: auto;
@@ -110,5 +112,28 @@ export const UserBtn = styled.button`
       : `url(${UserIcon}) no-repeat center / contain`};
   :active {
     background: url(${UserIcon2}) no-repeat center / contain;
+  }
+`;
+
+export const SellerBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 168px;
+  padding: 11px 0;
+  margin-left: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  color: white;
+  background-color: var(--color-green);
+  ::before {
+    content: "";
+    margin-right: 8px;
+    height: 32px;
+    width: 32px;
+    background: url(${ShoppingBag}) no-repeat center / 32px 32px;
   }
 `;
