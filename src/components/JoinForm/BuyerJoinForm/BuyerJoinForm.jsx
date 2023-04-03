@@ -247,23 +247,22 @@ export default function BuyerJoinForm() {
             )}
           </>
         )}
-        <CheckBoxContainer>
-          <input id="check" type="checkbox" {...register("checkBox")} />
-          <label htmlFor="check"></label>
-          <span>
-            호두샵의 <strong>이용약관</strong> 및{" "}
-            <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고
-            동의합니다.
-          </span>
-        </CheckBoxContainer>
-        <JoinButton
-          type="submit"
-          disabled={!isValid || !checkVaild}
-          onClick={onSubmit}
-        >
-          가입하기
-        </JoinButton>
       </JoinForm>
+      <CheckBoxContainer>
+        <input id="check" type="checkbox" {...register("checkBox")} />
+        <label htmlFor="check"></label>
+        <span>
+          호두샵의 <strong>이용약관</strong> 및{" "}
+          <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동의합니다.
+        </span>
+      </CheckBoxContainer>
+      <JoinButton
+        type="submit"
+        disabled={!isValid || !checkVaild}
+        onClick={onSubmit}
+      >
+        가입하기
+      </JoinButton>
     </JoinContainer>
   );
 }

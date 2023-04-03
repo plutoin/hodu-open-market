@@ -127,8 +127,7 @@ export const SellerCodeLabel = styled.label`
 `;
 
 export const JoinButton = styled.button`
-  width: 100%;
-  margin-top: 34px;
+  width: 480px;
   padding: 19px 0;
   border: none;
   border-radius: 5px;
