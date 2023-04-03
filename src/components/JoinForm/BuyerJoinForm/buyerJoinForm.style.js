@@ -44,14 +44,6 @@ export const JoinForm = styled.form`
     line-height: 20px;
     color: var(--color-deep-gray);
   }
-  /* #userPW,
-  #userPWCheck {
-    background: url(${(props) => (props.checked ? Check_on : Check_off)})
-      no-repeat right;
-    background-size: 28px 28px;
-    background-origin: content-box;
-  } */
-
   #email_1,
   #email_2 {
     width: calc((100% - 39px) / 2);
@@ -89,6 +81,13 @@ export const JoinForm = styled.form`
     font-weight: 500;
     line-height: 20px;
   }
+`;
+
+export const PasswordInput = styled.input`
+  background: url(${(props) => (props.checked ? Check_on : Check_off)})
+    no-repeat right;
+  background-size: 28px 28px;
+  background-origin: content-box;
 `;
 
 export const CheckBoxContainer = styled.div`
@@ -151,20 +150,4 @@ export const ErrorMsg = styled.p`
   line-height: 20px;
   text-align: left;
   color: var(--color-red);
-`;
-
-export const PasswordInput = styled.input`
-  background: url(${(props) => (props.checked ? Check_on : Check_off)})
-    no-repeat right;
-  background-size: 28px 28px;
-  background-origin: content-box;
-  /* &::after {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    position: absolute;
-    content: "";
-    background: url(${(props) => (props.checked ? Check_on : Check_off)});
-    background-origin: content-box;
-  } */
 `;
