@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CheckBox_empty from "../../../assets/check-box.svg";
 import CheckBox_fill from "../../../assets/check-fill-box.svg";
 import Check_off from "../../../assets/icon-check-off.svg";
+import Check_on from "../../../assets/icon-check-on.svg";
 
 export const JoinContainer = styled.div`
   width: 550px;
@@ -43,12 +44,13 @@ export const JoinForm = styled.form`
     line-height: 20px;
     color: var(--color-deep-gray);
   }
-  #userPW,
+  /* #userPW,
   #userPWCheck {
-    background: url(${Check_off}) no-repeat right;
+    background: url(${(props) => (props.checked ? Check_on : Check_off)})
+      no-repeat right;
     background-size: 28px 28px;
     background-origin: content-box;
-  }
+  } */
 
   #email_1,
   #email_2 {
@@ -149,4 +151,20 @@ export const ErrorMsg = styled.p`
   line-height: 20px;
   text-align: left;
   color: var(--color-red);
+`;
+
+export const PasswordInput = styled.input`
+  background: url(${(props) => (props.checked ? Check_on : Check_off)})
+    no-repeat right;
+  background-size: 28px 28px;
+  background-origin: content-box;
+  /* &::after {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    content: "";
+    background: url(${(props) => (props.checked ? Check_on : Check_off)});
+    background-origin: content-box;
+  } */
 `;

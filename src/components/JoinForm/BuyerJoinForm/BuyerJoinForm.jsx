@@ -11,6 +11,7 @@ import {
   SellerCodeLabel,
   CheckBoxContainer,
   ErrorMsg,
+  PasswordInput,
 } from "./buyerJoinForm.style";
 
 import { Tab } from "../../Login/login.style";
@@ -31,8 +32,10 @@ export default function BuyerJoinForm() {
   } = useForm({ mode: "onBlur", defaultValues: { checkBox: false } });
 
   const [isSelected, setIsSelected] = useState(true);
+  const [checkedPW, setCheckedPW] = useState(false);
+  const [checkedPW2, setCheckedPW2] = useState(false);
 
-  const isValid = watch("checkBox");
+  const checkVaild = watch("checkBox");
 
   const goToLogin = () => {
     navigate("/login");
@@ -59,6 +62,26 @@ export default function BuyerJoinForm() {
   const onValidID = () => {
     const id = getValues("userID");
     validID(id, setError);
+  };
+
+  const onValidPW = (e) => {
+    const pw = e.target.value;
+    const regEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,16}$/;
+    if (regEx.test(pw)) {
+      setCheckedPW(true);
+    } else {
+      setError("password", {
+        message: "8~16자 영문 대소문자, 숫자, 특수문자를 사용하세요.",
+      });
+    }
+  };
+
+  const onValidPW2 = (e) => {
+    const pw1 = getValues("password");
+    const pw2 = e.target.value;
+    if (pw2 && pw2 === pw1) {
+      setCheckedPW2(true);
+    }
   };
 
   const onValidSellerCode = () => {
@@ -101,7 +124,7 @@ export default function BuyerJoinForm() {
         )}
 
         <label htmlFor="userPW">비밀번호</label>
-        <input
+        <PasswordInput
           id="userPW"
           type="password"
           maxLength="16"
@@ -111,25 +134,25 @@ export default function BuyerJoinForm() {
               value: 8,
               message: "8글자 이상 입력해 주세요.",
             },
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,16}$/,
-              message: "8~16자 영문 대소문자, 숫자, 특수문자를 사용하세요.",
-            },
             maxLength: {
               value: 16,
               message: "16자 이하로 입력해 주세요.",
             },
           })}
+          onChange={onValidPW}
+          checked={checkedPW}
         />
         {errors.password && <ErrorMsg>{errors.password?.message}</ErrorMsg>}
 
         <label htmlFor="userPWCheck">비밀번호 재확인</label>
-        <input
+        <PasswordInput
           id="userPWCheck"
           type="password"
           {...register("password2", {
             required: "비밀번호가 일치하지 않습니다.",
           })}
+          onChange={onValidPW2}
+          checked={checkedPW2}
         />
         {errors.password2 && <ErrorMsg>{errors.password2?.message}</ErrorMsg>}
 
@@ -219,7 +242,7 @@ export default function BuyerJoinForm() {
             동의합니다.
           </span>
         </CheckBoxContainer>
-        <JoinButton type="submit" disabled={!isValid} onClick={onSubmit}>
+        <JoinButton type="submit" disabled={!checkVaild} onClick={onSubmit}>
           가입하기
         </JoinButton>
       </JoinForm>
