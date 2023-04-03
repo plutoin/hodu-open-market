@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Container, LogoBtn } from "./join.style";
 
-import BuyerJoinForm from "../../components/JoinForm/BuyerJoinForm/BuyerJoinForm";
+import JoinForm from "../../components/JoinForm/JoinForm";
 
 export default function Join() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Join() {
     <Container>
       <h1 className="ir">로그인 페이지</h1>
       <LogoBtn onClick={home}></LogoBtn>
-      <BuyerJoinForm />
+      <JoinForm />
     </Container>
   );
 }

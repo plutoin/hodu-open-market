@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { useAuth } from "../../../auth/useAuth";
+import { useAuth } from "../../auth/useAuth";
 
 import {
   JoinContainer,
@@ -12,9 +12,9 @@ import {
   CheckBoxContainer,
   ErrorMsg,
   PasswordInput,
-} from "./buyerJoinForm.style";
+} from "./joinForm.style";
 
-import { Tab } from "../../Login/login.style";
+import { Tab } from "../Login/login.style";
 
 export default function BuyerJoinForm() {
   const { onClickBuyerJoin, onClickSellerJoin, validID, validSellerCode } =

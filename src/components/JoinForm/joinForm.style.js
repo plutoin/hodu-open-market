@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import CheckBox_empty from "../../../assets/check-box.svg";
-import CheckBox_fill from "../../../assets/check-fill-box.svg";
-import Check_off from "../../../assets/icon-check-off.svg";
-import Check_on from "../../../assets/icon-check-on.svg";
+import CheckBox_empty from "../../assets/check-box.svg";
+import CheckBox_fill from "../../assets/check-fill-box.svg";
+import Check_off from "../../assets/icon-check-off.svg";
+import Check_on from "../../assets/icon-check-on.svg";
 
 export const JoinContainer = styled.div`
   width: 550px;
