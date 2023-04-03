@@ -12,7 +12,8 @@ import ShoppingBag from "../../assets/icon-shopping-bag.svg";
 export const Container = styled.header`
   position: fixed;
   width: 100%;
-  padding: 22px 0;
+  height: 90px;
+  padding-top: 20px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   white-space: nowrap;
