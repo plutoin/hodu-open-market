@@ -23,7 +23,7 @@ export default function BuyerJoinForm() {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     setError,
     reset,
@@ -42,6 +42,8 @@ export default function BuyerJoinForm() {
   };
 
   const onSubmit = handleSubmit((data) => {
+    const phonenum = data.phonenum1 + data.phonenum2 + data.phonenum3;
+
     if (data.password !== data.password2) {
       setError(
         "password2",
@@ -49,8 +51,6 @@ export default function BuyerJoinForm() {
         { shouldFocus: true }
       );
     }
-
-    const phonenum = data.phonenum1 + data.phonenum2 + data.phonenum3;
 
     if (isSelected) {
       onClickBuyerJoin(data, phonenum, setError, reset, goToLogin);
@@ -179,6 +179,7 @@ export default function BuyerJoinForm() {
           className="phone"
           maxLength="4"
           {...register("phonenum2", {
+            required: "휴대폰 중간 자리를 입력해 주세요.",
             pattern: {
               value: /^[0-9]+$/,
               message: "숫자만 입력해 주세요.",
@@ -190,6 +191,7 @@ export default function BuyerJoinForm() {
           className="phone"
           maxLength="4"
           {...register("phonenum3", {
+            required: "휴대폰 마지막 자리를 입력해 주세요.",
             pattern: {
               value: /^[0-9]+$/,
               message: "숫자만 입력해 주세요.",
@@ -211,7 +213,13 @@ export default function BuyerJoinForm() {
             <SellerCodeLabel htmlFor="sellerCode">
               사업자 등록번호
             </SellerCodeLabel>
-            <input id="sellerCode" type="text" {...register("sellerCode")} />
+            <input
+              id="sellerCode"
+              type="text"
+              {...register("sellerCode", {
+                required: "사업자 등록번호를 입력해 주세요.",
+              })}
+            />
             <button className="check" onClick={onValidSellerCode}>
               인증
             </button>
@@ -227,7 +235,13 @@ export default function BuyerJoinForm() {
             )}
 
             <label htmlFor="storeName">스토어 이름</label>
-            <input id="storeName" type="text" {...register("storeName")} />
+            <input
+              id="storeName"
+              type="text"
+              {...register("storeName", {
+                required: "스토어 이름을 입력해 주세요.",
+              })}
+            />
             {errors.storeName && (
               <ErrorMsg>{errors.storeName?.message}</ErrorMsg>
             )}
@@ -242,7 +256,11 @@ export default function BuyerJoinForm() {
             동의합니다.
           </span>
         </CheckBoxContainer>
-        <JoinButton type="submit" disabled={!checkVaild} onClick={onSubmit}>
+        <JoinButton
+          type="submit"
+          disabled={!isValid || !checkVaild}
+          onClick={onSubmit}
+        >
           가입하기
         </JoinButton>
       </JoinForm>
