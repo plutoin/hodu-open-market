@@ -175,27 +175,19 @@ export default function BuyerJoinForm() {
           <option>070</option>
         </select>
         <input
-          type="text"
+          type="number"
           className="phone"
           maxLength="4"
           {...register("phonenum2", {
             required: "휴대폰 중간 자리를 입력해 주세요.",
-            pattern: {
-              value: /^[0-9]+$/,
-              message: "숫자만 입력해 주세요.",
-            },
           })}
         />
         <input
-          type="text"
+          type="number"
           className="phone"
           maxLength="4"
           {...register("phonenum3", {
             required: "휴대폰 마지막 자리를 입력해 주세요.",
-            pattern: {
-              value: /^[0-9]+$/,
-              message: "숫자만 입력해 주세요.",
-            },
           })}
         />
         {errors.phonenum2 && <ErrorMsg>{errors.phonenum2?.message}</ErrorMsg>}
