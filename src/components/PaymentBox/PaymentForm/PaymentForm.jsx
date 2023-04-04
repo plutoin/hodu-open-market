@@ -40,7 +40,7 @@ export default function PaymentForm({
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     watch,
   } = useForm({
@@ -48,7 +48,7 @@ export default function PaymentForm({
     defaultValues: { checkBox: false },
   });
 
-  const isValid = watch("checkBox");
+  const checkVaild = watch("checkBox");
 
   const onCompletePost = (data) => {
     setAddressValue(data.address);
@@ -337,7 +337,11 @@ export default function PaymentForm({
             {...register("payMethod")}
           />
           <label htmlFor="kakaoPay">카카오페이</label>
-          {errors.receiver && <p>{errors.receiver?.message}</p>}
+          {errors.receiver && (
+            <p style={{ color: "red", marginTop: "10px" }}>
+              {errors.receiver?.message}
+            </p>
+          )}
         </PayForm>
         <CheckInfoDiv>
           <h2>최종결제 정보</h2>
@@ -368,7 +372,7 @@ export default function PaymentForm({
             <label htmlFor="check">
               주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
             </label>
-            <button disabled={!isValid} onClick={onSubmit}>
+            <button disabled={!isValid || !checkVaild} onClick={onSubmit}>
               결제하기
             </button>
           </CheckForm>
