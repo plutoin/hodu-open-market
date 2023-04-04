@@ -9,6 +9,7 @@ import Join from "./pages/Join/Join";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment/Payment";
+import SellerCenter from "./pages/SellerCenter/SellerCenter";
 import NotFound from "./pages/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/productDetail/:product_id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/sellerCenter" element={<SellerCenter />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
