@@ -86,7 +86,7 @@ export default function BuyerJoinForm() {
 
   const onValidSellerCode = () => {
     const code = getValues("sellerCode");
-    validSellerCode(code, setError);
+    code.length === 10 && validSellerCode(code, setError);
   };
 
   return (
@@ -179,7 +179,7 @@ export default function BuyerJoinForm() {
           className="phone"
           maxLength="4"
           {...register("phonenum2", {
-            required: "휴대폰 중간 자리를 입력해 주세요.",
+            required: "중간 자리를 입력해 주세요.",
           })}
         />
         <input
@@ -187,7 +187,7 @@ export default function BuyerJoinForm() {
           className="phone"
           maxLength="4"
           {...register("phonenum3", {
-            required: "휴대폰 마지막 자리를 입력해 주세요.",
+            required: "마지막 자리를 입력해 주세요.",
           })}
         />
         {errors.phonenum2 && <ErrorMsg>{errors.phonenum2?.message}</ErrorMsg>}
@@ -208,8 +208,13 @@ export default function BuyerJoinForm() {
             <input
               id="sellerCode"
               type="text"
+              maxLength="10"
               {...register("sellerCode", {
                 required: "사업자 등록번호를 입력해 주세요.",
+                minLength: {
+                  value: 10,
+                  message: "사업자등록번호는 10자리여야 합니다.",
+                },
               })}
             />
             <button className="check" onClick={onValidSellerCode}>
