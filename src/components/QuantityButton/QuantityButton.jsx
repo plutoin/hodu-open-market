@@ -19,9 +19,9 @@ export default function QuantityButton({
     <>
       <FieldSet>
         <legend className="ir">수량 선택</legend>
-        <MinusButton onClick={() => loginType === "BUYER" && minusStock} />
+        <MinusButton onClick={() => loginType === "BUYER" && minusStock()} />
         <span>{orderNum}</span>
-        <PlusButton onClick={() => loginType === "BUYER" && plusStock} />
+        <PlusButton onClick={() => loginType === "BUYER" && plusStock()} />
       </FieldSet>
       {pathname === "/cart" ? null : (
         <TotalPriceBox
