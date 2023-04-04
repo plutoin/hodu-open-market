@@ -57,7 +57,6 @@ export const BuyButton = styled.button`
   line-height: 22px;
   text-align: center;
   :disabled {
-    width: 100%;
     background-color: var(--color-light-gray);
   }
 `;
@@ -73,4 +72,7 @@ export const CartButton = styled.button`
   line-height: 22px;
   text-align: center;
   white-space: nowrap;
+  :disabled {
+    background-color: var(--color-light-gray);
+  }
 `;

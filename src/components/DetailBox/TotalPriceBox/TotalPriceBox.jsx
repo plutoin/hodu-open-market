@@ -15,7 +15,12 @@ import {
   CartButton,
 } from "./totalPriceBox.style";
 
-export default function TotalPriceBox({ detail, quantity, totalPrice }) {
+export default function TotalPriceBox({
+  detail,
+  quantity,
+  totalPrice,
+  loginType,
+}) {
   const { product_id } = useParams();
   const navigate = useNavigate();
   const token = getCookie("token");
@@ -106,10 +111,13 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
         </TotalPrice>
       </ConfirmContainer>
       {detail?.stock === 0 ? (
-        <BuyButton disabled>품절</BuyButton>
+        <BuyButton style={{ width: "100%" }} disabled>
+          품절
+        </BuyButton>
       ) : (
         <>
           <BuyButton
+            disabled={loginType === "SELLER" ? true : false}
             onClick={
               !token
                 ? openLoginModal
@@ -121,6 +129,7 @@ export default function TotalPriceBox({ detail, quantity, totalPrice }) {
             바로 구매
           </BuyButton>
           <CartButton
+            disabled={loginType === "SELLER" ? true : false}
             onClick={
               !token
                 ? openLoginModal

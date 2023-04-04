@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
+import { getCookie } from "../../../Cookie";
+
 import QuantityButton from "../../QuantityButton/QuantityButton";
 import SkeletonDetail from "./SkeletonDetail";
 
@@ -17,6 +19,7 @@ import {
 
 export default function ProductDetailBox({ loading }) {
   const [orderNum, setOrderNum] = useState(1);
+  const loginType = getCookie("loginType");
 
   const detail = useSelector((state) => state.productDetailReducer);
 
@@ -74,6 +77,7 @@ export default function ProductDetailBox({ loading }) {
               minusStock={minusStock}
               plusStock={plusStock}
               detail={detail?.products}
+              loginType={loginType}
             />
           </DetailDiv>
         </Section>

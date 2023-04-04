@@ -11,6 +11,7 @@ export default function QuantityButton({
   plusStock,
   totalPrice,
   detail,
+  loginType,
 }) {
   const { pathname } = useLocation();
 
@@ -18,15 +19,16 @@ export default function QuantityButton({
     <>
       <FieldSet>
         <legend className="ir">수량 선택</legend>
-        <MinusButton onClick={minusStock} />
+        <MinusButton onClick={() => loginType === "BUYER" && minusStock} />
         <span>{orderNum}</span>
-        <PlusButton onClick={plusStock} />
+        <PlusButton onClick={() => loginType === "BUYER" && plusStock} />
       </FieldSet>
       {pathname === "/cart" ? null : (
         <TotalPriceBox
           detail={detail}
           quantity={orderNum}
           totalPrice={totalPrice}
+          loginType={loginType}
         />
       )}
     </>
