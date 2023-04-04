@@ -288,7 +288,9 @@ export default function PaymentForm({
         <Message
           type="text"
           id="address_message"
-          {...register("address_message")}
+          {...register("address_message", {
+            required: "필수 응답 항목입니다.",
+          })}
         />
       </WrapperDiv>
 
