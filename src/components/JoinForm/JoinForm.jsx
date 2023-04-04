@@ -213,7 +213,7 @@ export default function BuyerJoinForm() {
                 required: "사업자 등록번호를 입력해 주세요.",
                 minLength: {
                   value: 10,
-                  message: "사업자등록번호는 10자리여야 합니다.",
+                  message: "사업자 등록번호는 10자리여야 합니다.",
                 },
               })}
             />
