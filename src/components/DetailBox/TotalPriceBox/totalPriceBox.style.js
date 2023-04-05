@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ConfirmContainer = styled.div`
   display: flex;
+  width: 630px;
   justify-content: space-between;
   align-items: flex-end;
   padding: 32px 0 22px;

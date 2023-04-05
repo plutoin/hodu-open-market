@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Section = styled.section`
   display: flex;
-  justify-content: center;
+  width: 1280px;
+  margin: 0 auto;
   padding: 174px 0 140px;
   gap: 50px;
 `;
@@ -60,9 +61,11 @@ export const Shipping = styled.p`
 
 export const ProductInfoDiv = styled.div`
   display: flex;
+  width: 1280px;
+  margin: 0 auto;
   margin-bottom: 500px;
-  justify-content: center;
   flex-wrap: wrap;
+  box-sizing: border-box;
   > input {
     display: none;
     :checked + label {
