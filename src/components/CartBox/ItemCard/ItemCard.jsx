@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AxiosInstance } from "../../../Axios";
+import { getCookie } from "../../../Cookie";
 
 import Modal from "../../Modal/Modal";
 import QuantityButton from "../../QuantityButton/QuantityButton";
@@ -22,6 +23,7 @@ export default function ItemCard({
   checkedArr,
 }) {
   const navigate = useNavigate();
+  const loginType = getCookie('loginType');
 
   const [orderNum, setOrderNum] = useState(quantity);
   const [delModal, setDelModal] = useState(false);
@@ -61,9 +63,11 @@ export default function ItemCard({
   }
 
   const minusStock = () => {
-    if (cartItem.stock > 1 && orderNum > 0) {
+    if (orderNum === 1) {
+      alert('최수 주문 수량은 1개입니다.')
+    } else if (cartItem.stock > 1 && orderNum > 0) {
       setOrderNum(parseInt(orderNum - 1));
-    }
+    } 
   };
 
   const plusStock = () => {
@@ -125,6 +129,7 @@ export default function ItemCard({
           orderNum={orderNum}
           minusStock={openQuantityModal}
           plusStock={openQuantityModal}
+          loginType={loginType}
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
@@ -151,6 +156,7 @@ export default function ItemCard({
           plusStock={plusStock}
           openModal={openQuantityModal}
           closeModal={closeQuantityModal}
+          loginType={loginType}
         />
       )}
     </>

@@ -24,5 +24,8 @@ export const CartSection = styled.section`
     font-size: 24px;
     font-weight: 700;
     line-height: 30px;
+    :disabled {
+      background-color: var(--color-light-gray);
+    }
   }
 `;

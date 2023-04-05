@@ -55,9 +55,6 @@ export default function Cart() {
     }
   };
 
-  // async function getCartDetail(id) {
-  //   AxiosInstance.get(`/products/${id}`).then((res) => res.data);
-  // }
 
   const getData = () => {
     const result = Promise.all(
@@ -116,6 +113,8 @@ export default function Cart() {
     });
   };
 
+  console.log(cartArr)
+
   return (
     <>
       {loading && <Loading />}
@@ -144,7 +143,7 @@ export default function Cart() {
           totalFee={totalFee}
           totalPay={totalPay}
         />
-        <button onClick={goToPayment}>주문하기</button>
+        <button onClick={goToPayment} disabled={checkedArr.length === 0}>주문하기</button>
       </CartSection>
       <Footer />
     </>

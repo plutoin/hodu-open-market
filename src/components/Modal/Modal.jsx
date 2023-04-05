@@ -19,6 +19,7 @@ export default function Modal({
   plusStock,
   openModal,
   closeModal,
+  loginType
 }) {
   const navigate = useNavigate();
   const token = getCookie("token");
@@ -67,6 +68,7 @@ export default function Modal({
               orderNum={orderNum}
               minusStock={minusStock}
               plusStock={plusStock}
+              loginType={loginType}
             />
           ) : null}
           {option === "delete" ? (
