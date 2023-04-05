@@ -7,8 +7,12 @@
 - [DEMO](https://hoduopenmarket.netlify.app/)
 
 - 계정
-  - ID: marketbuyer
-  - PW: buyer00!
+  - 구매자
+    - ID: marketbuyer
+    - PW: buyer00!
+  - 판매자
+    - ID: marketseller
+    - PW: seller00!
 
 <br/>
 
@@ -30,7 +34,7 @@
 
 #### [ Back-end ]
 
-REST API 기반의 제공된 API 사용
+- 제공된 API 사용
 
 #### [ Design ]
 
@@ -65,6 +69,7 @@ REST API 기반의 제공된 API 사용
     ├── App.jsx
     ├── Axios.jsx
     ├── Cookie.js
+    ├── index.js
     ├── assets
     ├── auth
     ├── components
@@ -78,7 +83,6 @@ REST API 기반의 제공된 API 사용
     │   ├── Footer
     │   ├── Header
     │   ├── JoinForm
-    │   │   └──BuyerJoinForm
     │   ├── Loading
     │   ├── Login
     │   ├── Modal
@@ -87,7 +91,6 @@ REST API 기반의 제공된 API 사용
     │   ├── ProductList
     │   ├── QuantityButton
     │   └── Slide
-    ├── index.js
     ├── pages
     │   ├── Cart
     │   ├── Home
