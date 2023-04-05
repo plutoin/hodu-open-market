@@ -63,7 +63,6 @@ export const ItemInfo = styled.div`
   }
   > p {
     margin-bottom: 40px;
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
@@ -94,6 +93,9 @@ export const ItemPrice = styled.div`
     font-weight: 500;
     line-height: 20px;
     text-align: center;
+    :disabled {
+      background-color: var(--color-light-gray);
+    }
   }
 `;
 

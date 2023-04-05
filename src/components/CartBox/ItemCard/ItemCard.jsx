@@ -30,6 +30,8 @@ export default function ItemCard({
   const [quantityModal, setQuantityModal] = useState(false);
   const [cartItem, setCartItem] = useState([]);
 
+  const soldOut = cartItem.stock === 0;
+
   const openDelModal = () => {
     setDelModal(true);
   };
@@ -114,6 +116,7 @@ export default function ItemCard({
           onChange={(e) =>
             checkedItemHandler(e.target.checked, cartItem, cartItem.product_id)
           }
+          disabled={soldOut}
         />
         <img src={cartItem.image} alt="상품이미지" />
         <DeleteBtn onClick={openDelModal} />
@@ -133,7 +136,7 @@ export default function ItemCard({
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
-          <button onClick={goToPayment}>주문하기</button>
+          <button onClick={goToPayment} disabled={soldOut}>{soldOut ? '품절' : '주문하기'}</button>
         </ItemPrice>
       </ItemContainer>
 
