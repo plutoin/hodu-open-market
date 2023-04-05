@@ -133,6 +133,7 @@ export default function ItemCard({
           minusStock={openQuantityModal}
           plusStock={openQuantityModal}
           loginType={loginType}
+          soldOut={soldOut}
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
