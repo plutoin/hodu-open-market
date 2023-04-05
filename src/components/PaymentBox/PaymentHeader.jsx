@@ -6,7 +6,7 @@ export default function PaymentHeader() {
     <PayHeader>
       <span>상품정보</span>
       <span>할인</span>
-      <span>베송비</span>
+      <span>배송비</span>
       <span>주문금액</span>
     </PayHeader>
   );
