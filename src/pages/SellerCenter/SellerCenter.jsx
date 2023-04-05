@@ -4,7 +4,6 @@ import SellerHeader from "../../components/Header/SellerHeader";
 import {
   Title,
   Container,
-  List,
   Button,
   ProductBox,
   ItemHeader,
@@ -18,13 +17,12 @@ export default function SellerCenter() {
     <>
       <SellerHeader />
       <Title>
-        <h2>대시보드</h2>
-        <span>백엔드글로벌</span>
+        <h1>대시보드<strong>백엔드글로벌</strong></h1>
         <button>상품 업로드</button>
       </Title>
       <Container>
         <div>
-          <Button>판매중인 상품(3)</Button>
+          <Button>판매중인 상품 (3)</Button>
           <Button>주문/배송</Button>
           <Button>문의/리뷰</Button>
           <Button>통계</Button>

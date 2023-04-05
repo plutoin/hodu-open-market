@@ -3,25 +3,29 @@ import Plus from "../../assets/icon-plus.svg";
 
 export const Title = styled.div`
   display: flex;
+  width: 1920px;
+  justify-content: space-between;
   align-items: center;
   padding: 44px 100px 42px;
-  > h2 {
-    margin-right: 16px;
+  box-sizing: border-box;
+  > h1 {
     font-size: 36px;
     font-weight: 700;
     line-height: 44px;
-  }
-  > span {
+    > strong {
+    margin-left: 16px;
     font-size: 36px;
     font-weight: 500;
     line-height: 44px;
     color: var(--color-green);
   }
+  }
+  
   > button {
     display: flex;
     width: 168px;
     padding: 11px 0;
-    margin-left: auto;
+    /* margin-left: auto; */
     align-items: center;
     justify-content: center;
     border: none;
@@ -43,8 +47,10 @@ export const Title = styled.div`
 
 export const Container = styled.div`
   display: flex;
+  width: 1920px;
   padding: 0 100px;
   gap: 30px;
+  box-sizing: border-box;
 `;
 
 export const Button = styled.button`

@@ -10,7 +10,7 @@ export default function SellerHeader() {
   return (
     <Container>
       <button onClick={() => navigate("/")} />
-      <h1>판매자 센터</h1>
+      <strong>판매자 센터</strong>
     </Container>
   );
 }
@@ -21,14 +21,15 @@ const Container = styled.header`
   gap: 16px;
   padding: 26px 0 26px 100px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-  > h1 {
+  box-sizing: border-box;
+  > strong {
     font-size: 30px;
     font-weight: 500;
     line-height: 38px;
   }
   > button {
     width: 80px;
-    height: 80px;
+    height: 24px;
     border: none;
     background: url(${Logo}) no-repeat center / contain;
   }
