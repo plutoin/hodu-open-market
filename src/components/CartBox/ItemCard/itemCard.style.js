@@ -32,6 +32,9 @@ export const ItemContainer = styled.div`
         box-sizing: border-box;
       }
     }
+    :disabled {
+      border: 2px solid var(--color-light-gray);
+    }
   }
   > img {
     width: 160px;
