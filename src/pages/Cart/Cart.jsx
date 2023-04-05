@@ -47,15 +47,6 @@ export default function Cart() {
     getCartItem();
   }, [dispatch, token]);
 
-  const checkedItemHandler = (checked, item, id) => {
-    if (checked) {
-      setCheckedArr((prev) => [...prev, item]);
-    } else {
-      setCheckedArr(checkedArr.filter((i) => i.product_id !== id));
-    }
-  };
-
-
   const getData = () => {
     const result = Promise.all(
       carts.map((el) => {
@@ -67,9 +58,19 @@ export default function Cart() {
     return result;
   };
 
+  const checkedItemHandler = (checked, item, id) => {
+    if (item.stock !== 0 && checked) {
+      setCheckedArr((prev) => [...prev, item]);
+    } else {
+      setCheckedArr(checkedArr.filter((i) => i.product_id !== id));
+    }
+  };
+
   const checkedAllHandler = (checked) => {
     if (checked) {
-      getData().then((arr) => setCheckedArr(arr));
+      getData().then((arr) => {
+        setCheckedArr(arr.filter((i) => i.stock !== 0));
+      });
     } else {
       setCheckedArr([]);
     }
@@ -113,8 +114,6 @@ export default function Cart() {
     });
   };
 
-  console.log(cartArr)
-
   return (
     <>
       {loading && <Loading />}
@@ -143,7 +142,9 @@ export default function Cart() {
           totalFee={totalFee}
           totalPay={totalPay}
         />
-        <button onClick={goToPayment} disabled={checkedArr.length === 0}>주문하기</button>
+        <button onClick={goToPayment} disabled={checkedArr.length === 0}>
+          주문하기
+        </button>
       </CartSection>
       <Footer />
     </>

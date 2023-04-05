@@ -23,7 +23,7 @@ export default function ItemCard({
   checkedArr,
 }) {
   const navigate = useNavigate();
-  const loginType = getCookie('loginType');
+  const loginType = getCookie("loginType");
 
   const [orderNum, setOrderNum] = useState(quantity);
   const [delModal, setDelModal] = useState(false);
@@ -66,10 +66,10 @@ export default function ItemCard({
 
   const minusStock = () => {
     if (orderNum === 1) {
-      alert('최수 주문 수량은 1개입니다.')
+      alert("최수 주문 수량은 1개입니다.");
     } else if (cartItem.stock > 1 && orderNum > 0) {
       setOrderNum(parseInt(orderNum - 1));
-    } 
+    }
   };
 
   const plusStock = () => {
@@ -109,6 +109,7 @@ export default function ItemCard({
         <input
           type="checkbox"
           checked={
+            !soldOut &&
             checkedArr.map((el) => el.product_id).includes(cartItem.product_id)
               ? true
               : false
@@ -137,7 +138,9 @@ export default function ItemCard({
         />
         <ItemPrice>
           <p>{(cartItem.price * quantity)?.toLocaleString()}원</p>
-          <button onClick={goToPayment} disabled={soldOut}>{soldOut ? '품절' : '주문하기'}</button>
+          <button onClick={goToPayment} disabled={soldOut}>
+            {soldOut ? "품절" : "주문하기"}
+          </button>
         </ItemPrice>
       </ItemContainer>
 
