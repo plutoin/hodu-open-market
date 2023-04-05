@@ -51,7 +51,7 @@ export default function Header() {
               <span>마이페이지</span>
               {isOpen && <Dropdown />}
             </BtnContainer>
-            <SellerBtn>판매자 센터</SellerBtn>
+            <SellerBtn onClick={()=> navigate('/sellerCenter')}>판매자 센터</SellerBtn>
           </>
         ) : (
           <>
