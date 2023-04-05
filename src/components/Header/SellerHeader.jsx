@@ -17,6 +17,7 @@ export default function SellerHeader() {
 
 const Container = styled.header`
   display: flex;
+  width: 1920px;
   align-items: center;
   gap: 16px;
   padding: 26px 0 26px 100px;
