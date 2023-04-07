@@ -6,6 +6,8 @@ import { getCookie } from "../../../Cookie";
 
 import Modal from "../../Modal/Modal";
 
+import { postCarts } from "../../../api/cartApi";
+
 import {
   ConfirmContainer,
   TotalInfo,
@@ -30,24 +32,25 @@ export default function TotalPriceBox({
   const [cart, setCart] = useState([]);
 
   const addCart = async () => {
-    try {
-      await AxiosInstance.post(
-        "cart/",
-        {
-          product_id: parseInt(product_id),
-          quantity: quantity,
-          check: true,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      navigate("/cart");
-    } catch (error) {
-      return error.response.data;
-    }
+    // try {
+    //   await AxiosInstance.post(
+    //     "cart/",
+    //     {
+    //       product_id: parseInt(product_id),
+    //       quantity: quantity,
+    //       check: true,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: token,
+    //       },
+    //     }
+    //   );
+    //   navigate("/cart");
+    // } catch (error) {
+    //   return error.response.data;
+    // }
+    postCarts(token, product_id, quantity).then(navigate("/cart"));
   };
 
   const goToPayment = () => {
