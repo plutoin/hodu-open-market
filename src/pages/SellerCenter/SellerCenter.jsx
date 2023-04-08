@@ -47,7 +47,6 @@ export default function SellerCenter() {
             <li>수정</li>
             <li>삭제</li>
           </ItemHeader>
-
           {productList.length > 0
             ? productList.map((item) => (
                 <SellerItem

@@ -83,10 +83,12 @@ export const ProductBox = styled.div`
 
 export const ItemHeader = styled.ul`
   display: flex;
+  width: 1440px;
   border-bottom: 1px solid var(--color-light-gray);
   padding: 18px 53px 18px 366px;
   border-radius: 5px 5px 0 0;
   background-color: white;
+  box-sizing: border-box;
   > li {
     font-size: 18px;
     font-weight: 400;
