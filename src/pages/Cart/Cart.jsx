@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getCookie } from "../../Cookie";
-import { AxiosInstance } from "../../Axios";
+import { getCarts } from "../../api/cartApi";
+import { getDetail } from "../../api/productApi";
 import { setCarts } from "../../redux/action/Actions";
 
 import Header from "../../components/Header/Header";
@@ -29,30 +30,17 @@ export default function Cart() {
   const carts = useSelector((state) => state.cartReducer.carts);
 
   useEffect(() => {
-    const getCartItem = async () => {
-      try {
-        const res = await AxiosInstance.get("cart/", {
-          headers: {
-            Authorization: token,
-          },
-        });
-        dispatch(setCarts(res.data.results));
-        setLoading(false);
-      } catch (error) {
-        return error.response.data;
-      }
-    };
-
+    getCarts(token).then((res) => {
+      dispatch(setCarts(res.results));
+      setLoading(false);
+    });
     setLoading(true);
-    getCartItem();
   }, [dispatch, token]);
 
   const getData = () => {
     const result = Promise.all(
       carts.map((el) => {
-        return AxiosInstance.get(`/products/${el.product_id}`).then(
-          (res) => res.data
-        );
+        return getDetail(el.product_id);
       })
     );
     return result;

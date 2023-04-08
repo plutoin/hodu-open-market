@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import DaumPostcode from "react-daum-postcode";
 
-import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
+import { postOrder } from "../../../api/orderApi";
 
 import {
   Container,
@@ -64,18 +64,10 @@ export default function PaymentForm({
   };
 
   async function payFunc(data) {
-    try {
-      await AxiosInstance.post("order/", data, {
-        headers: {
-          Authorization: token,
-        },
-      });
-    } catch (error) {
-      return error.response.data;
-    }
+    postOrder(token, data);
   }
 
-  const postOrder = async (data, receiver_phoneNum, receiver_address) => {
+  const orderData = async (data, receiver_phoneNum, receiver_address) => {
     const product_id = products[0].product_id;
     const quantity = products[0].quantity;
     const order_kind = products[0].order_kind;
@@ -140,7 +132,7 @@ export default function PaymentForm({
       data.receiver_phonenum2 +
       data.receiver_phonenum3;
     const receiver_address = addressValue + " " + data.address;
-    postOrder(data, receiver_phoneNum, receiver_address);
+    orderData(data, receiver_phoneNum, receiver_address);
   });
 
   return (

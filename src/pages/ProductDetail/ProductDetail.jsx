@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { AxiosInstance } from "../../Axios";
+import { getDetail } from "../../api/productApi";
 import { getProducts } from "../../redux/action/Actions";
 
 import Header from "../../components/Header/Header";
@@ -17,18 +17,11 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const productDetails = async () => {
-      try {
-        const res = await AxiosInstance.get(`products/${product_id}`);
-        const data = res.data;
-        dispatch(getProducts(data));
-        setLoading(false);
-      } catch (error) {
-        return error.response.data;
-      }
-    };
+    getDetail(product_id).then((res) => {
+      dispatch(getProducts(res));
+      setLoading(false);
+    });
 
-    productDetails(product_id);
     setLoading(true);
   }, [product_id, dispatch]);
 

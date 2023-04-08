@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
+import { getDetail } from "../../../api/productApi";
 
 import Modal from "../../Modal/Modal";
 import QuantityButton from "../../QuantityButton/QuantityButton";
@@ -48,10 +48,6 @@ export default function ItemCard({
     setQuantityModal(false);
   };
 
-  function getCartDetail(id) {
-    return AxiosInstance.get(`/products/${id}`).then((res) => res.data);
-  }
-
   function shipping(method, fee) {
     if (method === "DELIVERY" && fee !== 0) {
       return `택배배송 / ${fee.toLocaleString()}원`;
@@ -94,7 +90,7 @@ export default function ItemCard({
 
   useEffect(() => {
     async function getCart() {
-      const cartDetail = getCartDetail(product_id).then((detail) => {
+      const cartDetail = getDetail(product_id).then((detail) => {
         setCartItem(detail);
       });
       return cartDetail;

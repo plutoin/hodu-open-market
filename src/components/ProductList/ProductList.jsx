@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AxiosInstance } from "../../Axios";
+import { getData } from "../../api/productApi";
 import { setProducts } from "../../redux/action/Actions";
 
 import Loading from "../Loading/Loading";
@@ -27,20 +27,13 @@ export default function ProductList() {
     products: state.productReducer.products,
   }));
 
-  const productList = async () => {
-    try {
-      const res = await AxiosInstance.get("products/");
-      dispatch(setProducts(res.data.results));
-      setLoading(false);
-    } catch (error) {
-      return error.response.data;
-    }
-  };
-
   useEffect(() => {
-    productList();
+    getData().then((res) => {
+      dispatch(setProducts(res));
+      setLoading(false);
+    });
     setLoading(true);
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

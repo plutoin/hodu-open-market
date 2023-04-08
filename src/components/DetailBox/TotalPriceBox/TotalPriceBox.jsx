@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { AxiosInstance } from "../../../Axios";
 import { getCookie } from "../../../Cookie";
+import { getCarts, postCarts } from "../../../api/cartApi";
 
 import Modal from "../../Modal/Modal";
-
-import { postCarts } from "../../../api/cartApi";
 
 import {
   ConfirmContainer,
@@ -31,25 +29,7 @@ export default function TotalPriceBox({
   const [cartModal, setCartModal] = useState(false);
   const [cart, setCart] = useState([]);
 
-  const addCart = async () => {
-    // try {
-    //   await AxiosInstance.post(
-    //     "cart/",
-    //     {
-    //       product_id: parseInt(product_id),
-    //       quantity: quantity,
-    //       check: true,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: token,
-    //       },
-    //     }
-    //   );
-    //   navigate("/cart");
-    // } catch (error) {
-    //   return error.response.data;
-    // }
+  const addCart = () => {
     postCarts(token, product_id, quantity).then(navigate("/cart"));
   };
 
@@ -84,19 +64,7 @@ export default function TotalPriceBox({
   };
 
   useEffect(() => {
-    async function getCart() {
-      try {
-        const res = await AxiosInstance.get("cart", {
-          headers: {
-            Authorization: token,
-          },
-        });
-        setCart(res.data.results);
-      } catch (error) {
-        return error.response.data;
-      }
-    }
-    getCart();
+    getCarts(token);
   }, [token]);
 
   const isCart = cart?.filter((i) => i.product_id === parseInt(product_id));
