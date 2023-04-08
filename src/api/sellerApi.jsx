@@ -3,12 +3,11 @@ import { AxiosInstance } from "../Axios";
 export const getProduct = async (token) => {
   try {
     const res = await AxiosInstance.get("/seller/", {
-      method: "GET",
       headers: {
         Authorization: token,
       },
     });
-    return res.data;
+    return res.data.results;
   } catch (error) {
     return error.response.data;
   }
