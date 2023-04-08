@@ -28,7 +28,7 @@ export default function SellerCenter() {
       <SellerHeader />
       <Title>
         <h1>
-          대시보드<strong>백엔드글로벌</strong>
+          대시보드<strong>{productList[0].store_name}</strong>
         </h1>
         <button>상품 업로드</button>
       </Title>
