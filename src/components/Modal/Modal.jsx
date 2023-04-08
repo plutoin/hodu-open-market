@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 import { getCookie } from "../../Cookie";
 import { editQuantity, deleteItem } from "../../api/cartApi";
+import { deleteProduct } from "../../api/productApi";
 
 import QuantityButton from "../QuantityButton/QuantityButton";
 
@@ -29,7 +30,11 @@ export default function Modal({
   };
 
   const deleteBtn = async () => {
-    deleteItem(token, cartId);
+    if (cartId) {
+      deleteItem(token, cartId);
+    } else if (productId) {
+      deleteProduct(token, productId);
+    }
   };
 
   return (

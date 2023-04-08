@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import Modal from "../Modal/Modal";
 
 import { ItemCard, EditBtn, DeleteBtn } from "./sellerItem.style";
 
@@ -8,7 +10,18 @@ export default function SellerItem({
   product_id,
   product_name,
   stock,
+  token,
 }) {
+  const [delModal, setDelModal] = useState(false);
+
+  const openDelModal = () => {
+    setDelModal(true);
+  };
+
+  const closeDelModal = () => {
+    setDelModal(false);
+  };
+
   return (
     <ItemCard>
       <img src={image} alt="상품 이미지" />
@@ -18,7 +31,15 @@ export default function SellerItem({
       </div>
       <span>{price}원</span>
       <EditBtn>수정</EditBtn>
-      <DeleteBtn>삭제</DeleteBtn>
+      <DeleteBtn onClick={openDelModal}>삭제</DeleteBtn>
+      {delModal && (
+        <Modal
+          option="delete"
+          productId={product_id}
+          openModal={openDelModal}
+          closeModal={closeDelModal}
+        />
+      )}
     </ItemCard>
   );
 }

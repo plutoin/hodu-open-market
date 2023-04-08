@@ -18,6 +18,20 @@ export const getDetail = async (product_id) => {
   }
 };
 
+export const deleteProduct = async (token, product_id) => {
+  try {
+    await AxiosInstance.delete(`products/${product_id}/`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    alert("상품이 삭제되었습니다.");
+    window.location.reload();
+  } catch (error) {
+    return error.response;
+  }
+};
+
 export const getSearchResult = async (입력값) => {
   try {
     const res = await AxiosInstance.get(`/products/?search=${입력값}`);

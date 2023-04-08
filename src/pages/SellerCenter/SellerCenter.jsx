@@ -28,7 +28,7 @@ export default function SellerCenter() {
       <SellerHeader />
       <Title>
         <h1>
-          대시보드<strong>{productList[0].store_name}</strong>
+          대시보드<strong>{productList[0]?.store_name}</strong>
         </h1>
         <button>상품 업로드</button>
       </Title>
@@ -56,6 +56,7 @@ export default function SellerCenter() {
                   product_id={item.product_id}
                   product_name={item.product_name}
                   stock={item.stock}
+                  token={token}
                 />
               ))
             : null}
