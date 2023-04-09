@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment/Payment";
 import SellerCenter from "./pages/SellerCenter/SellerCenter";
+import ProductUpload from "./pages/ProductUpload/ProductUpload";
 import NotFound from "./pages/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/sellerCenter" element={<SellerCenter />} />
+        <Route path="/productUpload" element={<ProductUpload />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

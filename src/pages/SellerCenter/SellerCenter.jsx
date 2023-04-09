@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SellerHeader from "../../components/Header/SellerHeader";
-import SellerItem from "../../components/SellerItem/SellerItem";
+import { useNavigate } from "react-router-dom";
 
 import { getProduct } from "../../api/sellerApi";
 import { getCookie } from "../../Cookie";
+
+import SellerHeader from "../../components/Header/SellerHeader";
+import SellerItem from "../../components/SellerItem/SellerItem";
 
 import {
   Title,
@@ -15,6 +17,7 @@ import {
 
 export default function SellerCenter() {
   const token = getCookie("token");
+  const navigate = useNavigate();
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function SellerCenter() {
         <h1>
           대시보드<strong>{productList[0]?.store_name}</strong>
         </h1>
-        <button>상품 업로드</button>
+        <button onClick={() => navigate("/productUpload")}>상품 업로드</button>
       </Title>
       <Container>
         <div>
