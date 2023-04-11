@@ -15,25 +15,26 @@ export const getProduct = async (token) => {
 
 export const postProduct = async (
   token,
-  product_name,
-  image,
-  price,
-  shipping_method,
-  shipping_fee,
-  stock,
-  products_info
+  // product_name,
+  // image,
+  // price,
+  // shipping_method,
+  // shipping_fee,
+  // stock,
+  // products_info
+  data
 ) => {
   try {
     const res = await AxiosInstance.post(
       "products/",
       {
-        product_name: product_name,
-        image: image,
-        price: price,
-        shipping_method: shipping_method,
-        shipping_fee: shipping_fee,
-        stock: stock,
-        products_info: products_info,
+        product_name: data.product_name,
+        image: data.image,
+        price: data.price,
+        shipping_method: data.shipping_method,
+        shipping_fee: data.shipping_fee,
+        stock: data.stock,
+        products_info: data.products_info,
       },
       {
         headers: {

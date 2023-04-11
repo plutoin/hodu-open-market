@@ -40,7 +40,7 @@ export const TextBox = styled.div`
   }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   width: 1320px;
   flex-direction: column;
@@ -56,14 +56,11 @@ export const Form = styled.div`
   }
   input,
   textarea {
-    width: 220px;
-    margin-bottom: 16px;
     padding: 16px;
+    border-radius: 5px;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    border: 1px solid var(--color-light-gray);
-    border-radius: 5px;
     box-sizing: border-box;
   }
   input[type="number"]::-webkit-outer-spin-button,
@@ -76,6 +73,15 @@ export const Form = styled.div`
 export const TopSection = styled.div`
   display: flex;
   gap: 40px;
+`;
+
+export const Input = styled.input`
+  width: 220px;
+  margin-bottom: 16px;
+  border: ${(props) =>
+    props.isError
+      ? "1px solid var(--color-red)"
+      : "1px solid var(--color-light-gray)"};
 `;
 
 export const ShippingBtn = styled.button`
@@ -115,7 +121,7 @@ export const ImgUploadBtn = styled.button`
 
 export const InputWrapper = styled.div`
   width: 100%;
-  #productName {
+  #product_name {
     width: 100%;
   }
 `;
@@ -136,9 +142,11 @@ export const UnitSpan = styled.span`
   display: inline-block;
   width: 54px;
   margin-left: -54px;
-  padding: 17px;
+  padding: 16px;
   border-radius: 0px 5px 5px 0;
-  background-color: var(--color-light-gray);
+  background-color: var(
+    ${(props) => (props.isError ? "--color-red" : "--color-light-gray")}
+  );
   color: white;
   font-size: 16px;
   font-weight: 400;
@@ -152,12 +160,17 @@ export const DetailWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   margin-top: 40px;
-  > textarea {
-    width: 100%;
-    height: 700px;
-    resize: none;
-    outline: none;
-  }
+`;
+
+export const Textarea = styled.textarea`
+  width: 100%;
+  height: 700px;
+  resize: none;
+  outline: none;
+  border: ${(props) =>
+    props.isError
+      ? "1px solid var(--color-red)"
+      : "1px solid var(--color-light-gray)"};
 `;
 
 export const ButtonContainer = styled.div`
@@ -185,4 +198,7 @@ export const SaveBtn = styled.button`
   border: none;
   color: white;
   background-color: var(--color-green);
+  :disabled {
+    background-color: var(--color-light-gray);
+  }
 `;
