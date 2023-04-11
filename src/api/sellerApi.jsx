@@ -13,17 +13,7 @@ export const getProduct = async (token) => {
   }
 };
 
-export const postProduct = async (
-  token,
-  // product_name,
-  // image,
-  // price,
-  // shipping_method,
-  // shipping_fee,
-  // stock,
-  // products_info
-  data
-) => {
+export const postProduct = async (token, data) => {
   try {
     const res = await AxiosInstance.post(
       "products/",

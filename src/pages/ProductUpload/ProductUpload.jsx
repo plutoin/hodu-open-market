@@ -32,6 +32,7 @@ export default function ProductUpload() {
   const token = getCookie("token");
 
   const [isSelected, setIsSelected] = useState(true);
+  const [inputText, setInputText] = useState("");
 
   const {
     register,
@@ -43,6 +44,10 @@ export default function ProductUpload() {
 
   const checkedMethod = () => {
     setIsSelected(!isSelected);
+  };
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -58,13 +63,13 @@ export default function ProductUpload() {
           <TextBox>
             <p>* 상품 등록 주의사항</p>
             <div>
-              - 상품명은 20자까지 입력 가능합니다.
+              - 상품명은 공백 포함 20자까지 입력 가능합니다.
               <br />
               <br />
               - 상품 이미지 등록 시 jpg, png, gif 형식만 업로드 가능합니다.
               <br />
               <br />
-              - 재고는 0개로 설정할 수 없습니다.
+              - 판매가와 재고는 0으로 설정할 수 없습니다.
               <br />
               <br />
               - 기본 배송비를 0원으로 설정 시 무료배송으로 등록됩니다.
@@ -87,13 +92,12 @@ export default function ProductUpload() {
                 <Input
                   type="text"
                   id="product_name"
+                  maxLength="20"
                   isError={errors.product_name}
-                  {...register("product_name", {
-                    required: "필수 응답 항목입니다.",
-                    maxLength: "20",
-                  })}
+                  {...register("product_name")}
+                  onChange={handleInputChange}
                 />
-                <CharacterSpan>0 / 20</CharacterSpan>
+                <CharacterSpan>{inputText.length} / 20</CharacterSpan>
 
                 <label htmlFor="price">판매가</label>
                 <Input
@@ -101,7 +105,7 @@ export default function ProductUpload() {
                   id="price"
                   isError={errors.price}
                   {...register("price", {
-                    required: "필수 입력 항목입니다.",
+                    pattern: /^[1-9]\d*$/,
                   })}
                 />
                 <UnitSpan isError={errors.price}>원</UnitSpan>
@@ -136,7 +140,7 @@ export default function ProductUpload() {
                   id="shipping_fee"
                   isError={errors.shipping_fee}
                   {...register("shipping_fee", {
-                    required: "필수 입력 항목입니다.",
+                    pattern: /^[0-9]\d*$/,
                   })}
                 />
                 <UnitSpan isError={errors.shipping_fee}>원</UnitSpan>
@@ -147,7 +151,7 @@ export default function ProductUpload() {
                   id="stock"
                   isError={errors.stock}
                   {...register("stock", {
-                    required: "필수 입력 항목입니다.",
+                    pattern: /^[1-9]\d*$/,
                   })}
                 />
                 <UnitSpan isError={errors.stock}>개</UnitSpan>
@@ -159,9 +163,7 @@ export default function ProductUpload() {
                 type="text"
                 id="product_info"
                 isError={errors.product_info}
-                {...register("product_info", {
-                  required: "필수 입력 항목입니다.",
-                })}
+                {...register("product_info")}
               />
             </DetailWrapper>
           </Form>
