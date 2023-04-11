@@ -105,7 +105,14 @@ export const ImageWrapper = styled.div`
   > div {
     width: 454px;
     height: 454px;
-    background: #c4c4c4;
+    /* background: #c4c4c4; */
+    > img {
+      width: 454px;
+      height: 454px;
+    }
+  }
+  input {
+    display: none;
   }
 `;
 

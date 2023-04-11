@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -29,10 +29,13 @@ import {
 
 export default function ProductUpload() {
   const navigate = useNavigate();
+  const imageInput = useRef();
   const token = getCookie("token");
 
   const [isSelected, setIsSelected] = useState(true);
   const [inputText, setInputText] = useState("");
+  const [uploadImage, setUploadImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const {
     register,
@@ -50,8 +53,23 @@ export default function ProductUpload() {
     setInputText(e.target.value);
   };
 
+  const handleImage = () => {
+    imageInput.current.click();
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
+    setUploadImage(file);
+  };
+
   const onSubmit = handleSubmit((data) => {
-    postProduct(token, data);
+    data.image = uploadImage;
+    postProduct(token, data).then(() => navigate("/sellerCenter"));
   });
 
   return (
@@ -66,7 +84,7 @@ export default function ProductUpload() {
               - 상품명은 공백 포함 20자까지 입력 가능합니다.
               <br />
               <br />
-              - 상품 이미지 등록 시 jpg, png, gif 형식만 업로드 가능합니다.
+              - 상품 이미지 등록 시 이미지 파일 확장자만 업로드 가능합니다.
               <br />
               <br />
               - 판매가와 재고는 0으로 설정할 수 없습니다.
@@ -82,8 +100,24 @@ export default function ProductUpload() {
             <TopSection>
               <ImageWrapper>
                 <label htmlFor="image">상품 이미지</label>
-                <div>
-                  <ImgUploadBtn />
+                <div
+                  style={
+                    previewImage
+                      ? {
+                          background: `url(${previewImage}) no-repeat center / cover`,
+                        }
+                      : { backgroundColor: "var(--color-light-gray)" }
+                  }
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="image"
+                    {...register("image")}
+                    ref={imageInput}
+                    onChange={handleImageChange}
+                  />
+                  <ImgUploadBtn type="button" onClick={handleImage} />
                 </div>
               </ImageWrapper>
 
@@ -171,7 +205,7 @@ export default function ProductUpload() {
 
         <ButtonContainer>
           <CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
-          <SaveBtn disabled={!isValid} onClick={onSubmit}>
+          <SaveBtn disabled={!isValid || !uploadImage} onClick={onSubmit}>
             저장
           </SaveBtn>
         </ButtonContainer>

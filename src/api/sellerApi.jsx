@@ -24,14 +24,16 @@ export const postProduct = async (token, data) => {
         shipping_method: data.shipping_method,
         shipping_fee: data.shipping_fee,
         stock: data.stock,
-        products_info: data.products_info,
+        product_info: data.product_info,
       },
       {
         headers: {
           Authorization: token,
+          "Content-Type": "multipart/form-data",
         },
       }
     );
+    alert("상품이 정상적으로 등록되었습니다.");
     return res;
   } catch (error) {
     return error.response.data;
