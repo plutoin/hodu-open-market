@@ -16,8 +16,9 @@ import {
 } from "./sellerCenter.style";
 
 export default function SellerCenter() {
-  const token = getCookie("token");
   const navigate = useNavigate();
+  const token = getCookie("token");
+
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -52,15 +53,7 @@ export default function SellerCenter() {
           </ItemHeader>
           {productList.length > 0
             ? productList.map((item) => (
-                <SellerItem
-                  key={item.product_id}
-                  image={item.image}
-                  price={item.price?.toLocaleString()}
-                  product_id={item.product_id}
-                  product_name={item.product_name}
-                  stock={item.stock}
-                  token={token}
-                />
+                <SellerItem key={item.product_id} token={token} {...item} />
               ))
             : null}
         </ProductBox>

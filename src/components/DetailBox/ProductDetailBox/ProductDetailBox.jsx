@@ -29,11 +29,10 @@ export default function ProductDetailBox({ loading }) {
 
   const minusStock = () => {
     if (orderNum === 1) {
-      alert('최수 주문 수량은 1개입니다.')
+      alert("최수 주문 수량은 1개입니다.");
     } else if (stock > 1 && orderNum > 0) {
       setOrderNum(parseInt(orderNum - 1));
     }
-    
   };
 
   const plusStock = () => {

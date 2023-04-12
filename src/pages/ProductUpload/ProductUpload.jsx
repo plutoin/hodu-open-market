@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { postProduct } from "../../api/sellerApi";
+import { postProduct, editProduct } from "../../api/sellerApi";
 import { getCookie } from "../../Cookie";
 
 import SellerHeader from "../../components/Header/SellerHeader";
@@ -29,8 +29,10 @@ import {
 
 export default function ProductUpload() {
   const navigate = useNavigate();
+  const location = useLocation();
   const imageInput = useRef();
   const token = getCookie("token");
+  const itemData = location.state;
 
   const [isSelected, setIsSelected] = useState(true);
   const [inputText, setInputText] = useState("");
@@ -43,6 +45,7 @@ export default function ProductUpload() {
     handleSubmit,
   } = useForm({
     mode: "onBlur",
+    defaultValues: itemData,
   });
 
   const checkedMethod = () => {
@@ -69,8 +72,17 @@ export default function ProductUpload() {
 
   const onSubmit = handleSubmit((data) => {
     data.image = uploadImage;
-    postProduct(token, data).then(() => navigate("/sellerCenter"));
+    !itemData
+      ? postProduct(token, data).then(() => navigate("/sellerCenter"))
+      : editProduct(token, data).then(() => navigate("/sellerCenter"));
   });
+
+  useEffect(() => {
+    if (itemData?.image) {
+      setPreviewImage(itemData.image);
+      setUploadImage(itemData.image);
+    }
+  }, [setPreviewImage, itemData?.image]);
 
   return (
     <>
