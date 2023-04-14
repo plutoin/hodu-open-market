@@ -54,8 +54,7 @@ export const Form = styled.form`
     font-weight: 400;
     line-height: 20px;
   }
-  input,
-  textarea {
+  input {
     padding: 16px;
     border-radius: 5px;
     font-size: 16px;
@@ -171,12 +170,18 @@ export const DetailWrapper = styled.div`
 export const Textarea = styled.textarea`
   width: 100%;
   height: 700px;
-  resize: none;
-  outline: none;
+  padding: 16px;
   border: ${(props) =>
     props.isError
       ? "1px solid var(--color-red)"
       : "1px solid var(--color-light-gray)"};
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 2;
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
 `;
 
 export const ButtonContainer = styled.div`

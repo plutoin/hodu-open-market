@@ -92,8 +92,9 @@ export const ProductInfoDiv = styled.div`
   > div {
     display: none;
     width: 1280px;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 2;
+    white-space: pre-line;
   }
   #detail:checked ~ #content {
     display: flex;
