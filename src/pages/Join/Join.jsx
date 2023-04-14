@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Container, LogoBtn } from "./join.style";
-
 import JoinForm from "../../components/JoinForm/JoinForm";
+
+import { Container, LogoBtn } from "./join.style";
 
 export default function Join() {
   const navigate = useNavigate();

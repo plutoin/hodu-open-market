@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+
 import BeatLoader from "react-spinners/BeatLoader";
 
 export default function Loading() {
   return (
     <Container>
       <LoadingBg>
-        {/* <ClimbingBoxLoader
-          color="#21bf48"
-          cssOverride={null}
-          loading
-          size={15}
-          speedMultiplier={1}
-        /> */}
         <BeatLoader
           color="var(--color-green)"
           loading
