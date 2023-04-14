@@ -9,28 +9,24 @@ import UserIcon2 from "../../assets/icon-user-2.svg";
 import SearchIcon from "../../assets/icon-search.svg";
 import ShoppingBag from "../../assets/icon-shopping-bag.svg";
 
-export const Container = styled.header`
+export const Container = styled.div`
   position: fixed;
+  display: flex;
   width: 100%;
-  height: 90px;
-  padding-top: 20px;
+  padding: 20px 320px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   white-space: nowrap;
   background-color: white;
-  z-index: 10;
-`;
-
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 85%;
-  margin: 0 auto;
+  z-index: 100;
+  @media (max-width: 1350px) {
+    padding: 20px 35px;
+  }
 `;
 
 export const Label = styled.label`
   position: relative;
-  input {
+  > input {
     width: 400px;
     border-radius: 50px;
     border: 2px solid var(--color-green);
@@ -44,16 +40,14 @@ export const Label = styled.label`
       text-align: left;
     }
   }
-  button {
+  > button {
     position: absolute;
-    top: 9px;
+    top: 7px;
     right: 22px;
     width: 28px;
     height: 28px;
     border: none;
-    background-color: transparent;
-    background-image: url(${SearchIcon});
-    background-size: contain;
+    background: url(${SearchIcon}) no-repeat center / contain;
   }
 `;
 
@@ -61,11 +55,7 @@ export const LogoBtn = styled(Link)`
   width: 124px;
   height: 38px;
   margin-right: 30px;
-  border: none;
-  background-color: transparent;
-  background-image: url(${LogoImage});
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url(${LogoImage}) no-repeat center / cover;
 `;
 
 export const BtnContainer = styled.div`
@@ -76,15 +66,15 @@ export const BtnContainer = styled.div`
   text-align: center;
   flex-direction: column;
   margin-left: auto;
-  color: ${(props) =>
-    props.modal === true ? "var(--color-green)" : "var(--color-deep-gray)"};
+  color: var(
+    ${(props) => (props.modal === true ? "--color-green" : "--color-deep-gray")}
+  );
   > button {
     width: 32px;
     height: 32px;
     margin: 0 auto;
     margin-bottom: 4px;
     border: none;
-    background-color: transparent;
     :active + span {
       color: var(--color-green);
     }

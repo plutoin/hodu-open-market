@@ -54,56 +54,54 @@ export default function Header() {
 
   return (
     <Container>
-      <Wrapper>
-        <LogoBtn to="/" />
-        <Label htmlFor="search">
-          <input
-            id="search"
-            type="text"
-            placeholder="상품을 검색해 보세요!"
-            onChange={handleSearch}
-            onKeyDown={handleKeyDown}
-          />
-          <button onClick={onClickSearch}>
-            <span className="ir">검색 버튼</span>
-          </button>
-        </Label>
-        {loginType === "SELLER" ? (
-          <>
+      <LogoBtn to="/" />
+      <Label htmlFor="search">
+        <input
+          id="search"
+          type="text"
+          placeholder="상품을 검색해 보세요!"
+          onChange={handleSearch}
+          onKeyDown={handleKeyDown}
+        />
+        <button onClick={onClickSearch}>
+          <span className="ir">검색 버튼</span>
+        </button>
+      </Label>
+      {loginType === "SELLER" ? (
+        <>
+          <BtnContainer modal={isOpen} width="56">
+            <UserBtn onClick={handleModal} ref={modalRef} modal={isOpen} />
+            <span>마이페이지</span>
+            {isOpen && <Dropdown />}
+          </BtnContainer>
+          <SellerBtn onClick={() => navigate("/sellerCenter")}>
+            판매자 센터
+          </SellerBtn>
+        </>
+      ) : (
+        <>
+          <BtnContainer>
+            {token ? (
+              <CartBtn onClick={() => navigate("/cart")} />
+            ) : (
+              <CartBtn onClick={() => navigate("/login")} />
+            )}
+            <span>장바구니</span>
+          </BtnContainer>
+          {token ? (
             <BtnContainer modal={isOpen} width="56">
               <UserBtn onClick={handleModal} ref={modalRef} modal={isOpen} />
               <span>마이페이지</span>
               {isOpen && <Dropdown />}
             </BtnContainer>
-            <SellerBtn onClick={() => navigate("/sellerCenter")}>
-              판매자 센터
-            </SellerBtn>
-          </>
-        ) : (
-          <>
-            <BtnContainer>
-              {token ? (
-                <CartBtn onClick={() => navigate("/cart")} />
-              ) : (
-                <CartBtn onClick={() => navigate("/login")} />
-              )}
-              <span>장바구니</span>
+          ) : (
+            <BtnContainer width="56">
+              <UserBtn onClick={() => navigate("/login")} />
+              <span>로그인</span>
             </BtnContainer>
-            {token ? (
-              <BtnContainer modal={isOpen} width="56">
-                <UserBtn onClick={handleModal} ref={modalRef} modal={isOpen} />
-                <span>마이페이지</span>
-                {isOpen && <Dropdown />}
-              </BtnContainer>
-            ) : (
-              <BtnContainer width="56">
-                <UserBtn onClick={() => navigate("/login")} />
-                <span>로그인</span>
-              </BtnContainer>
-            )}
-          </>
-        )}
-      </Wrapper>
+          )}
+        </>
+      )}
     </Container>
   );
 }
