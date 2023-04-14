@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 export const SliderBox = styled(Slider)`
-  padding-top: 94px;
+  padding-top: 90px;
   .slick-prev::before,
   .slick-next::before {
     opacity: 0;
