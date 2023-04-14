@@ -11,6 +11,7 @@ import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment/Payment";
 import SellerCenter from "./pages/SellerCenter/SellerCenter";
 import ProductUpload from "./pages/ProductUpload/ProductUpload";
+import Search from "./pages/Search/Search";
 import NotFound from "./pages/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/sellerCenter" element={<SellerCenter />} />
         <Route path="/productUpload" element={<ProductUpload />} />
+        <Route path="/searchResult" element={<Search />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

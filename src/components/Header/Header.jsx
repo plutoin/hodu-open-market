@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { getSearchResult } from "../../api/productApi";
 import { getCookie } from "../../Cookie";
+
 import Dropdown from "../Dropdown/Dropdown";
 
 import {
@@ -18,15 +20,35 @@ import {
 export default function Header() {
   const modalRef = useRef();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+
   const token = getCookie("token");
   const loginType = getCookie("loginType");
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const handleModal = () => {
     if (isOpen === true) {
       setIsOpen(false);
     } else {
       setIsOpen(true);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const onClickSearch = async () => {
+    const searchResults = await getSearchResult(searchText);
+    navigate("/searchResult", {
+      state: searchResults,
+    });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onClickSearch();
     }
   };
 
@@ -39,8 +61,10 @@ export default function Header() {
             id="search"
             type="text"
             placeholder="상품을 검색해 보세요!"
-          ></input>
-          <button>
+            onChange={handleSearch}
+            onKeyDown={handleKeyDown}
+          />
+          <button onClick={onClickSearch}>
             <span className="ir">검색 버튼</span>
           </button>
         </Label>
@@ -51,7 +75,9 @@ export default function Header() {
               <span>마이페이지</span>
               {isOpen && <Dropdown />}
             </BtnContainer>
-            <SellerBtn onClick={()=> navigate('/sellerCenter')}>판매자 센터</SellerBtn>
+            <SellerBtn onClick={() => navigate("/sellerCenter")}>
+              판매자 센터
+            </SellerBtn>
           </>
         ) : (
           <>

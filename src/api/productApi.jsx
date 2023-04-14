@@ -32,10 +32,10 @@ export const deleteProduct = async (token, product_id) => {
   }
 };
 
-export const getSearchResult = async (입력값) => {
+export const getSearchResult = async (searchText) => {
   try {
-    const res = await AxiosInstance.get(`/products/?search=${입력값}`);
-    return res.data;
+    const res = await AxiosInstance.get(`/products/?search=${searchText}`);
+    return res.data.results;
   } catch (error) {
     return error.response;
   }
