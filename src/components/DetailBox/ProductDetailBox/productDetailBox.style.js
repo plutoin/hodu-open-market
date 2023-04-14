@@ -79,7 +79,7 @@ export const ProductInfoDiv = styled.div`
     margin-bottom: 20px;
     padding: 19px 0 18px;
     border: none;
-    background-color: #fff;
+    background-color: white;
     font-size: 18px;
     font-weight: 700;
     line-height: 23px;

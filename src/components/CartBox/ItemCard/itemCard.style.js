@@ -79,7 +79,7 @@ export const ItemPrice = styled.div`
   text-align: center;
   > p {
     margin-bottom: 26px;
-    color: #eb5757;
+    color: var(--color-red);
     font-size: 18px;
     font-weight: 700;
     line-height: 23px;

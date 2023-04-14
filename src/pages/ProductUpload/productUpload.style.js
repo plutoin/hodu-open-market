@@ -22,7 +22,7 @@ export const Container = styled.div`
 
 export const TextBox = styled.div`
   > p {
-    color: #eb5757;
+    color: var(--color-red);
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
@@ -105,7 +105,6 @@ export const ImageWrapper = styled.div`
   > div {
     width: 454px;
     height: 454px;
-    /* background: #c4c4c4; */
     > img {
       width: 454px;
       height: 454px;
@@ -137,7 +136,7 @@ export const CharacterSpan = styled.span`
   display: inline-block;
   width: 46px;
   margin-left: -67px;
-  color: #c4c4c4;
+  color: var(--color-light-gray);
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;

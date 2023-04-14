@@ -51,7 +51,7 @@ export const BuyButton = styled.button`
   margin-right: 14px;
   padding: 19px 0;
   border: none;
-  color: #fff;
+  color: white;
   background-color: var(--color-green);
   font-size: 18px;
   font-weight: 700;

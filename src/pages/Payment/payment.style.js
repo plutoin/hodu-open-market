@@ -38,6 +38,6 @@ export const TotalPrice = styled.p`
     font-size: 24px;
     font-weight: 700;
     line-height: 30px;
-    color: #eb5757;
+    color: var(--color-red);
   }
 `;

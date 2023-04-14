@@ -36,7 +36,7 @@ const PayContainer = styled.div`
   align-items: center;
   margin: 16px 0;
   padding: 8px 0px 18px 8px;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid var(--color-light-gray);
   > img {
     width: 104px;
     height: 104px;

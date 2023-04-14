@@ -34,7 +34,7 @@ export const WrapperDiv = styled.div`
   }
   > input {
     height: 40px;
-    border: 1px solid #c4c4c4;
+    border: 1px solid var(--color-light-gray);
     box-sizing: border-box;
   }
   > span {
@@ -159,7 +159,7 @@ export const PayPriceDiv = styled.div`
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
-    color: #eb5757;
+    color: var(--color-red);
   }
 `;
 

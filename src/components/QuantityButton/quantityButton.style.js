@@ -11,7 +11,7 @@ export const FieldSet = styled.fieldset`
   button {
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background-color: white;
     box-sizing: border-box;
   }
   > span {

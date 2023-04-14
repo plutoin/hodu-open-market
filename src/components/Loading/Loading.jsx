@@ -14,7 +14,7 @@ export default function Loading() {
           speedMultiplier={1}
         /> */}
         <BeatLoader
-          color="#21bf48"
+          color="var(--color-green)"
           loading
           margin={3}
           size={18}

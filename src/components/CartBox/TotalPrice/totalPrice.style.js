@@ -38,6 +38,6 @@ export const Container = styled.div`
 export const TotalContainer = styled.div`
   margin-left: 229px;
   > strong {
-    color: #eb5757;
+    color: var(--color-red);
   }
 `;

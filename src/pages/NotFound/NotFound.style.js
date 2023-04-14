@@ -41,7 +41,7 @@ export const Div = styled.div`
 `;
 
 export const MainButton = styled.button`
-  color: #fff;
+  color: white;
   background-color: var(--color-green);
   border: none;
 `;
@@ -49,6 +49,6 @@ export const MainButton = styled.button`
 export const PrevButton = styled.button`
   margin-left: 14px;
   color: black;
-  background-color: #fff;
-  border: 1px solid #c4c4c4;
+  background-color: white;
+  border: 1px solid var(--color-light-gray);
 `;
