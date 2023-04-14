@@ -13,11 +13,12 @@ export const Container = styled.div`
   position: fixed;
   display: flex;
   width: 100%;
+  height: 90px;
   padding: 20px 320px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
   white-space: nowrap;
   background-color: white;
+  box-sizing: border-box;
   z-index: 100;
   @media (max-width: 1350px) {
     padding: 20px 35px;

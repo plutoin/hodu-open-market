@@ -115,7 +115,11 @@ export default function ItemCard({
           }
           disabled={soldOut}
         />
-        <img src={cartItem.image} alt="상품이미지" />
+        <img
+          src={cartItem.image}
+          alt="상품이미지"
+          onClick={() => navigate(`/productDetail/${product_id}`)}
+        />
         <DeleteBtn onClick={openDelModal} />
         <ItemInfo>
           <span>{cartItem.store_name}</span>

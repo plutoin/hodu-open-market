@@ -42,6 +42,7 @@ export const ItemContainer = styled.div`
     margin: 0 36px 0 40px;
     object-fit: cover;
     border-radius: 10px;
+    cursor: pointer;
   }
 `;
 
