@@ -64,58 +64,64 @@
 
 ```
 📦 hodu-open-market
-├─ public
-└── src
-    ├── App.jsx
-    ├── Axios.jsx
-    ├── Cookie.js
-    ├── index.js
-    ├── assets
-    ├── auth
-    ├── components
-    │   ├── CartBox
-    │   │   ├── ItemCard
-    │   │   └── TotalPrice
-    │   ├── DetailBox
-    │   │   ├── ProductDetailBox
-    │   │   └── TotalPriceBox
-    │   ├── Dropdown
-    │   ├── Footer
-    │   ├── Header
-    │   ├── JoinForm
-    │   ├── Loading
-    │   ├── Login
-    │   ├── Modal
-    │   ├── PaymentBox
-    │   │   └── PaymentForm
-    │   ├── ProductList
-    │   ├── QuantityButton
-    │   └── Slide
-    ├── pages
-    │   ├── Cart
-    │   ├── Home
-    │   ├── Join
-    │   ├── NotFound
-    │   ├── Payment
-    │   ├── ProductDetail
-    │   └── SignIn
-    ├── redux
-    │   ├── action
-    │   ├── constants
-    │   └── reducer
-    └── styles
-        ├── app.css
-        └── reset.css
+├─ public
+└─ src
+   ├─ App.jsx
+   ├─ Axios.jsx
+   ├─ Cookie.js
+   ├─ index.js
+   ├─ api
+   ├─ assets
+   ├─ auth
+   ├─ components
+   │  ├─ CartBox
+   │  ├─ DetailBox
+   │  ├─ Dropdown
+   │  ├─ Footer
+   │  ├─ Header
+   │  ├─ JoinForm
+   │  ├─ Loading
+   │  ├─ Login
+   │  ├─ Modal
+   │  ├─ PaymentBox
+   │  ├─ ProductList
+   │  ├─ QuantityButton
+   │  ├─ SellerItem
+   │  └─ Slide
+   ├─ pages
+   │  ├─ Cart
+   │  ├─ Home
+   │  ├─ Join
+   │  ├─ NotFound
+   │  ├─ Payment
+   │  ├─ ProductDetail
+   │  ├─ ProductUpload
+   │  ├─ Search
+   │  ├─ SellerCenter
+   │  └─ SignIn
+   ├─ redux
+   │  ├─ action
+   │  ├─ constants
+   │  └─ reducer
+   └─ styles
+      ├─ app.css
+      └─ reset.css
 ```
 
 <br />
 
-<!-- ## 🖥️ 기능
+## 🖥️ 기능
+
 ### 1. 계정
+
 - 회원가입
 - 로그인
 - 로그아웃
+
 ### 2. 홈 화면
+
 ### 3. 상품 상세
+
 ### 4. 장바구니
-### 5. 구매 -->
+
+### 5. 구매
