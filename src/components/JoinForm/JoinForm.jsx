@@ -112,7 +112,7 @@ export default function BuyerJoinForm() {
       <JoinForm onSubmit={onSubmit}>
         <label htmlFor="userID">아이디</label>
         <input id="userID" type="id" {...register("userID")} />
-        <button className="check" onClick={onValidID}>
+        <button type="button" className="check" onClick={onValidID}>
           중복확인
         </button>
         {errors.userID && errors.userID.message === "멋진 아이디네요 :)" ? (
@@ -175,7 +175,7 @@ export default function BuyerJoinForm() {
           <option>070</option>
         </select>
         <input
-          type="number"
+          type="text"
           className="phone"
           maxLength="4"
           {...register("phonenum2", {
@@ -183,7 +183,7 @@ export default function BuyerJoinForm() {
           })}
         />
         <input
-          type="number"
+          type="text"
           className="phone"
           maxLength="4"
           {...register("phonenum3", {
@@ -217,7 +217,7 @@ export default function BuyerJoinForm() {
                 },
               })}
             />
-            <button className="check" onClick={onValidSellerCode}>
+            <button type="button" className="check" onClick={onValidSellerCode}>
               인증
             </button>
 
