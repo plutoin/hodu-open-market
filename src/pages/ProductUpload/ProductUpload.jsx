@@ -73,7 +73,9 @@ export default function ProductUpload() {
   const onSubmit = handleSubmit((data) => {
     data.image = uploadImage;
     !itemData
-      ? postProduct(token, data).then(() => navigate("/sellerCenter"))
+      ? postProduct(token, data).then(() =>
+          navigate(`/productDetail/${itemData.product_id}`)
+        )
       : editProduct(token, data).then(() => navigate("/sellerCenter"));
   });
 
