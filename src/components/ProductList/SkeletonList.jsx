@@ -8,8 +8,8 @@ export default function SkeletonList() {
     <ItemContainer>
       <Skeleton variant="rounded" width={380} height={380} />
       <Skeleton variant="rounded" width={100} height={18} />
-      <Skeleton variant="rounded" width={200} height={18} />
-      <Skeleton variant="rounded" width={140} height={18} />
+      <Skeleton variant="rounded" width={200} height={22} />
+      <Skeleton variant="rounded" width={140} height={24} />
     </ItemContainer>
   );
 }
