@@ -5,11 +5,8 @@ import styled from "styled-components";
 import { AxiosInstance } from "../../Axios";
 import { removeCookie } from "../../Cookie";
 
-export default function Dropdown(props) {
+export default function Dropdown() {
   const navigate = useNavigate();
-  const handleModal = () => {
-    props.setModal(false);
-  };
 
   const handleLogout = async () => {
     try {
@@ -24,7 +21,7 @@ export default function Dropdown(props) {
 
   return (
     <Container>
-      <li onClick={handleModal}>마이페이지</li>
+      <li>마이페이지</li>
       <li onClick={handleLogout}>로그아웃</li>
     </Container>
   );
