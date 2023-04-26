@@ -7,10 +7,9 @@ import { removeCookie } from "../../Cookie";
 
 export default function Dropdown(props) {
   const navigate = useNavigate();
-  function handleModal(e) {
-    e.stopPropagation();
+  const handleModal = () => {
     props.setModal(false);
-  }
+  };
 
   const handleLogout = async () => {
     try {
