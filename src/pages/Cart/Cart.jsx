@@ -73,8 +73,6 @@ export default function Cart() {
     }
   };
 
-  console.log(checkedArr);
-
   checkedArr.map((p) =>
     carts
       .filter((c) => p.product_id === c.product_id)
