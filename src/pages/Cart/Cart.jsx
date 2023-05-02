@@ -119,12 +119,7 @@ export default function Cart() {
       <Header />
       <CartSection>
         <h1>장바구니</h1>
-        <ItemHeader
-          checkedAllHandler={checkedAllHandler}
-          checkedArr={checkedArr}
-          carts={carts}
-          getData={getData}
-        />
+        <ItemHeader checkedAllHandler={checkedAllHandler} />
         {carts.length > 0 ? (
           carts.map((item) => (
             <ItemCard
