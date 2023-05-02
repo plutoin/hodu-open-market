@@ -52,6 +52,13 @@ export default function Cart() {
     } else {
       setCheckedArr(checkedArr.filter((i) => i.product_id !== id));
     }
+
+    const allCheckbox = document.getElementById("allCheckbox");
+    if (allCheckbox.checked && !checked) {
+      allCheckbox.checked = false;
+    } else {
+      allCheckbox.checked = true;
+    }
   };
 
   const checkedAllHandler = (checked) => {
@@ -59,10 +66,14 @@ export default function Cart() {
       getData().then((arr) => {
         setCheckedArr(arr.filter((i) => i.stock !== 0));
       });
+
+      console.log(checkedArr);
     } else {
       setCheckedArr([]);
     }
   };
+
+  console.log(checkedArr);
 
   checkedArr.map((p) =>
     carts
@@ -112,6 +123,7 @@ export default function Cart() {
           checkedAllHandler={checkedAllHandler}
           checkedArr={checkedArr}
           carts={carts}
+          getData={getData}
         />
         {carts.length > 0 ? (
           carts.map((item) => (

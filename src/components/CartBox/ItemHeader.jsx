@@ -5,10 +5,11 @@ export default function ItemHeader({ checkedAllHandler }) {
   return (
     <CartHeader>
       <input
+        id="allCheckbox"
         type="checkbox"
         onChange={(e) => checkedAllHandler(e.target.checked)}
       />
-      <span colSpan="2">상품정보</span>
+      <span>상품정보</span>
       <span>수량</span>
       <span>상품금액</span>
     </CartHeader>
